@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to Learn 0DTE Trading Rules</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <nav class="crumbs"><a href="../../index.html">Library</a><span>/</span><a href="../../topics/0dte/index.html">0DTE</a><span>/</span><a href="../../topics/0dte/0dte-trading-rules.html">0DTE Trading Rules</a></nav>
+  <h1>เริ่มอ่าน 0DTE Trading Rules จากศูนย์</h1>
+  <p class="deck">บทนี้คือแผนที่ก่อนเข้า paper: เราจะไม่เริ่มจากสูตร VRP หรือ model แต่จะเริ่มจากคำถามว่า strategy 0DTE ทำเงินจริงหลัง friction และ tail risk หรือไม่</p>
+
+  <section class="callout"><strong>หนึ่งประโยคของ paper:</strong> 0DTE มี variance risk premium บวก แต่ edge แบบ unconditional เล็กและเสี่ยงมาก; โอกาสที่น่าสนใจกว่าคือ conditional timing rules บางชุดที่ทดสอบแบบ out-of-sample</section>
+
+  <h2>1. paper นี้ต่างจาก paper ก่อนอย่างไร</h2>
+  <p>paper ก่อนถามว่า 0DTE market maker hedging กระทบ volatility ของ S&amp;P 500 อย่างไร ส่วน paper นี้ถามว่า ถ้าเราสร้าง 0DTE option positions และ strategies ที่ implement ได้จริง มันทำเงินอย่างไร</p>
+  <p>ดังนั้นคำหลักจะเปลี่ยนจาก net gamma/hedging flow ไปเป็น payoff, PNL, execution costs, tail risk และ trading rules</p>
+
+  <h2>2. บันไดเรียน</h2>
+  <div class="flow">
+    <div class="step">เข้าใจ payoff, PNL, return และทำไมต้อง scale เทียบ underlying</div>
+    <div class="step">เข้าใจ variance risk premium และทำไม positive VRP ไม่เท่ากับ free money</div>
+    <div class="step">เข้าใจ multi-leg option strategies และ payoff shape</div>
+    <div class="step">อ่าน unconditional results: mean, Sharpe, friction, ES1%, drawdown</div>
+    <div class="step">อ่าน conditional rules: VIX regimes, OOS protocol, logistic direction prediction</div>
+    <div class="step">สรุปว่า paper claim อะไร และไม่ claim อะไร</div>
+  </div>
+
+  <h2>3. Retrieval</h2>
+  <section class="quiz">
+    <details><summary>paper นี้สนใจ market impact หรือ trading payoff มากกว่า?</summary><p>สนใจ trading payoff และ trading rules ของ 0DTE strategies มากกว่า market impact</p></details>
+    <details><summary>ทำไมไม่ควรดู mean PNL อย่างเดียว?</summary><p>เพราะ 0DTE distributions มี tail risk สูง mean อาจดูดีแต่ worst days และ drawdowns แย่มาก</p></details>
+  </section>
+
+  <p>อ่านต่อ: <a href="0002-payoff-pnl-and-return.html">0002 Payoff, PNL, return</a>. Glossary: <a href="../reference/0001-0dte-trading-rules-glossary.html">Trading rules glossary</a>.</p>
+</main>
+</body>
+</html>

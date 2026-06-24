@@ -10,4 +10,5 @@ Static teaching workspace for step-by-step paper learning.
 
 ## Current Course
 
-`01 - 0DTE on SPY` contains the source paper, mission, resources, reference material, and 12 HTML lessons ordered from beginner foundations to full paper synthesis.
+- `01 - 0DTE on SPY` contains the market-impact paper course.
+- `02 - 0DTE Trading Rules` contains the payoff/trading-rules paper course.

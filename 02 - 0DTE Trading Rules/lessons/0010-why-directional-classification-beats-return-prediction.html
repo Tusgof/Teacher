@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="th">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Classification vs Return Prediction</title><link rel="stylesheet" href="../assets/lesson.css"></head>
+<body><main>
+  <h1>ทำไม direction classification ดีกว่า return prediction</h1>
+  <p class="deck">Table 9 คือบทเรียนสำคัญ: ใน 0DTE noisy payoffs การทำนายขนาด return ตรง ๆ อ่อนกว่าการทำนายทิศทางกำไร/ขาดทุน</p>
+
+  <h2>1. Return target ยากเกินไป</h2>
+  <p>0DTE payoff มี tail moves และ noise สูง การทำนายว่าพรุ่งนี้ strategy จะได้กี่ bps จึงยากและไม่ stable</p>
+
+  <h2>2. Binary target ตรงกับ decision มากกว่า</h2>
+  <p>คำถาม trading ที่เรียบง่ายกว่าคือ net PNL จะเป็นบวกหรือไม่ ถ้า probability มากกว่า 0.5 ก็ long strategy ถ้าน้อยกว่าก็ short strategy</p>
+
+  <h2>3. hard vs soft mapping</h2>
+  <div class="grid">
+    <section class="card"><h3>Hard</h3><p>เต็มขนาด: sign(p - 0.5)</p></section>
+    <section class="card"><h3>Soft</h3><p>ขนาดตามความมั่นใจ: 2p - 1</p></section>
+  </div>
+  <p>paper พบว่า binary-hard มักดีกว่าใน test หลัก จึงใช้ logistic benchmark เป็นแกน</p>
+
+  <section class="quiz">
+    <details><summary>Table 9 เปรียบเทียบอะไร?</summary><p>เปรียบเทียบ direct return prediction กับ logistic binary hard/soft mapping</p></details>
+    <details><summary>ทำไม logistic น่าใช้ใน paper นี้?</summary><p>เพราะ decision เป็น directional, probability bounded, และ model variance ต่ำกว่า nonlinear model ที่ซับซ้อน</p></details>
+  </section>
+  <p>อ่านต่อ: <a href="0011-oos-performance-and-baskets.html">0011 OOS performance</a>.</p>
+</main></body></html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="th">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>OOS Performance and Baskets</title><link rel="stylesheet" href="../assets/lesson.css"></head>
+<body><main>
+  <h1>OOS performance: อะไรใช้ได้จริงใน paper</h1>
+  <p class="deck">บทนี้อ่าน Table 10-11: conditional rules ไม่ได้ชนะทุก strategy แต่บางกลุ่มและ baskets ดูมี economic value</p>
+
+  <h2>1. Strategy-specific results</h2>
+  <p>Table 10 รายงานว่า put ratio spreads เด่นที่สุดใน individual series: expanding spec มี mean net 2.58 bps และ Sharpe 1.26 ส่วน iron butterfly/condor ยังมี Sharpe 0.82</p>
+  <p>แต่ call ratio spreads แย่ และ strategy อื่นไม่แข็งเท่ากัน นี่คือคำว่า selective timing</p>
+
+  <h2>2. Baskets ช่วย smooth</h2>
+  <p>Table 11 ใช้ rolling 252-day signals แล้วรวมเป็น equal-weight baskets: top-three by SR net ได้ Sharpe 1.27, top-three by mean ได้ 1.17, all-strategies basket ได้ 1.01</p>
+  <p>การกระจายหลาย strategy ไม่ได้ลบ tail risk แต่ช่วยลด strategy-specific drawdown</p>
+
+  <h2>3. อ่านผลให้รอบคอบ</h2>
+  <section class="callout"><strong>อย่าตีความเกิน:</strong> paper ไม่ได้บอกว่าทุก 0DTE strategy มี edge แต่บอกว่าบาง strategy families สามารถ timed ได้ภายใต้ OOS discipline</section>
+
+  <section class="quiz">
+    <details><summary>strategy เด่นใน Table 10 คืออะไร?</summary><p>put ratio spread เด่นที่สุดใน individual conditional results</p></details>
+    <details><summary>basket ช่วยอะไร?</summary><p>ช่วย smooth strategy-specific drawdowns และทำให้ evidence ดูเป็น investable object มากขึ้น</p></details>
+  </section>
+  <p>อ่านต่อ: <a href="0012-final-synthesis-and-research-hypotheses.html">0012 Final synthesis</a>.</p>
+</main></body></html>

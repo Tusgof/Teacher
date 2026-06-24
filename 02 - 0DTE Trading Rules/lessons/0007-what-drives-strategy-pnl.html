@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="th">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>What Drives Strategy PNL</title><link rel="stylesheet" href="../assets/lesson.css"></head>
+<body><main>
+  <h1>Strategy PNL ถูกขับด้วยอะไร</h1>
+  <p class="deck">Section 4 ถามว่า PNL ของ strategies load กับ variance, skewness และ directional movement อย่างไร</p>
+
+  <section class="callout"><strong>แกนสำคัญ:</strong> PNL ของหลาย 0DTE strategies ถูกขับโดย directional asymmetry และ realized skewness มากกว่า realized variance อย่างเดียว</section>
+
+  <h2>1. variance อย่างเดียวอธิบายไม่พอ</h2>
+  <p>ถ้า strategy เป็น straddle/strangle เราคาดว่า realized variance สำคัญ แต่ paper พบว่าในหลาย structures variance alone อธิบายได้น้อย</p>
+
+  <h2>2. skewness คือทิศทางแบบไม่สมมาตร</h2>
+  <p>realized skewness proxy แยกว่าการขยับขึ้นกับลงมีน้ำหนักไม่เท่ากันอย่างไร สำหรับ directional spreads และ risk reversals ช่องทางนี้สำคัญมาก</p>
+
+  <h2>3. อ่าน Table 5-6</h2>
+  <p>Table 5 ใส่ implied/realized variance และ skewness เพื่อดูความไวของ PNL ส่วน Table 6 ทำ inference ให้เข้มขึ้นด้วย date clustering และ BH multiple-testing adjustment</p>
+  <p>ผลที่แข็งแรงที่สุดคือ directional-skew links หลายตัว ไม่ใช่ generic variance story</p>
+
+  <section class="quiz">
+    <details><summary>paper บอกว่า realized variance alone พอไหม?</summary><p>ไม่พอ โดยเฉพาะ strategies ที่มี directional หรือ skew exposure</p></details>
+    <details><summary>ทำไม Table 6 สำคัญ?</summary><p>เพราะช่วยกันการเห็น pattern หลอก ๆ จาก repeated testing และ standard errors ที่เบาเกินไป</p></details>
+  </section>
+  <p>อ่านต่อ: <a href="0008-conditional-rules-and-vix-regimes.html">0008 Conditional rules</a>.</p>
+</main></body></html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="th">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>VRP Without Formulas</title><link rel="stylesheet" href="../assets/lesson.css"></head>
+<body><main>
+  <h1>Variance Risk Premium แบบไม่ใช้สูตร</h1>
+  <p class="deck">paper พบ VRP บวก แต่บอกพร้อมกันว่า monetization ยาก นี่คือจุดที่ต้องเข้าใจให้แม่น</p>
+
+  <section class="callout"><strong>VRP แบบภาษาคน:</strong> ตลาด option ตั้งราคา implied variance สูงกว่า variance ที่เกิดจริงโดยเฉลี่ย แต่สำหรับ 0DTE ช่วงเวลาเหลือแค่ไม่กี่ชั่วโมง premium นั้นเล็กมาก</section>
+
+  <h2>1. implied vs realized</h2>
+  <p>implied variance คือความแกว่งที่ฝังอยู่ในราคา option ตอนเข้า position ส่วน realized variance คือความแกว่งที่เกิดจริงจนถึงปิดตลาด</p>
+  <p>ถ้า implied สูงกว่า realized ผู้ขาย variance โดย concept จะได้ premium</p>
+
+  <h2>2. ทำไม positive VRP ยังไม่พอ</h2>
+  <p>paper ระบุว่า median realized VRP จาก 10:00 ET ถึง expiry มีขนาดประมาณ 0.0011% ของ underlying ซึ่งเล็กมากเมื่อเทียบกับ friction และ tail risk</p>
+  <p>ดังนั้น "มี premium" ไม่เท่ากับ "มี strategy ที่เทรดง่ายและคุ้ม risk"</p>
+
+  <h2>3. สิ่งที่ paper เตือน</h2>
+  <div class="flow">
+    <div class="step">VRP บวกใน sample</div>
+    <div class="step">แต่ time value ของ 0DTE เหลือน้อย</div>
+    <div class="step">execution spread และ slippage กิน edge ได้</div>
+    <div class="step">tail event หนึ่งวันอาจลบ mean carry หลายวัน</div>
+  </div>
+
+  <h2>4. Retrieval</h2>
+  <section class="quiz">
+    <details><summary>positive VRP แปลว่า free money หรือไม่?</summary><p>ไม่ใช่ เพราะต้องเจอ friction, implementation constraints และ tail risk</p></details>
+    <details><summary>paper มอง VRP เป็น broad edge หรือไม่?</summary><p>ไม่ใช่ paper บอกว่า economic magnitude ใน same-day horizon เล็กและ monetize ยาก</p></details>
+  </section>
+  <p>อ่านต่อ: <a href="0004-strategy-templates-and-payoff-shapes.html">0004 Strategy templates</a>. Primary source: <a href="../0DTE_Trading_Rules.md">0DTE Trading Rules</a>.</p>
+</main></body></html>

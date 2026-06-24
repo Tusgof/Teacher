@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="th">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Unconditional Results</title><link rel="stylesheet" href="../assets/lesson.css"></head>
+<body><main>
+  <h1>Unconditional results: ทำทุกวันไม่ใช่ broad edge</h1>
+  <p class="deck">Section 3 ถามว่า ถ้าเปิด strategy ทุกวันที่ 10:00 ET แล้วถือถึงปิดตลาด ผลเป็นอย่างไร</p>
+
+  <section class="callout"><strong>ข้อสรุป:</strong> unconditional strategy PNL กระจายกว้าง, เปลี่ยนตาม regime, และ mean carry ไม่เสถียรพอจะเรียกว่า edge ทั่วไป</section>
+
+  <h2>1. Unconditional แปลว่าอะไร</h2>
+  <p>คือเข้า position ทุกวันโดยไม่ถามว่าวันนั้น state เป็นอย่างไร เช่น VIX สูงหรือต่ำ, skew เป็นแบบไหน, เมื่อวาน strategy เพิ่งเสียหรือกำไร</p>
+
+  <h2>2. สิ่งที่ Table 1-2 สอน</h2>
+  <p>บาง strategy ดูมี mean PNL บวกในบางช่วง แต่สัญญาณเปลี่ยนหลัง 2022 daily-expiration expansion และมี time variation สูง</p>
+  <p>นี่ทำให้ paper ไม่หยุดที่ unconditional average แต่ไปถามต่อว่าเราควร condition ด้วย state ที่เห็นตอน 10:00 ได้ไหม</p>
+
+  <h2>3. ภาพจำ</h2>
+  <div class="flow">
+    <div class="step">ทำทุกวัน = ง่ายต่อการทดสอบ</div>
+    <div class="step">แต่ 0DTE payoff = tail-heavy และ state-dependent</div>
+    <div class="step">mean average = ไม่พอสำหรับ implementation</div>
+  </div>
+
+  <section class="quiz">
+    <details><summary>unconditional strategy คืออะไร?</summary><p>strategy ที่เปิด position ทุกวันโดยไม่ใช้ state variables เพื่อเลือกวันหรือขนาด position</p></details>
+    <details><summary>ทำไมผล unconditional จึงไม่พอ?</summary><p>เพราะ payoff กระจายกว้างและเปลี่ยนตาม regime ทำให้ average edge ไม่มั่นคง</p></details>
+  </section>
+  <p>อ่านต่อ: <a href="0006-frictions-and-tail-risk.html">0006 Frictions and tail risk</a>.</p>
+</main></body></html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0DTE Trading Rules Glossary</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Glossary: 0DTE Trading Rules</h1>
+  <p class="deck">คำศัพท์แกนกลางสำหรับอ่าน paper ของ Grigory Vilkov</p>
+
+  <div class="grid">
+    <section class="card"><h3>Payoff</h3><p>มูลค่าที่ option หรือ strategy จ่ายตอนหมดอายุ ก่อนหักราคาที่จ่ายเข้า position</p></section>
+    <section class="card"><h3>PNL</h3><p>กำไรขาดทุนหลังเทียบ payoff กับต้นทุน entry เช่น mid price และ execution costs</p></section>
+    <section class="card"><h3>VRP</h3><p>variance risk premium: implied variance ลบ realized variance ใน paper นี้มองเป็น premium ที่ผู้ขาย variance อาจเก็บได้</p></section>
+    <section class="card"><h3>Mid</h3><p>ราคากลางระหว่าง bid กับ ask ใช้เป็น benchmark แต่ไม่ใช่ราคาที่ execute ได้จริงเสมอ</p></section>
+    <section class="card"><h3>Bid/Ask cost</h3><p>ต้นทุนจาก spread ที่ต้องจ่ายเมื่อเข้า position; paper หักครึ่ง spread ต่อ leg</p></section>
+    <section class="card"><h3>ES1%</h3><p>expected shortfall ฝั่งแย่สุด 1% ใช้ดู tail risk ที่ mean PNL มองไม่เห็น</p></section>
+    <section class="card"><h3>OOS</h3><p>out-of-sample: ทดสอบช่วงที่ model ไม่ได้เห็นตอน train เพื่อกัน ex-post story</p></section>
+    <section class="card"><h3>Hard mapping</h3><p>แปลง probability เป็น position เต็มขนาด: ถ้า p มากกว่า 0.5 ก็ long ถ้าน้อยกว่าก็ short</p></section>
+  </div>
+</main>
+</body>
+</html>

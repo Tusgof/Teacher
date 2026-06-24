@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="th">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Conditional Rules and VIX Regimes</title><link rel="stylesheet" href="../assets/lesson.css"></head>
+<body><main>
+  <h1>Conditional rules: จากทำทุกวัน เป็นเลือกตาม state</h1>
+  <p class="deck">Section 5 เริ่มจากคำถามที่ practical กว่า: ถ้า payoff state-dependent เราใช้ข้อมูลตอน 10:00 ET เลือก trade ได้ไหม</p>
+
+  <h2>1. VIX regime เป็น filter ง่าย</h2>
+  <p>paper แบ่งวันเป็น low/mid/high regime ด้วย 10:00 ET integrated implied variance จาก SPXW 0DTE options</p>
+  <p>Table 7 พบว่าบาง structures เปลี่ยน behavior ตาม regime เช่น downside-oriented structures ดีขึ้นใน high-VIX states</p>
+
+  <h2>2. แต่ ex-post tercile ยังไม่พอ</h2>
+  <p>thresholds ใน Table 7 ใช้ full sample terciles จึงเป็นภาพอธิบาย state heterogeneity มากกว่า trading rule ที่พิสูจน์ OOS แล้ว</p>
+
+  <h2>3. บทเรียน</h2>
+  <div class="flow">
+    <div class="step">unconditional average อ่อน</div>
+    <div class="step">state partitions เปลี่ยน payoff profile</div>
+    <div class="step">จึงต้องทดสอบ strict OOS rules</div>
+  </div>
+
+  <section class="quiz">
+    <details><summary>Table 7 เป็น trading rule สุดท้ายหรือไม่?</summary><p>ไม่ใช่ เป็น state filter แบบ ex-post ที่ชี้ว่า performance ขึ้นกับ regime</p></details>
+    <details><summary>ทำไมต้องใช้ข้อมูล 10:00 ET?</summary><p>เพราะเป็นเวลาที่ entry เกิดขึ้นและข้อมูลต้อง available ก่อนตัดสินใจ trade</p></details>
+  </section>
+  <p>อ่านต่อ: <a href="0009-strict-out-of-sample-protocol.html">0009 Strict OOS protocol</a>.</p>
+</main></body></html>

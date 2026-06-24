@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="th">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Payoff PNL Return</title><link rel="stylesheet" href="../assets/lesson.css"></head>
+<body><main>
+  <h1>Payoff, PNL, Return: สามคำที่ต้องแยกก่อน</h1>
+  <p class="deck">ถ้าแยกสามคำนี้ไม่ได้ ตารางของ paper จะหลอกตาเราได้ง่ายมาก</p>
+
+  <section class="callout"><strong>จำสั้น ๆ:</strong> payoff คือสิ่งที่ option จ่ายตอนหมดอายุ, PNL คือ payoff ลบต้นทุนเข้า position, return คือ PNL เทียบกับเงินที่จ่ายซื้อ option หรือ premium</section>
+
+  <h2>1. Payoff คือปลายทาง</h2>
+  <p>สำหรับ call payoff จะดีเมื่อ S&amp;P 500 ปิดเหนือ strike ส่วน put payoff จะดีเมื่อ S&amp;P 500 ปิดต่ำกว่า strike</p>
+  <p>paper เปิด position ตอน 10:00 ET และถือไปถึง 16:00 ET เป็น baseline หลัก</p>
+
+  <h2>2. PNL คือสิ่งที่เราควรสนใจมากกว่า</h2>
+  <p>ถ้า option จ่าย 10 แต่ตอนเข้า position เราจ่าย 8 PNL คือบวก 2 ถ้าจ่าย 12 PNL คือขาดทุน 2</p>
+  <p>paper รายงาน PNL เป็นเปอร์เซ็นต์ของ underlying เพื่อให้ option และ strategy หลายแบบเทียบกันได้</p>
+
+  <h2>3. Return อาจดูเว่อร์ใน 0DTE</h2>
+  <p>option ใกล้หมดอายุบางตัวมีราคาเล็กมาก ถ้า payoff ขยับนิดเดียว return เทียบ premium อาจดูใหญ่มาก แต่ PNL ต่อ underlying อาจเล็ก</p>
+  <p>ดังนั้น paper ใช้ทั้ง return และ PNL แต่สำหรับ multi-leg strategies มักเน้น PNL scaled by spot มากกว่า</p>
+
+  <h2>4. Retrieval</h2>
+  <section class="quiz">
+    <details><summary>Payoff กับ PNL ต่างกันอย่างไร?</summary><p>payoff คือเงินที่จ่ายตอน expiry ส่วน PNL คือ payoff ลบต้นทุนเข้า position</p></details>
+    <details><summary>ทำไม return ของ OTM 0DTE อาจ misleading?</summary><p>เพราะ premium เล็กมาก ทำให้ return percentage ใหญ่ แม้ PNL ต่อ underlying จะเล็ก</p></details>
+  </section>
+  <p>อ่านต่อ: <a href="0003-variance-risk-premium-without-formulas.html">0003 Variance risk premium</a>.</p>
+</main></body></html>

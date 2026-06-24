@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="th">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Strategy Templates</title><link rel="stylesheet" href="../assets/lesson.css"></head>
+<body><main>
+  <h1>Strategy templates: paper เทรดอะไรบ้าง</h1>
+  <p class="deck">ก่อนอ่าน Table 1-4 ต้องรู้ว่า strategy แต่ละกลุ่มกำลัง bet กับรูปทรง payoff แบบไหน</p>
+
+  <h2>1. กลุ่ม volatility</h2>
+  <div class="grid">
+    <section class="card"><h3>Straddle/Strangle</h3><p>ใช้ call และ put พร้อมกัน เพื่อรับผลจากการขยับแรงทั้งสองทาง</p></section>
+    <section class="card"><h3>Iron butterfly/condor</h3><p>โครงสร้าง bounded payoff มักใช้เล่นกรอบการแกว่งและเก็บ premium แบบจำกัด risk</p></section>
+  </div>
+
+  <h2>2. กลุ่ม directional</h2>
+  <div class="grid">
+    <section class="card"><h3>Bull call spread</h3><p>ได้ประโยชน์ถ้าดัชนีขึ้นในกรอบหนึ่ง</p></section>
+    <section class="card"><h3>Bear put spread</h3><p>ได้ประโยชน์ถ้าดัชนีลงในกรอบหนึ่ง</p></section>
+  </div>
+
+  <h2>3. กลุ่ม asymmetric/skew</h2>
+  <div class="grid">
+    <section class="card"><h3>Risk reversal</h3><p>ถือ exposure ไม่สมมาตรระหว่างฝั่งขึ้นและฝั่งลง</p></section>
+    <section class="card"><h3>Ratio spread</h3><p>จำนวน long/short option ไม่เท่ากัน จึงมี payoff และ tail risk เฉพาะตัว</p></section>
+  </div>
+
+  <h2>4. ทำไมต้อง standardize moneyness</h2>
+  <p>paper สร้าง grid moneyness 0.98 ถึง 1.02 เพื่อให้แต่ละวันเทียบกันได้ เช่น option 1% OTM วันนี้กับ 1% OTM วันอื่น</p>
+
+  <section class="quiz">
+    <details><summary>straddle/strangle สนใจอะไรเป็นหลัก?</summary><p>สนใจการขยับแรงของ underlying มากกว่าทิศทางเดียว</p></details>
+    <details><summary>ทำไม ratio spread ต้องระวัง?</summary><p>เพราะจำนวน legs ไม่สมมาตร ทำให้ tail payoff อาจรุนแรงกว่าที่ mean บอก</p></details>
+  </section>
+  <p>อ่านต่อ: <a href="0005-unconditional-results-are-not-a-broad-edge.html">0005 Unconditional results</a>.</p>
+</main></body></html>

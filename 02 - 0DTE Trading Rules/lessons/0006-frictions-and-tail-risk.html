@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="th">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Frictions and Tail Risk</title><link rel="stylesheet" href="../assets/lesson.css"></head>
+<body><main>
+  <h1>Friction และ Tail Risk: จุดที่ฆ่า edge ง่ายที่สุด</h1>
+  <p class="deck">บทนี้อ่าน Table 3-4 แบบภาษาคน: ทำไม mid-price backtest มักดูดีกว่า implementation จริง</p>
+
+  <h2>1. mid ไม่ใช่ execution เสมอไป</h2>
+  <p>paper เริ่มจาก mid benchmark แล้วหัก half-spread ต่อ leg และเพิ่ม 0.5bp slippage/fees เพื่อเข้าใกล้ implementability มากขึ้น</p>
+  <p>ผลคือ mean PNL และ Sharpe ของหลาย strategies ลดลงทันที</p>
+
+  <h2>2. ES1% คือคำเตือนเรื่องหางซ้าย</h2>
+  <p>ES1% ดูวันที่แย่สุดประมาณ 1% ว่าขาดทุนเฉลี่ยหนักแค่ไหน ใน 0DTE ตัวเลขนี้สำคัญเพราะ rare events เป็นส่วนหนึ่งของ strategy ไม่ใช่ noise ที่ควรตัดทิ้ง</p>
+
+  <h2>3. Table 4 บอกอะไร</h2>
+  <p>paper พบว่า ES1%, worst day, worst 5-day loss และ max drawdown ใหญ่พอที่จะทำให้ mean PNL อย่างเดียวใช้ตัดสินไม่ได้</p>
+
+  <section class="callout"><strong>กฎอ่าน 0DTE strategy:</strong> ถ้า mean เป็นบวก แต่ ES1% และ drawdown ใหญ่กว่ามาก อย่าเรียกว่า edge ก่อนเห็น risk governance</section>
+
+  <section class="quiz">
+    <details><summary>ทำไมต้องหัก bid/ask cost?</summary><p>เพราะ mid เป็น benchmark แต่ราคาที่ execute จริงต้องเสีย spread โดยเฉพาะ strategy หลาย leg</p></details>
+    <details><summary>ทำไม paper ไม่ winsorize extremes?</summary><p>เพราะ rare tail realizations คือ risk จริงของ 0DTE strategies ไม่ใช่ค่าผิดปกติที่ควรลบทิ้ง</p></details>
+  </section>
+  <p>อ่านต่อ: <a href="0007-what-drives-strategy-pnl.html">0007 What drives PNL</a>.</p>
+</main></body></html>

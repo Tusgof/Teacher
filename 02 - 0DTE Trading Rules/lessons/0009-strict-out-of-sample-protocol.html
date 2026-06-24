@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="th">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Strict OOS Protocol</title><link rel="stylesheet" href="../assets/lesson.css"></head>
+<body><main>
+  <h1>Strict out-of-sample protocol: กัน ex-post story</h1>
+  <p class="deck">บทนี้คือหัวใจของความน่าเชื่อถือใน trading-rule paper: model เห็นอะไรได้บ้าง ก่อนวันที่มันต้อง trade</p>
+
+  <section class="callout"><strong>กฎหลัก:</strong> predictors ต้องเป็นข้อมูลที่รู้ได้ตอน 10:00 ET เท่านั้น และ training ใช้ข้อมูลถึงวันก่อนหน้าเท่านั้น</section>
+
+  <h2>1. predictors ที่ใช้ได้</h2>
+  <p>paper ใช้ contemporaneous implied-state variables ตอน 10:00, lagged realized SPX variables, และ lagged strategy-PNL terms</p>
+  <p>ไม่มีการใช้ข้อมูลหลัง 10:00 ของวันเดียวกันเพื่อทำนายผล 10:00-16:00</p>
+
+  <h2>2. expanding vs rolling</h2>
+  <div class="grid">
+    <section class="card"><h3>Expanding window</h3><p>train ด้วยข้อมูลสะสมเพิ่มขึ้นเรื่อย ๆ</p></section>
+    <section class="card"><h3>Rolling 252 days</h3><p>train ด้วยหน้าต่างล่าสุดประมาณหนึ่งปี trading days</p></section>
+  </div>
+
+  <h2>3. ทำไมเลือก representative moneyness</h2>
+  <p>เพื่อไม่ให้ pooling ของ strike designs จำนวนมากทำให้ผลดูดีเกินจริง paper เลือก near-ATM configuration ที่ representative ต่อ strategy type</p>
+
+  <section class="quiz">
+    <details><summary>no-look-ahead แปลว่าอะไร?</summary><p>model ห้ามใช้ข้อมูลที่ยังไม่รู้ตอนตัดสินใจ trade</p></details>
+    <details><summary>OOS forecasts เริ่มหลังอะไร?</summary><p>หลัง burn-in 252 trading days เพื่อให้ model มีข้อมูล train ก่อนเริ่มทดสอบจริง</p></details>
+  </section>
+  <p>อ่านต่อ: <a href="0010-why-directional-classification-beats-return-prediction.html">0010 Classification beats return prediction</a>.</p>
+</main></body></html>
