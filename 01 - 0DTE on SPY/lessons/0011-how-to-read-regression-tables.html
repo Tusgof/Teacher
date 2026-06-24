@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to Read Regression Tables</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>อ่าน regression tables แบบไม่หลง</h1>
+  <p class="deck">บทนี้ไม่ได้สอน econometrics เต็มระบบ แต่ให้ checklist พออ่าน Table 1, 4, 5, 6, 8 ของ paper ได้</p>
+
+  <section class="callout">
+    <strong>เวลาอ่าน table:</strong>
+    อย่าเริ่มที่ดาวหรือสูตร ให้เริ่มจาก dependent variable, independent variable หลัก, เครื่องหมายของ coefficient, และคำถาม causal/mechanism ที่ table นั้นตอบ
+  </section>
+
+  <h2>1. สี่คำถามก่อนอ่านตัวเลข</h2>
+  <div class="flow">
+    <div class="step">เขากำลังอธิบายตัวแปรอะไร? นี่คือ dependent variable</div>
+    <div class="step">ตัวแปรหลักที่สนใจคืออะไร? เช่น 0DTE Trading หรือ 0DTE Net Gamma</div>
+    <div class="step">coefficient เป็นบวกหรือลบ?</div>
+    <div class="step">ผลนี้ตอบ main effect, mechanism, หรือ robustness?</div>
+  </div>
+
+  <h2>2. Table map ของ paper</h2>
+  <div class="grid">
+    <section class="card">
+      <h3>Table 1</h3>
+      <p>ถามว่า 0DTE trading days มี volatility ต่ำกว่าหรือไม่</p>
+    </section>
+    <section class="card">
+      <h3>Table 4</h3>
+      <p>ถามว่า 0DTE trading เพิ่ม market maker net gamma หรือไม่</p>
+    </section>
+    <section class="card">
+      <h3>Table 5</h3>
+      <p>ใช้ 2SLS เชื่อม 0DTE, net gamma, และ volatility reduction</p>
+    </section>
+    <section class="card">
+      <h3>Table 6-8</h3>
+      <p>ดู intraday mechanism: volatility และ E-mini order flow</p>
+    </section>
+  </div>
+
+  <h2>3. ดาวคืออะไร</h2>
+  <p>ดาวบอก statistical significance หรือความมั่นใจเชิงสถิติว่าผลไม่ได้เกิดจาก noise ง่าย ๆ</p>
+  <p>แต่ดาวไม่ใช่ทุกอย่าง ต้องดูขนาดผล ทิศทางผล และ design ของการเปรียบเทียบด้วย</p>
+
+  <h2>4. 2SLS แบบภาษาคน</h2>
+  <p>2SLS ใน paper ใช้ 0DTE Trading เป็นตัวช่วยสร้าง variation ใน net gamma แล้วดูว่า net gamma ที่ถูกผลักด้วย variation นี้สัมพันธ์กับ volatility อย่างไร</p>
+  <p>อย่าเพิ่งจำสมการ จำ flow นี้ก่อน:</p>
+  <div class="flow">
+    <div class="step">expiration calendar ทำให้บางวันมี 0DTE</div>
+    <div class="step">0DTE ทำให้ market maker net gamma สูงขึ้น</div>
+    <div class="step">net gamma ที่สูงขึ้นสัมพันธ์กับ volatility ต่ำลง</div>
+  </div>
+
+  <h2>5. Retrieval exercise</h2>
+  <section class="quiz">
+    <details>
+      <summary>ก่อนดูดาวใน table ควรถามอะไรก่อน?</summary>
+      <p>ถามว่า dependent variable คืออะไร ตัวแปรหลักคืออะไร และ coefficient เป็นบวกหรือลบ</p>
+    </details>
+    <details>
+      <summary>Table 1 ตอบคำถามอะไร?</summary>
+      <p>ตอบว่าดัชนีมี volatility ต่ำกว่าหรือไม่ในวันที่มี 0DTE trading</p>
+    </details>
+    <details>
+      <summary>2SLS flow ใน paper คืออะไรแบบสั้น?</summary>
+      <p>calendar สร้าง 0DTE, 0DTE เพิ่ม net gamma, net gamma เชื่อมกับ volatility ต่ำลง</p>
+    </details>
+  </section>
+
+  <p>อ่านต่อ: <a href="0012-final-synthesis-and-research-hypotheses.html">0012 Final synthesis</a>. ย้อนกลับ: <a href="0010-where-positive-gamma-comes-from.html">0010 Source of gamma</a>. Primary source: <a href="../The_Market_for_0DTE_options.md">local paper</a>.</p>
+</main>
+</body>
+</html>

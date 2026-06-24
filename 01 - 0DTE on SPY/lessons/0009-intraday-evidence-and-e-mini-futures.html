@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intraday Evidence and E-mini Futures</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Intraday evidence: หลักฐานว่า hedge เกิดในตลาด E-mini</h1>
+  <p class="deck">บทนี้เชื่อมกลไกกับข้อมูลจริง: ถ้า market maker hedge สวนทางราคา เราควรเห็นอะไรใน futures order flow</p>
+
+  <section class="callout">
+    <strong>prediction ของกลไก:</strong>
+    เมื่อ 0DTE net gamma สูงขึ้น E-mini order flow ควรตอบสนองต่อ S&amp;P 500 return แบบสวนทางมากขึ้น และ volatility ถัดไปควรต่ำลง
+  </section>
+
+  <h2>1. ทำไมต้องดู intraday</h2>
+  <p>ถ้า hedge ของ 0DTE สำคัญจริง มันควรเกิดเร็ว เพราะ option หมดอายุวันนี้ ไม่ใช่เดือนหน้า</p>
+  <p>paper จึงดูช่วง 10 นาทีและถามว่า net gamma ตอนนี้ทำนาย volatility กับ futures order flow ในช่วงถัดไปได้ไหม</p>
+
+  <h2>2. หลักฐานชุดแรก: net gamma ทำนาย volatility ต่ำลง</h2>
+  <p>paper พบว่าเมื่อ 0DTE net gamma ของ market maker สูงขึ้น volatility ในช่วงถัดไปต่ำลงโดยเฉลี่ย</p>
+  <p>ผลนี้อยู่ประมาณภายในชั่วโมงถัดไป แล้วค่อย ๆ จางลง ซึ่งเข้ากับภาพว่า hedge ถูกปรับภายในวัน</p>
+
+  <h2>3. หลักฐานชุดที่สอง: E-mini order flow สวนทางราคา</h2>
+  <p>ถ้าดัชนีขึ้นและ market maker มี positive net gamma เขาควรขาย futures มากขึ้น</p>
+  <p>ถ้าดัชนีลง เขาควรซื้อ futures มากขึ้น</p>
+  <p>paper พบว่า negative relationship ระหว่าง index return กับ E-mini order flow แข็งแรงขึ้นเมื่อ 0DTE net gamma สูง</p>
+
+  <div class="flow">
+    <div class="step">0DTE net gamma สูง</div>
+    <div class="step">S&amp;P 500 ขยับ</div>
+    <div class="step">E-mini flow ตอบสนองสวนทางมากขึ้น</div>
+    <div class="step">volatility ถัดไปต่ำลงโดยเฉลี่ย</div>
+  </div>
+
+  <h2>4. ข้อจำกัดที่ต้องพูดให้ตรง</h2>
+  <p>paper บอกชัดว่า evidence ตรงนี้เป็น circumstantial เพราะเขาไม่สามารถผูก E-mini order flow แต่ละรายการเข้ากับ market maker รายตัวได้โดยตรง</p>
+  <p>แต่ direction, strength, timing ของหลักฐานสอดคล้องกับกลไก hedging</p>
+
+  <h2>5. Retrieval exercise</h2>
+  <section class="quiz">
+    <details>
+      <summary>ถ้ากลไก hedge จริง ผลควรเห็นเร็วหรือช้า?</summary>
+      <p>ควรเห็นเร็วภายในวัน เพราะ 0DTE หมดอายุวันเดียวกันและต้อง hedge ทันเวลา</p>
+    </details>
+    <details>
+      <summary>เมื่อ 0DTE net gamma สูง paper พบ volatility ถัดไปเป็นอย่างไร?</summary>
+      <p>ต่ำลงโดยเฉลี่ย และผลค่อย ๆ จางในเวลาประมาณหนึ่งชั่วโมง</p>
+    </details>
+    <details>
+      <summary>ทำไมหลักฐาน E-mini ยังไม่ใช่หลักฐานตรงสมบูรณ์?</summary>
+      <p>เพราะ paper ไม่สามารถ link futures order flow กับ market maker รายตัวได้โดยตรง</p>
+    </details>
+  </section>
+
+  <p>อ่านต่อ: <a href="0010-where-positive-gamma-comes-from.html">0010 Where positive gamma comes from</a>. ย้อนกลับ: <a href="0008-measuring-net-delta-and-net-gamma.html">0008 Measuring net gamma</a>. Primary source: <a href="../The_Market_for_0DTE_options.md">local paper</a>.</p>
+</main>
+</body>
+</html>

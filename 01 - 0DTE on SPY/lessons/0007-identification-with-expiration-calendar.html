@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Identification with Expiration Calendar</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Identification: เขาแยกเหตุออกจากความบังเอิญอย่างไร</h1>
+  <p class="deck">บทนี้สอน causal identification แบบไม่ใช้สมการ: ทำไม paper ถึงกล้าพูดว่า 0DTE trading มี treatment effect ต่อ volatility</p>
+
+  <section class="callout">
+    <strong>คำถาม identification:</strong>
+    วันที่มี 0DTE volatility ต่ำกว่าเพราะ 0DTE จริง ๆ หรือเพราะวันนั้นเป็นวันพิเศษอย่างอื่น?
+  </section>
+
+  <h2>1. ปัญหาถ้าดูแค่วันที่มี 0DTE</h2>
+  <p>ถ้าเราเทียบวันจันทร์ที่มี 0DTE กับวันอังคารที่ไม่มี 0DTE อาจไม่แฟร์ เพราะวันจันทร์กับวันอังคารอาจมี pattern ตลาดต่างกันอยู่แล้ว</p>
+  <p>ดังนั้น paper ต้องหา variation ที่ใกล้เคียงกับการทดลองธรรมชาติ</p>
+
+  <h2>2. Calendar เป็นแหล่ง variation</h2>
+  <p>ก่อนปี 2022 0DTE มักมีในวันจันทร์ พุธ ศุกร์ แต่บางครั้งวันอังคารหรือพฤหัสก็มี 0DTE เพราะ month-end, quarter-end, หรือ holiday exception</p>
+  <p>paper ใช้วันอังคาร/พฤหัสที่บางครั้งมี 0DTE และบางครั้งไม่มี เป็นจุดเปรียบเทียบหลัก</p>
+
+  <div class="flow">
+    <div class="step">วันอังคาร/พฤหัสปกติ: ไม่มี 0DTE</div>
+    <div class="step">วันอังคาร/พฤหัสบางวัน: มี 0DTE เพราะปฏิทินหมดอายุ</div>
+    <div class="step">สองกลุ่มนี้คล้ายกันกว่าเทียบข้าม weekday แบบหยาบ ๆ</div>
+  </div>
+
+  <h2>3. Fixed effects คือการกันเสียงรบกวน</h2>
+  <p>ยังไม่ต้องจำสูตร ให้คิดว่า fixed effects คือการบอก regression ว่า "อย่าเอาความต่างประจำปี ประจำสัปดาห์ เวลาในวัน หรือ weekday มาปนกับผลของ 0DTE"</p>
+
+  <div class="grid">
+    <section class="card">
+      <h3>Year x Week x Time</h3>
+      <p>กัน pattern ของสัปดาห์เดียวกันและเวลาเดียวกันในวัน</p>
+    </section>
+    <section class="card">
+      <h3>Day-of-Week</h3>
+      <p>กันความต่างปกติระหว่างวันจันทร์ อังคาร พุธ และอื่น ๆ</p>
+    </section>
+  </div>
+
+  <h2>4. Difference-in-differences แบบ intuition</h2>
+  <p>หลังปี 2022 Tuesday/Thursday 0DTE ถูกเพิ่มเป็นประจำ ถ้าความต่างเดิมหายไปหลังทุก weekday มี 0DTE มากขึ้น ก็เป็นหลักฐานเสริมว่า 0DTE เป็นกลไกสำคัญ</p>
+  <p>นี่ไม่ใช่เวทมนตร์ทางสถิติ แต่เป็นการถามว่า "เมื่อกติกาเปลี่ยน pattern ที่เราคาดไว้เปลี่ยนตามไหม"</p>
+
+  <h2>5. Retrieval exercise</h2>
+  <section class="quiz">
+    <details>
+      <summary>ทำไมเทียบวันมี 0DTE กับไม่มี 0DTE แบบตรง ๆ อาจผิด?</summary>
+      <p>เพราะวันเหล่านั้นอาจต่างกันด้วยปัจจัยอื่น เช่น weekday, ข่าว, หรือ pattern ในช่วงเวลา</p>
+    </details>
+    <details>
+      <summary>paper ใช้ variation จากอะไร?</summary>
+      <p>ใช้ปฏิทินวันหมดอายุ SPXW โดยเฉพาะ Tuesday/Thursday ที่บางครั้งมี 0DTE ก่อนปี 2022</p>
+    </details>
+    <details>
+      <summary>fixed effects ช่วยทำอะไร?</summary>
+      <p>ช่วยกัน pattern ซ้ำ ๆ ที่ไม่ใช่ผลของ 0DTE ออกจากการเปรียบเทียบ</p>
+    </details>
+  </section>
+
+  <p>อ่านต่อ: <a href="0008-measuring-net-delta-and-net-gamma.html">0008 Measuring net delta and net gamma</a>. ย้อนกลับ: <a href="0006-volatility-measurement-and-main-result.html">0006 Volatility</a>. Primary source: <a href="../The_Market_for_0DTE_options.md">local paper</a>.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Measuring Net Delta and Net Gamma</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>เขาวัด Net Delta และ Net Gamma ของ market maker อย่างไร</h1>
+  <p class="deck">บทนี้ทำให้ Section 3 อ่านออก: paper ไม่ได้เดา hedge ของ market maker แต่สร้าง proxy จาก option volume และ position</p>
+
+  <section class="callout">
+    <strong>แกนของการวัด:</strong>
+    paper ใช้ข้อมูล open-close volume ของ CBOE เพื่อดูว่า market maker รับ position สุทธิจากใคร แล้วแปลง position นั้นเป็น net delta และ net gamma hedging need
+  </section>
+
+  <h2>1. ทำไมวัดตรง ๆ ไม่ง่าย</h2>
+  <p>เราไม่ได้เห็นบัญชี hedge จริงของ market maker ทุกเจ้า และ paper ก็ยอมรับว่าไม่สามารถ link E-mini order flow กับ market maker รายตัวโดยตรง</p>
+  <p>ดังนั้นเขาต้องวัด hedging need จาก option positions ที่ market maker น่าจะถือ</p>
+
+  <h2>2. Open-close volume บอกอะไร</h2>
+  <p>ข้อมูล CBOE แยกได้ว่า trade เป็นการเปิด position ใหม่หรือปิด position เดิม และแยก investor type เช่น Customers, Professional Customers, Firm Proprietary, Broker-Dealers</p>
+  <p>ถ้าผู้ใช้ปลายทางถือฝั่งหนึ่ง market maker มักถืออีกฝั่งเพื่อให้ตลาด clear</p>
+
+  <h2>3. Net delta ใน paper</h2>
+  <p>Net delta สื่อถึง exposure จาก position ใหม่ตั้งแต่การปรับ hedge ครั้งก่อน</p>
+  <p>ถ้า net delta สูง market maker มี directional exposure ที่ต้อง hedge มากขึ้น</p>
+
+  <h2>4. Net gamma ใน paper</h2>
+  <p>Net gamma สื่อถึงการเปลี่ยนของ exposure จาก position ที่ถือสะสมอยู่ก่อนแล้ว</p>
+  <p>นี่สำคัญมากสำหรับ 0DTE เพราะ gamma ของ option ใกล้หมดอายุ โดยเฉพาะ near-the-money สามารถสูงขึ้นมาก</p>
+
+  <div class="grid">
+    <section class="card">
+      <h3>Net delta</h3>
+      <p>risk จาก position ใหม่และทิศทางตอนนี้</p>
+    </section>
+    <section class="card">
+      <h3>Net gamma</h3>
+      <p>risk จากการที่ hedge ต้องเปลี่ยนเมื่อดัชนีขยับ</p>
+    </section>
+  </div>
+
+  <h2>5. ผลที่ต้องจำจาก Section 3</h2>
+  <p>paper พบว่า market maker match intraday buy/sell order flow ของ SPX options ได้มาก ทำให้ net delta เฉลี่ยเล็ก</p>
+  <p>แต่ position ที่สะสมมาก่อนสร้าง net gamma เฉลี่ยประมาณหนึ่งเปอร์เซ็นต์ และ 0DTE trading เพิ่ม net gamma ของ market maker</p>
+
+  <h2>6. Retrieval exercise</h2>
+  <section class="quiz">
+    <details>
+      <summary>ทำไม paper ต้องสร้าง measure ของ hedging need?</summary>
+      <p>เพราะไม่ได้เห็น hedge จริงทุกครั้งของ market maker จึงวัดจาก option position และ exposure แทน</p>
+    </details>
+    <details>
+      <summary>net delta กับ net gamma ต่างกันแบบภาษาคนอย่างไร?</summary>
+      <p>net delta คือทิศทางตอนนี้ ส่วน net gamma คือ hedge ต้องเปลี่ยนเร็วแค่ไหนเมื่อดัชนีขยับ</p>
+    </details>
+    <details>
+      <summary>Section 3 พบว่า net delta หรือ net gamma สำคัญกว่าต่อ story นี้?</summary>
+      <p>net gamma สำคัญกว่า เพราะเป็นแหล่ง hedging need ที่เชื่อมกับ volatility attenuation</p>
+    </details>
+  </section>
+
+  <p>อ่านต่อ: <a href="0009-intraday-evidence-and-e-mini-futures.html">0009 Intraday evidence and E-mini futures</a>. ย้อนกลับ: <a href="0007-identification-with-expiration-calendar.html">0007 Identification</a>. Primary source: <a href="../The_Market_for_0DTE_options.md">local paper</a>.</p>
+</main>
+</body>
+</html>

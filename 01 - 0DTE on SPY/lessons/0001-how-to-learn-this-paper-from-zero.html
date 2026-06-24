@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to Learn This Paper from Zero</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <nav class="crumbs">
+    <a href="../../index.html">Library</a>
+    <span>/</span>
+    <a href="../../topics/0dte/index.html">0DTE</a>
+    <span>/</span>
+    <a href="../../topics/0dte/the-market-for-0dte-options.html">The Market for 0DTE options</a>
+  </nav>
+
+  <h1>เริ่มจากศูนย์: เราจะอ่าน paper นี้ยังไง</h1>
+  <p class="deck">บทนี้คือแผนที่ก่อนเริ่มเรียนจริง สำหรับคนที่ยังไม่รู้ 0DTE, options Greeks, market maker, hedging, microstructure หรือ regression tables</p>
+
+  <section class="callout">
+    <strong>เป้าหมายของทั้ง course:</strong>
+    อ่าน <em>The Market for 0DTE options</em> ให้เข้าใจทั้ง story, mechanism, evidence, limitation และแปลงเป็น research hypothesis ได้ โดยไม่ต้องเริ่มจากสูตร
+  </section>
+
+  <h2>1. อย่าเริ่มจาก Abstract แบบนักวิจัย</h2>
+  <p>ถ้าพื้นฐานยังเป็นศูนย์ Abstract ของ paper นี้จะอัดคำยากเกินไป: 0DTE, liquidity providers, volatility attenuation, net gamma, E-mini futures, exogenous variation</p>
+  <p>เราจะไม่อ่านแบบไล่หน้า เราจะเรียนแบบสร้างบันไดก่อน แล้วค่อยกลับไปอ่าน paper จริง</p>
+
+  <h2>2. บันไดความเข้าใจ</h2>
+  <div class="flow">
+    <div class="step">เข้าใจ option, call, put, strike, expiration</div>
+    <div class="step">เข้าใจ 0DTE และทำไม same-day expiry ทำให้ risk ไวขึ้น</div>
+    <div class="step">เข้าใจ market maker และเหตุผลที่ต้อง hedge</div>
+    <div class="step">เข้าใจ delta/gamma แบบไม่ใช้สูตร</div>
+    <div class="step">เข้าใจ positive net gamma และ counter-cyclical hedging</div>
+    <div class="step">เข้าใจข้อมูล, identification, regression tables, และข้อจำกัดของ paper</div>
+  </div>
+
+  <h2>3. สิ่งที่ต้องกันสับสนตั้งแต่แรก</h2>
+  <div class="grid">
+    <section class="card">
+      <h3>Volume</h3>
+      <p>ซื้อขายเยอะ ไม่ได้แปลว่า market maker เหลือ risk เยอะเสมอไป</p>
+    </section>
+    <section class="card">
+      <h3>Inventory</h3>
+      <p>position ที่ค้างอยู่จริง เป็นตัวสร้าง hedging need</p>
+    </section>
+    <section class="card">
+      <h3>Hedging flow</h3>
+      <p>การซื้อขาย futures เพื่อคุม risk ซึ่งอาจส่งผลต่อ volatility</p>
+    </section>
+  </div>
+
+  <h2>4. วิธีเรียนแต่ละบท</h2>
+  <ol>
+    <li>อ่านบทสั้น ๆ ให้จบก่อน ไม่ต้องเปิด paper พร้อมกัน</li>
+    <li>ตอบ retrieval exercise ก่อนเปิดเฉลย</li>
+    <li>ถ้าตอบไม่ได้ ให้ย้อนอ่านเฉพาะ section ก่อนหน้า</li>
+    <li>หลังบท 0006 ค่อยเริ่มเปิด paper บางช่วงตามที่บทเรียนชี้</li>
+  </ol>
+
+  <h2>5. Checkpoint ก่อนเริ่ม</h2>
+  <section class="quiz">
+    <details>
+      <summary>เราควรอ่าน paper นี้แบบไล่หน้าทันทีไหม?</summary>
+      <p>ยังไม่ควร ถ้าพื้นฐานเป็นศูนย์ควรสร้าง intuition ก่อน แล้วค่อยกลับไปอ่าน paper จริง</p>
+    </details>
+    <details>
+      <summary>สามคำที่ต้องแยกให้ได้คืออะไร?</summary>
+      <p>volume, inventory, hedging flow เพราะสามคำนี้ตอบคนละคำถาม</p>
+    </details>
+    <details>
+      <summary>บทแรกที่เรียนเนื้อหาจริงต่อจากนี้คือบทไหน?</summary>
+      <p>บท 0002 เรื่อง 0DTE จากศูนย์ ก่อนเข้า delta/gamma และ empirical evidence</p>
+    </details>
+  </section>
+
+  <p>อ่านต่อ: <a href="0002-0dte-from-zero-before-the-paper.html">0002 0DTE จากศูนย์</a>. กลับไปหน้า paper: <a href="../../topics/0dte/the-market-for-0dte-options.html">สารบัญบทเรียน</a>.</p>
+</main>
+</body>
+</html>

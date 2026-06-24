@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0DTE From Zero</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>0DTE จากศูนย์: ก่อนอ่านเปเปอร์จริง</h1>
+  <p class="deck">เป้าหมายของบทนี้คือเข้าใจ story พื้นฐานก่อนเจอศัพท์อย่าง delta, gamma, hedging, market maker</p>
+
+  <section class="callout">
+    <strong>จำแค่นี้ก่อน:</strong>
+    0DTE คือ option ที่จะหมดอายุวันนี้บน S&amp;P 500. เพราะเวลาจะหมดแล้ว มูลค่าของมันไวต่อการขยับของดัชนีมาก คนเลยกลัวว่าการ hedge ของ market maker อาจทำให้ตลาดแกว่งแรง.
+  </section>
+
+  <h2>1. Option คืออะไรแบบไม่ใช้สูตร</h2>
+  <p>ลองคิดว่า S&amp;P 500 ตอนนี้อยู่ที่ 5,000 จุด</p>
+  <ul>
+    <li><strong>Call option</strong>: สิทธิที่จะได้ประโยชน์ถ้า S&amp;P 500 ขึ้นเกินระดับหนึ่ง</li>
+    <li><strong>Put option</strong>: สิทธิที่จะได้ประโยชน์ถ้า S&amp;P 500 ลงต่ำกว่าระดับหนึ่ง</li>
+    <li><strong>Strike</strong>: ระดับราคาที่ option อ้างอิง เช่น 5,000</li>
+    <li><strong>Expiration</strong>: วันหมดอายุของ option</li>
+  </ul>
+  <p>ถ้า option หมดอายุวันนี้ มันแทบไม่มีเวลาให้รอแล้ว ทุกการขยับของดัชนีจึงสำคัญมากขึ้นทันที</p>
+
+  <h2>2. 0DTE คืออะไร</h2>
+  <p><strong>0DTE = zero days to expiration</strong> แปลว่าเหลือเวลา 0 วันก่อนหมดอายุ หรือหมดอายุภายในวันนั้น</p>
+  <p>ในเปเปอร์นี้เขาดู SPXW options ซึ่งอ้างอิง S&amp;P 500 index และหมดอายุตอนปิดตลาด</p>
+
+  <div class="grid">
+    <section class="card">
+      <h3>Option ปกติ</h3>
+      <p>อาจเหลือเวลาอีกหลายวัน หลายสัปดาห์ หรือหลายเดือน</p>
+    </section>
+    <section class="card">
+      <h3>0DTE option</h3>
+      <p>เหลือเวลาแค่วันนี้ ผลลัพธ์ถูกตัดสินเร็วมาก</p>
+    </section>
+  </div>
+
+  <h2>3. Market maker คือใคร</h2>
+  <p>ตลาด option ต้องมีคนคอยรับซื้อรับขายให้ตลาดมีสภาพคล่อง คนกลุ่มนี้คือ <strong>market maker</strong></p>
+  <p>ถ้าคุณอยากซื้อ option ตอนนี้ market maker อาจเป็นคนขายให้คุณ ถ้าคุณอยากขาย market maker อาจเป็นคนซื้อจากคุณ</p>
+  <p>ปัญหาคือ market maker ไม่ได้อยากพนันทิศทางตลาดตลอดเวลา เขาอยากได้ค่าธรรมเนียม/ส่วนต่างราคาและควบคุมความเสี่ยง ดังนั้นหลังรับ order เขามักต้อง <strong>hedge</strong></p>
+
+  <h2>4. Hedge คืออะไร</h2>
+  <p>Hedge คือการทำอีก position หนึ่งเพื่อลดความเสี่ยงของ position แรก</p>
+  <div class="flow">
+    <div class="step"><strong>ตัวอย่างง่าย:</strong> market maker ขาย call ให้ลูกค้า</div>
+    <div class="step">ถ้า S&amp;P 500 ขึ้น call นั้นอาจขาดทุนกับ market maker</div>
+    <div class="step">market maker จึงอาจซื้อ futures เพื่อชดเชยความเสี่ยงจากดัชนีขึ้น</div>
+  </div>
+  <p>ในเปเปอร์นี้ เครื่องมือ hedge สำคัญคือ <strong>E-mini futures</strong> เพราะ S&amp;P 500 index ตัว cash index เอาไปซื้อขายตรง ๆ ไม่ได้</p>
+
+  <h2>5. ทำไมคนกลัว 0DTE</h2>
+  <p>เพราะ option ใกล้หมดอายุจะไวต่อราคาดัชนีมาก ถ้า market maker ต้อง hedge เยอะและ hedge ไปทางเดียวกับราคา ก็อาจยิ่งดันตลาดให้แกว่งแรง</p>
+  <p>ตัวอย่างความกลัว:</p>
+  <div class="flow">
+    <div class="step">ดัชนีขึ้น</div>
+    <div class="step">market maker ต้องซื้อ futures เพิ่ม</div>
+    <div class="step">การซื้อเพิ่มดันราคาให้ขึ้นอีก</div>
+    <div class="step">ตลาดเลยแกว่งแรงขึ้น</div>
+  </div>
+
+  <h2>6. แล้วเปเปอร์นี้บอกอะไรที่สวนทางความกลัว</h2>
+  <p>เปเปอร์นี้บอกว่าโดยเฉลี่ยในข้อมูลที่เขาดู กลไกหลักกลับเป็นอีกแบบ:</p>
+  <div class="flow">
+    <div class="step">ลูกค้าจำนวนมากมี position ที่เหมือนขาย volatility ไว้ก่อนหน้า</div>
+    <div class="step">market maker ถืออีกฝั่งของ position เหล่านั้น</div>
+    <div class="step">พอ option เหล่านั้นกลายเป็น 0DTE market maker มี exposure ที่ทำให้ต้อง hedge แบบสวนทางราคา</div>
+    <div class="step">ดัชนีขึ้น เขาขาย futures; ดัชนีลง เขาซื้อ futures</div>
+    <div class="step">การ hedge แบบนี้ช่วยลดแรงแกว่งโดยเฉลี่ย</div>
+  </div>
+
+  <section class="callout">
+    <strong>พูดแบบภาษาคน:</strong>
+    เปเปอร์ไม่ได้บอกว่า 0DTE ไม่น่ากลัวเสมอไป แต่มันบอกว่าในข้อมูลนี้ market maker ไม่ได้เป็นคนราดน้ำมันใส่ไฟโดยเฉลี่ย กลับทำตัวเหมือนแรงต้านการแกว่ง เพราะต้อง hedge สวนทางราคา
+  </section>
+
+  <h2>7. สามคำที่ยังไม่ต้องเข้าใจลึก แต่ต้องรู้หน้าที่</h2>
+  <div class="grid">
+    <section class="card">
+      <h3>Delta</h3>
+      <p>ความไวของ option ต่อการขยับของดัชนีตอนนี้ คิดแบบหยาบ ๆ คือ exposure ต่อทิศทาง</p>
+    </section>
+    <section class="card">
+      <h3>Gamma</h3>
+      <p>ความไวของ delta อีกที ถ้า gamma สูง แปลว่า hedge ที่ต้องทำเปลี่ยนเร็วเมื่อดัชนีขยับ</p>
+    </section>
+    <section class="card">
+      <h3>Net gamma</h3>
+      <p>ผลรวม gamma exposure ของ market maker ถ้าเป็นบวก มักนำไปสู่ hedge แบบสวนทางราคา</p>
+    </section>
+  </div>
+
+  <h2>8. เช็คความเข้าใจ</h2>
+  <section class="quiz">
+    <details>
+      <summary>0DTE แปลว่าอะไร?</summary>
+      <p>Option ที่หมดอายุภายในวันเดียวกัน เหลือ 0 วันก่อน expiration</p>
+    </details>
+    <details>
+      <summary>Market maker ทำหน้าที่อะไรในตลาด option?</summary>
+      <p>รับซื้อรับขายให้ตลาดมีสภาพคล่อง และมัก hedge เพื่อลดความเสี่ยงจาก position ที่รับมา</p>
+    </details>
+    <details>
+      <summary>ทำไมการ hedge ของ market maker ถึงเกี่ยวกับ volatility ของ S&amp;P 500?</summary>
+      <p>เพราะ market maker ใช้ E-mini futures เพื่อ hedge ถ้า flow นั้นไปทางเดียวกับราคาอาจเพิ่มแรงแกว่ง ถ้าสวนทางราคาอาจลดแรงแกว่ง</p>
+    </details>
+  </section>
+
+  <h2>9. อ่านเปเปอร์ยังไงต่อ</h2>
+  <p>ตอนนี้ยังไม่ต้องอ่านทั้งเปเปอร์ ให้อ่านแค่ Abstract กับ Introduction ย่อหน้าแรก ๆ แล้วถามตัวเองสามข้อ:</p>
+  <ul>
+    <li>เขากำลังตอบความกลัวเรื่องอะไร?</li>
+    <li>เขาบอกว่า market maker hedge ทางไหน?</li>
+    <li>เขาบอกว่าผลนี้เป็น average effect หรือทุกสถานการณ์?</li>
+  </ul>
+
+  <p>บทต่อไปควรค่อย ๆ สอน <strong>delta/gamma ด้วยภาพจำ</strong> ก่อนกลับไปอ่าน Section 3 ของเปเปอร์</p>
+</main>
+</body>
+</html>

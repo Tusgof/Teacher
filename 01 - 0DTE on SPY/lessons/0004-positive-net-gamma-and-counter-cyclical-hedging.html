@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Positive Net Gamma</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Positive Net Gamma: ทำไม hedge ถึงสวนทางราคา</h1>
+  <p class="deck">บทนี้ต่อจาก delta/gamma: เป้าหมายคือเข้าใจประโยคสำคัญของ paper ว่า positive net gamma ทำให้ market maker ซื้อเมื่อดัชนีลง และขายเมื่อดัชนีขึ้น</p>
+
+  <section class="callout">
+    <strong>แกนของบทนี้:</strong>
+    ถ้า market maker มี positive net gamma เมื่อ S&amp;P 500 ขยับ hedge ที่เหมาะสมจะเปลี่ยนไปในทิศทางที่ทำให้เขาต้อง trade สวนกับการขยับนั้น
+  </section>
+
+  <h2>1. คำว่า net แปลว่าอะไร</h2>
+  <p>Market maker ไม่ได้ถือ option แค่สัญญาเดียว เขาถือหลาย strike หลาย expiry หลายฝั่งพร้อมกัน</p>
+  <p><strong>Net gamma</strong> คือภาพรวมหลังหักล้างทุก position แล้วว่า gamma exposure สุทธิของ market maker เป็นบวกหรือลบ</p>
+
+  <div class="grid">
+    <section class="card">
+      <h3>Gamma ของ position เดี่ยว</h3>
+      <p>ดู option หนึ่งตัวว่าทำให้ delta เปลี่ยนเร็วแค่ไหน</p>
+    </section>
+    <section class="card">
+      <h3>Net gamma</h3>
+      <p>รวมทั้ง book ของ market maker แล้วดูว่า hedge ต้องเปลี่ยนทางไหน</p>
+    </section>
+  </div>
+
+  <h2>2. ภาพจำของ positive net gamma</h2>
+  <p>ลองจำด้วยกฎง่าย ๆ ก่อน:</p>
+  <div class="flow">
+    <div class="step">ดัชนีขึ้น</div>
+    <div class="step">positive net gamma ทำให้ market maker ต้องลด hedge ฝั่ง long</div>
+    <div class="step">เขาจึงมีแรงขาย futures</div>
+  </div>
+  <div class="flow">
+    <div class="step">ดัชนีลง</div>
+    <div class="step">positive net gamma ทำให้ market maker ต้องเพิ่ม hedge ฝั่ง long</div>
+    <div class="step">เขาจึงมีแรงซื้อ futures</div>
+  </div>
+
+  <p>นี่เรียกว่า <strong>counter-cyclical hedging</strong>: trade สวนกับการขยับของราคา</p>
+
+  <h2>3. ทำไมมันลด volatility ได้</h2>
+  <p>Volatility ในที่นี้คือระดับการแกว่งของดัชนี ถ้าราคากำลังขึ้นแล้วมีแรงขายเข้ามา แรงขึ้นอาจเบาลง ถ้าราคากำลังลงแล้วมีแรงซื้อเข้ามา แรงลงอาจเบาลง</p>
+  <p>ดังนั้น paper จึงไม่ได้บอกว่า market maker ตั้งใจทำให้ตลาดนิ่ง แต่บอกว่า hedge ที่เขาจำเป็นต้องทำอาจสร้างแรงต้านการแกว่งโดยเฉลี่ย</p>
+
+  <h2>4. จุดที่ paper ใช้จริง</h2>
+  <p>ใน Introduction paper ระบุว่าเมื่อ net gamma และ net delta เป็นบวก market maker ควรซื้อหลังดัชนีลง และขายหลังดัชนีขึ้น ซึ่งหมายถึง trading activity ที่ช่วย dampen volatility</p>
+  <p>นี่คือสะพานจาก Greek ไปสู่ empirical claim: ไม่ใช่แค่ option sensitive แต่ต้องดูว่า market maker อยู่ฝั่งไหนของ sensitivity นั้น</p>
+
+  <h2>5. Retrieval exercise</h2>
+  <section class="quiz">
+    <details>
+      <summary>คำว่า net gamma ต่างจาก gamma เฉย ๆ อย่างไร?</summary>
+      <p>gamma เฉย ๆ ดู position หนึ่งตัว ส่วน net gamma ดูผลรวมสุทธิของหลาย position หลังหักล้างกันแล้ว</p>
+    </details>
+    <details>
+      <summary>ถ้า positive net gamma แล้ว S&amp;P 500 ขึ้น market maker มัก hedge ทางไหน?</summary>
+      <p>เขามักขาย futures หรือขาย exposure บางส่วน เพื่อปรับ hedge ให้กลับมาเหมาะสม</p>
+    </details>
+    <details>
+      <summary>ทำไม hedge แบบนี้อาจลด volatility?</summary>
+      <p>เพราะเป็นแรงสวนราคา: ขึ้นแล้วขาย ลงแล้วซื้อ จึงอาจลดแรงตามน้ำของตลาด</p>
+    </details>
+  </section>
+
+  <p>อ่านต่อ: <a href="0005-volume-inventory-and-hedging-flow.html">0005 Volume, inventory, and hedging flow</a>. ย้อนกลับ: <a href="0003-delta-and-gamma-without-formulas.html">0003 Delta and gamma</a>. Primary source: <a href="../The_Market_for_0DTE_options.md">local paper</a>.</p>
+</main>
+</body>
+</html>

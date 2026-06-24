@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Volatility and Main Result</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Volatility และผลลัพธ์หลักของ paper</h1>
+  <p class="deck">บทนี้ทำให้คำว่า "0DTE lowers volatility" อ่านออกโดยไม่ต้องเข้า regression ก่อน</p>
+
+  <section class="callout">
+    <strong>ผลหลัก:</strong>
+    paper พบว่าโดยเฉลี่ย วันที่มี 0DTE trading มี intraday volatility ของ S&amp;P 500 ต่ำกว่าวันที่ไม่มี 0DTE trading ประมาณ 60-90 annualized basis points
+  </section>
+
+  <h2>1. Volatility คืออะไรในบทนี้</h2>
+  <p>ให้คิดง่าย ๆ ว่า volatility คือความแรงของการแกว่ง ไม่ใช่ทิศทางว่าตลาดขึ้นหรือลง</p>
+  <p>ตลาดขึ้นแรงและตลาดลงแรงต่างก็เป็น volatility สูงได้ เพราะทั้งสองกรณีคือการขยับแรง</p>
+
+  <h2>2. เขาวัดแบบ intraday</h2>
+  <p>paper ไม่ได้ดูแค่ผลตอบแทนรายวัน เขาแบ่งวันซื้อขายเป็นช่วง 10 นาที ตั้งแต่ 9:30 ถึง 16:00</p>
+  <p>หนึ่งวันจึงมี 39 ช่วง 10 นาที วิธีนี้ทำให้เขาดูได้ว่า hedge ของ market maker สัมพันธ์กับ volatility ภายในวันอย่างไร</p>
+
+  <div class="grid">
+    <section class="card">
+      <h3>Abs Return</h3>
+      <p>ดูขนาดการขยับในช่วง 10 นาที โดยไม่สนว่าขึ้นหรือลง</p>
+    </section>
+    <section class="card">
+      <h3>Realized Vol</h3>
+      <p>รวมความผันผวนย่อยในช่วง 10 นาทีจากข้อมูลรายนาที</p>
+    </section>
+  </div>
+
+  <h2>3. Cash index กับ E-mini futures</h2>
+  <p>SPX option อ้างอิง S&amp;P 500 cash index แต่ cash index ซื้อขายตรง ๆ ไม่ได้</p>
+  <p>market maker จึงใช้ E-mini futures hedge และ paper จึงดูทั้ง cash index volatility กับ E-mini futures volatility</p>
+
+  <h2>4. คำว่า annualized basis points อย่าเพิ่งกลัว</h2>
+  <p>สำหรับตอนนี้ให้แปลแค่ว่า paper เอา volatility ระดับ 10 นาทีไปแปลงให้อยู่ในหน่วยรายปีเพื่อให้อ่านเทียบกันง่าย</p>
+  <p>เราไม่ต้องคำนวณเองในตอนนี้ สิ่งที่ต้องจำคือเครื่องหมายของผล: coefficient เป็นลบ แปลว่า volatility ต่ำกว่าในวันที่มี 0DTE</p>
+
+  <h2>5. Retrieval exercise</h2>
+  <section class="quiz">
+    <details>
+      <summary>Volatility ต่างจาก return direction อย่างไร?</summary>
+      <p>volatility วัดความแรงของการแกว่ง ส่วน direction บอกว่าราคาขึ้นหรือลง</p>
+    </details>
+    <details>
+      <summary>ทำไม paper ใช้ช่วง 10 นาที?</summary>
+      <p>เพราะต้องการดูกลไก hedge ภายในวัน และข้อมูล hedging need มีระดับละเอียดที่ 10 นาที</p>
+    </details>
+    <details>
+      <summary>ผลหลักของ paper เป็นบวกหรือลบต่อ volatility?</summary>
+      <p>เป็นลบโดยเฉลี่ย คือวันที่มี 0DTE trading volatility ต่ำกว่า</p>
+    </details>
+  </section>
+
+  <p>อ่านต่อ: <a href="0007-identification-with-expiration-calendar.html">0007 Identification with expiration calendar</a>. ย้อนกลับ: <a href="0005-volume-inventory-and-hedging-flow.html">0005 Volume, inventory, flow</a>. Primary source: <a href="../The_Market_for_0DTE_options.md">local paper</a>.</p>
+</main>
+</body>
+</html>
