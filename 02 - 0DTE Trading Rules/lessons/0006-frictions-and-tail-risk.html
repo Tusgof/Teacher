@@ -37,6 +37,11 @@
   <p>Table 4 รายงาน skewness, ES1%, max drawdown, worst day, worst 5-day loss และ loss probability</p>
   <p>ถ้า strategy mean บวกแต่ ES1%, worst-day loss และ max drawdown ใหญ่ นั่นหมายความว่า strategy ต้องการ capital/risk governance ที่จริงจัง ไม่ใช่แค่ดูว่า average เป็นบวก</p>
 
+  <figure class="paper-figure">
+    <img src="../images/Trading_Rules_Figure_5.png" alt="Figure 5: Time-series PNL and drawdown behavior">
+    <figcaption><strong>ใช้ Figure 5 อ่าน tail risk:</strong> เส้น PNL หลาย strategy มีช่วง drawdown ลึกและฟื้นตัวไม่พร้อมกัน นี่คือเหตุผลที่ paper ไม่ยอมให้ mean PNL เป็น summary เดียว</figcaption>
+  </figure>
+
   <h2>6. สรุปบทนี้</h2>
   <section class="callout">
     paper กำลังบอกว่า 0DTE strategy ต้องประเมินแบบ implementable PNL หลังต้นทุน และต้องใช้ tail-risk diagnostics. ถ้าไม่ทำ คุณอาจเข้าใจผิดว่า strategy มี edge ทั้งที่จริงแค่รับ tail risk

@@ -44,6 +44,11 @@
   <p>Table 11 ใช้ rolling 252-day signals แล้วสร้าง daily OOS strategy returns</p>
   <p>ที่น่าสนใจคือ equal-weight baskets: top-three by SR net ได้ Sharpe ประมาณ 1.27, top-three by mean PNL ได้ 1.17, และ all-strategies basket ได้ 1.01</p>
 
+  <figure class="paper-figure">
+    <img src="../images/Trading_Rules_Figure_6.png" alt="Figure 6: Cumulative OOS net PNL from strategy-specific signals">
+    <figcaption><strong>Figure 6 คือภาพของ Table 11:</strong> Panel A แสดงว่า strategy เดี่ยวมี path ต่างกันและ drawdown ต่างกันมาก ส่วน Panel B แสดงว่า equal-weight baskets ทำให้เส้น cumulative PNL เรียบขึ้น แต่ยังมี drawdown อยู่</figcaption>
+  </figure>
+
   <h2>5. ทำไม basket ดีขึ้น</h2>
   <p>แต่ละ strategy มีวันที่แย่ไม่เหมือนกัน การ equal-weight หลาย strategy จึงช่วยลด strategy-specific drawdown</p>
   <p>แต่ basket ไม่ได้ลบ tail risk ทั้งหมด มันแค่ทำให้ evidence ดูเป็น portfolio object มากกว่าชุดผลลัพธ์แยกเดี่ยว</p>

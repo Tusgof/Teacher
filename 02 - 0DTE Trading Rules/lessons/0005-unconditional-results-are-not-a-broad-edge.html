@@ -30,6 +30,11 @@
     <div class="step">ผลนี้ยังไม่หักต้นทุนจริงเต็มที่หรือยัง</div>
   </div>
 
+  <figure class="paper-figure">
+    <img src="../images/Trading_Rules_Figure_4.png" alt="Figure 4: 0DTE static option strategy PNL distributions">
+    <figcaption><strong>Figure 4 คือภาพของคำว่า dispersion:</strong> แต่ละ strategy มี median, mean, และ percentile กระจายกว้างมาก แปลว่าอย่าดูแค่ค่าเฉลี่ย ต้องดูว่าหางซ้ายและหางขวากว้างแค่ไหนด้วย</figcaption>
+  </figure>
+
   <h2>3. ทำไมผลเฉลี่ยอาจหลอก</h2>
   <p>สมมติ strategy ได้ +0.01% ของ underlying ในวันปกติหลายวัน แต่มีวันที่เสีย -1.0% หนึ่งวัน ค่าเฉลี่ยอาจยังดูไม่แย่มาก แต่คนเทรดจริงรับ drawdown และ margin/capital pressure หนัก</p>
   <p>0DTE มีเวลาสั้นมาก เหตุการณ์ tail จึงไม่ได้เป็นเรื่องไกลตัว มันคือส่วนหนึ่งของ distribution ที่ต้องวัด</p>
@@ -37,6 +42,11 @@
   <h2>4. Regime shift ปี 2022 สำคัญอย่างไร</h2>
   <p>SPXW เพิ่ม Tuesday/Thursday expirations ในปี 2022 ทำให้ 0DTE มีทุก weekday มากขึ้น ตลาดหลังจุดนี้อาจไม่เหมือนก่อนหน้า</p>
   <p>paper จึงตรวจ structural break ว่า average PNL ของ strategies เปลี่ยนไหม ข้อสรุปคือมี time variation เพียงพอที่จะไม่ควรเชื่อ full-sample mean แบบง่าย ๆ</p>
+
+  <figure class="paper-figure">
+    <img src="../images/Trading_Rules_Figure_5.png" alt="Figure 5: Time-series PNL of static 0DTE option strategies">
+    <figcaption><strong>Figure 5 คือภาพของ regime/time variation:</strong> เส้น PNL เคลื่อนไหวเป็นช่วง ๆ ไม่ได้เรียบเหมือน risk-free carry จึงสนับสนุนว่าต้องคิดเรื่อง state และ regime ไม่ใช่แค่ average ทั้ง sample</figcaption>
+  </figure>
 
   <h2>5. บทเรียนจาก Section 3</h2>
   <section class="callout">

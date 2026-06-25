@@ -176,6 +176,27 @@ li {
   padding: 18px 20px;
 }
 
+.paper-figure {
+  background: #fffdf8;
+  border: 1px solid #ded6c9;
+  border-radius: 8px;
+  margin: 26px 0;
+  padding: 12px;
+}
+
+.paper-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.paper-figure figcaption {
+  color: #5f6b7a;
+  font-size: 0.95rem;
+  margin-top: 10px;
+}
+
 details {
   background: #ffffff;
   border: 1px solid #d5dde6;

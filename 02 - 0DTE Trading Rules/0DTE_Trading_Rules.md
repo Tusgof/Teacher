@@ -488,6 +488,9 @@ Median 25th Percentile 75th Percentile Mean
 15:30
 
 #### Figure 1: Variance Risk Premiums. The figure shows average variance and its risk premiums (VRP) to
+
+![Figure 1](images/Trading_Rules_Figure_1.png)
+
 expiration for 0DTE SPXW options by intraday 30-minute bars. VRP is computed as implied minus realized
 variances from a given bar to expiration at 16:00 ET. Panels C and D are based on average volatility and differences
 in volatilities, respectively. We average variables measured at the end of each bar to expiration at 16:00 that day
@@ -933,6 +936,9 @@ Median 25th Percentile 75th Percentile Mean
 99.900
 
 #### Figure 2: 0DTE Option Prices and Time Value. The figure provides statistics on prices of 0DTE call and
+
+![Figure 2](images/Trading_Rules_Figure_2.png)
+
 put options at 10:00 ET. Panels on the left show option mid-price relative to the underlying price in %. Panels on
 the right show time value relative to underlying, also in %. Bars show mean values, and each bar is accompanied
 by median, 25th, and 75th percentiles. X-axis labels show the moneyness of the analyzed options. The sample
@@ -1374,6 +1380,9 @@ Median 25th Percentile 75th Percentile Mean
 99.900
 
 #### Figure 3: 0DTE Option Returns. The figure provides statistics on the profitability of naked 0DTE call and
+
+![Figure 3](images/Trading_Rules_Figure_3.png)
+
 put option buying at 10:00 ET and holding to expiry at 16:00 ET. Panels on the left show realized return in
 % relative to option mid-price. Panels on the right show the realized profit per one unit of underlying relative
 to underlying price (payoff −mid price)/underlying price × 100%. Bars show mean values, and each bar is
@@ -1634,6 +1643,9 @@ Median 25th Percentile 75th Percentile Mean
 0.98/1.02
 
 #### Figure 4: 0DTE Static Option Strategies. The figure shows statistics on the profitability of 0DTE option
+
+![Figure 4](images/Trading_Rules_Figure_4.png)
+
 strategies from 10:00 ET to expiry at 16:00 ET. All panels show strategies' realized PNL relative to underlying
 price (payoff −mid price)/underlying price × 100%. Bars show mean values, accompanied by the median and
 the 25th and 75th percentiles. X-axis labels show the combination of moneyness of options used for a strategy.
@@ -1990,6 +2002,9 @@ SPX/VIX Scaled Level
 2016-12 2017-12 2018-12 2019-12 2020-12 2021-12 2022-12 2023-12 2024-12 2025-12
 
 #### Figure 5: 0DTE Static Option Strategies: Time-series PNL. The figure shows 63-trading day moving
+
+![Figure 5](images/Trading_Rules_Figure_5.png)
+
 average PNL of option strategies (from 10:00 ET to expiry at 16:00 ET) relative to underlying price (payoff −
 mid price)/underlying price × 100%. Secondary y-axis shows scaled to (0,1) series of SPX and VIX. The sample
 period is from 09/2016 to February 2, 2026.
@@ -2285,6 +2300,9 @@ Put Ratio Spread Risk Reversal Strangle/Straddle
 2019 2020 2021 2022 2023 2024 2025 2026 Date
 
 #### Figure 6: Cumulative OOS Net PNL from Strategy-Specific Signals. Panel A plots cumulative net PNL
+
+![Figure 6](images/Trading_Rules_Figure_6.png)
+
 (bps) for all individual strategy series. Panel B plots three equal-weight baskets built from the same strategy-level
 series: top-three selected by mean net PNL, top-three selected by SR net, and all-strategies basket. Each strategy
 uses the same logistic benchmark as in Table 10, estimated with a 252-trading-day rolling window.

@@ -35,9 +35,19 @@
   <p>paper พบว่าใน sample 09/2016 ถึง February 2, 2026, 0DTE variance risk premium เป็นบวกและ statistically significant</p>
   <p>แปลว่าโดยเฉลี่ย implied variance สูงกว่า realized variance แต่ paper รีบเตือนทันทีว่า economic magnitude เล็กมากในช่วง same-day horizon</p>
 
+  <figure class="paper-figure">
+    <img src="../images/Trading_Rules_Figure_1.png" alt="Figure 1: Variance risk premiums to expiration">
+    <figcaption><strong>Figure 1 ใช้อ่านบทนี้:</strong> Panel B/D แสดงว่า variance/volatility risk premium เป็นบวกโดยเฉลี่ย แต่แกนตั้งเล็กมากและลดลงเมื่อเข้าใกล้ปิดตลาด จึงเป็น premium ที่มีอยู่จริงแต่ monetize ยาก</figcaption>
+  </figure>
+
   <h2>3. ทำไม positive แต่ monetize ยาก</h2>
   <p>เพราะ 0DTE เหลือเวลาแค่ไม่กี่ชั่วโมง time value ของ OTM options จึงเล็กมาก ผู้เขียนบอกว่า median realized VRP จาก 10:00 ถึง expiry ประมาณ 0.0011% ของ underlying</p>
   <p>0.0011% ของ underlying คือเล็กมากเมื่อเทียบกับ bid/ask spread, slippage, fees และวันที่ตลาดวิ่งแรงผิดคาด</p>
+
+  <figure class="paper-figure">
+    <img src="../images/Trading_Rules_Figure_2.png" alt="Figure 2: 0DTE option prices and time value">
+    <figcaption><strong>Figure 2 ช่วยอธิบายคำว่าเล็ก:</strong> ราคาและ time value ของ 0DTE options เหลือไม่มากในวันหมดอายุ ดังนั้นแม้มี premium บวก ต้นทุนการเทรดและ tail loss ก็มีโอกาสกิน edge ได้ง่าย</figcaption>
+  </figure>
 
   <div class="flow">
     <div class="step">มี VRP บวก</div>
