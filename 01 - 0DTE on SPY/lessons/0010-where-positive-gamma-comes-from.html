@@ -8,62 +8,45 @@
 </head>
 <body>
 <main>
-  <h1>Positive gamma มาจากไหน: ไม่ใช่แค่ trade ในวัน 0DTE</h1>
-  <p class="deck">บทนี้คือหัวใจของ Section 5: market maker positive net gamma ส่วนใหญ่ไม่ได้เกิดจากคนมา trade 0DTE ในวันนั้น แต่มาจาก position เก่าที่กลายเป็น 0DTE</p>
+  <h1>บท 0010: Positive gamma มาจากไหน</h1>
+  <p class="deck">Section 5 คือจุดหักมุม: positive net gamma ของ market maker ไม่ได้มาจากคนมา trade 0DTE ใหม่ในวันนั้นเป็นหลัก</p>
 
   <section class="callout">
     <strong>claim สำคัญ:</strong>
-    end-users เคยสร้าง position ใน longer-dated SPXW ไว้ก่อน พอถึงวันหมดอายุ position เหล่านั้นกลายเป็น 0DTE และ gamma สูงขึ้นมาก
+    แหล่งหลักคือ stale positions หรือ positions ที่สร้างไว้ก่อนวันหมดอายุใน longer-dated SPXW แล้วกลายเป็น 0DTE ในวัน expiry
   </section>
 
   <h2>1. ลูกค้าถืออะไรโดยรวม</h2>
-  <p>paper พบว่า Customers โดยรวมมีลักษณะ net short at-the-money straddles ใน 0DTE</p>
-  <p>straddle คือการใช้ call กับ put strike เดียวกัน ส่วน at-the-money หมายถึง strike ใกล้ระดับดัชนีตอนนั้น</p>
+  <p>paper พบว่า Customers โดยรวมมี net short at-the-money straddles ใน 0DTE</p>
+  <p>แปลแบบง่าย: ลูกค้าขายทั้ง call และ put ใกล้ระดับดัชนี เหมือน bet ว่าตลาดจะไม่แกว่งแรงเกินไป</p>
 
+  <h2>2. Market maker ถืออีกฝั่ง</h2>
+  <p>ถ้าลูกค้าสุทธิ short ATM straddles และมี negative gamma, market maker ที่ถืออีกฝั่งจะมี positive gamma</p>
+  <p>นี่คือเหตุผลที่ market maker ต้อง hedge แบบสวนราคาเมื่อดัชนีขยับ</p>
+
+  <h2>3. ทำไม ATM ใกล้ expiry สำคัญ</h2>
+  <p>gamma ของ ATM options สูงขึ้นเมื่อเวลาใกล้หมดอายุ เพราะราคาใกล้ strike นิดเดียวสามารถเปลี่ยนผลลัพธ์ตอน expiry ได้มาก</p>
+  <p>ดังนั้น position ที่เปิดไว้หลายวันก่อน พอถึงวันหมดอายุกลายเป็น 0DTE จะสร้าง hedging need สูงขึ้นมาก</p>
+
+  <h2>4. New positions vs stale positions</h2>
   <div class="grid">
-    <section class="card">
-      <h3>Short ATM straddle</h3>
-      <p>ขาย call และขาย put ใกล้ระดับดัชนี เหมือน bet ว่าตลาดไม่แกว่งแรงเกินไป</p>
-    </section>
-    <section class="card">
-      <h3>อีกฝั่งของ market maker</h3>
-      <p>ถ้าลูกค้าสุทธิ short gamma market maker จะถือฝั่งตรงข้ามและมี positive gamma</p>
-    </section>
+    <section class="card"><h3>New positions</h3><p>position ที่เกิดจากการซื้อขายใหม่ในวัน 0DTE</p></section>
+    <section class="card"><h3>Stale positions</h3><p>position ที่มีอยู่ตั้งแต่ก่อนเปิดตลาดวันหมดอายุ แล้ว gamma เปลี่ยนเมื่อเวลาเหลือน้อยลง</p></section>
   </div>
+  <p>Figure 8 แยกสองส่วนนี้และพบว่า stale positions เป็นแหล่งหลักของ positive net gamma</p>
 
-  <h2>2. ทำไม ATM สำคัญ</h2>
-  <p>gamma ของ option ที่ใกล้ at-the-money และใกล้หมดอายุสามารถสูงมาก เพราะการขยับเล็ก ๆ อาจเปลี่ยนผลลัพธ์เมื่อ expiry ได้เร็ว</p>
-  <p>ดังนั้น position ที่ดูเหมือน long-dated ตอนแรก พอเวลาหมดลงจนกลายเป็น 0DTE จะสร้าง hedging need ใหญ่ขึ้น</p>
+  <h2>5. ทำไมเรื่องนี้สำคัญ</h2>
+  <p>ถ้าดูแค่ volume ในวัน 0DTE เราจะพลาด risk ที่สะสมมาก่อนแล้วกลายเป็น 0DTE</p>
+  <p>paper จึงเน้น life-cycle ของ SPXW contracts ไม่ใช่แค่ flow ในวัน expiration</p>
 
-  <h2>3. Stale positions vs new positions</h2>
-  <p>paper แยก market maker net gamma เป็นสองส่วน:</p>
-  <ul>
-    <li><strong>Stale positions</strong>: position ที่มีอยู่ตั้งแต่เปิดตลาดวันหมดอายุ</li>
-    <li><strong>New positions</strong>: position ใหม่ที่เกิดจากการ trade ระหว่างวัน 0DTE</li>
-  </ul>
-  <p>ผลคือ stale positions เป็นแหล่งหลักของ positive net gamma ส่วน new positions เฉลี่ยเล็กและแกว่งรอบศูนย์มากกว่า</p>
-
-  <h2>4. ทำไมเรื่องนี้เปลี่ยนวิธีอ่าน 0DTE</h2>
-  <p>ถ้าดูเฉพาะ volume ในวัน 0DTE เราจะเข้าใจผิดได้ เพราะ risk สำคัญอาจถูกสร้างไว้ตั้งแต่ก่อนวันหมดอายุ</p>
-  <p>paper จึงเน้น life-cycle ของ SPXW contracts: ต้องดูว่าก่อนมันเป็น 0DTE มีใครถืออะไรไว้</p>
-
-  <h2>5. Retrieval exercise</h2>
+  <h2>6. Retrieval</h2>
   <section class="quiz">
-    <details>
-      <summary>positive net gamma ของ market maker มาจาก trade ใหม่ในวัน 0DTE เป็นหลักหรือไม่?</summary>
-      <p>ไม่ใช่เป็นหลัก paper พบว่าส่วนใหญ่จาก stale positions ที่สร้างไว้ก่อนวันหมดอายุ</p>
-    </details>
-    <details>
-      <summary>ลูกค้า net short ATM straddle แปลว่าอะไรแบบง่าย?</summary>
-      <p>ลูกค้าสุทธิขาย call และ put ใกล้ระดับดัชนี เหมือนขาย volatility โดยรวม</p>
-    </details>
-    <details>
-      <summary>ทำไมต้องดู life-cycle ของ SPXW?</summary>
-      <p>เพราะ position ที่สร้างไว้ก่อนสามารถกลายเป็น 0DTE และสร้าง gamma/hedging need ใหญ่ในวันหมดอายุ</p>
-    </details>
+    <details><summary>positive net gamma ของ market maker มาจาก new 0DTE trades เป็นหลักไหม?</summary><p>ไม่ใช่ paper พบว่าส่วนใหญ่จาก stale positions ที่สร้างไว้ก่อนวันหมดอายุ</p></details>
+    <details><summary>ลูกค้า net short ATM straddle หมายถึงอะไร?</summary><p>ลูกค้าสุทธิขาย call และ put ใกล้ระดับดัชนี เหมือนขาย volatility</p></details>
+    <details><summary>ทำไมต้องดู life-cycle ของ SPXW?</summary><p>เพราะ positions ที่เปิดก่อนวันหมดอายุสามารถกลายเป็น 0DTE และสร้าง gamma/hedging needs ใหญ่</p></details>
   </section>
 
-  <p>อ่านต่อ: <a href="0011-how-to-read-regression-tables.html">0011 How to read regression tables</a>. ย้อนกลับ: <a href="0009-intraday-evidence-and-e-mini-futures.html">0009 Intraday evidence</a>. Primary source: <a href="../The_Market_for_0DTE_options.md">local paper</a>.</p>
+  <p>ต่อไป: <a href="0011-how-to-read-regression-tables.html">0011 Regression Tables</a></p>
 </main>
 </body>
 </html>

@@ -8,130 +8,51 @@
 </head>
 <body>
 <main>
-  <h1>Delta และ Gamma แบบไม่ใช้สูตร</h1>
-  <p class="deck">บทนี้มีเป้าหมายเดียว: แยกให้ออกว่า option ไวต่อดัชนีแค่ไหน และ hedge ที่ market maker ต้องทำเปลี่ยนเร็วแค่ไหน</p>
+  <h1>บท 0003: Delta และ Gamma แบบไม่ใช้สูตร</h1>
+  <p class="deck">paper ใช้ net delta และ net gamma เพื่อวัด hedging needs ของ market maker บทนี้ทำให้สองคำนี้จับต้องได้</p>
 
   <section class="callout">
-    <strong>จำภาพรวมก่อน:</strong>
-    Delta คือ "option ขยับตาม S&amp;P 500 แค่ไหนตอนนี้" ส่วน gamma คือ "delta เปลี่ยนเร็วแค่ไหนเมื่อ S&amp;P 500 ขยับต่อ" 0DTE สำคัญเพราะ gamma มักทำให้ hedge ต้องปรับถี่และเร็วขึ้น
+    <strong>จำก่อน:</strong>
+    Delta คือ option ไวต่อทิศทางของดัชนีแค่ไหนตอนนี้. Gamma คือ delta เปลี่ยนเร็วแค่ไหนเมื่อดัชนีขยับต่อ
   </section>
 
-  <h2>1. ตั้งฉากเดียวพอ</h2>
-  <p>สมมติ S&amp;P 500 อยู่ที่ 5,000 จุด และมี call option ที่ strike 5,000 ซึ่งจะหมดอายุวันนี้</p>
-  <p>ถ้าดัชนีขึ้นจาก 5,000 เป็น 5,001 call นี้น่าจะมีค่ามากขึ้น เพราะสิทธิในการได้ประโยชน์จากตลาดขึ้นมีค่ามากกว่าเดิม</p>
-  <p>คำถามของ delta คือ: <strong>ถ้าดัชนีขยับ 1 จุด option จะตอบสนองประมาณแรงแค่ไหน?</strong></p>
+  <h2>1. Delta ด้วยตัวอย่างง่าย</h2>
+  <p>สมมติ call option ตัวหนึ่งใกล้ ATM ถ้า S&amp;P 500 ขยับขึ้น 1 จุด แล้วราคา option ขยับขึ้นประมาณ 0.5 จุด เราพูดแบบ intuition ได้ว่า option นี้มี delta ประมาณครึ่งหนึ่งของดัชนี</p>
+  <p>ไม่ต้องจำตัวเลขเป๊ะ สิ่งที่ต้องเข้าใจคือ delta บอก directional exposure ตอนนี้</p>
 
-  <div class="grid">
-    <section class="card">
-      <h3>Call</h3>
-      <p>ดัชนีขึ้น มักดีต่อ call. ดัชนีลง มักแย่ต่อ call.</p>
-    </section>
-    <section class="card">
-      <h3>Put</h3>
-      <p>ดัชนีลง มักดีต่อ put. ดัชนีขึ้น มักแย่ต่อ put.</p>
-    </section>
-  </div>
-
-  <h2>2. Delta: ความไวต่อทิศทาง</h2>
-  <p>Delta คือภาษาสั้น ๆ สำหรับพูดว่า option มี exposure ต่อทิศทางของ S&amp;P 500 แค่ไหน</p>
-  <p>ถ้า call มี delta สูง แปลว่าเวลาตลาดขึ้น call จะตอบสนองแรงกว่า call ที่ delta ต่ำ</p>
-  <p>ยังไม่ต้องจำตัวเลขหรือสูตร ให้จำว่า delta เป็นคำตอบของคำถามนี้:</p>
-
-  <section class="callout">
-    <strong>คำถาม delta:</strong>
-    ตอนนี้ option นี้เหมือนถือดัชนีมากแค่ไหน?
-  </section>
-
-  <h2>3. ทำไม market maker สนใจ delta</h2>
-  <p>สมมติ market maker ขาย call ให้ลูกค้า ถ้า S&amp;P 500 ขึ้น call ที่เขาขายไว้จะเป็นภาระมากขึ้น</p>
-  <p>เขาจึงอาจซื้อ E-mini futures เพื่อชดเชยความเสี่ยงจากตลาดขึ้น เพราะในเปเปอร์นี้ SPX index ซื้อขายตรง ๆ ไม่ได้ จึงใช้ E-mini เป็นเครื่องมือ hedge</p>
+  <h2>2. ทำไม market maker ต้องสนใจ delta</h2>
+  <p>ถ้า market maker ขาย call ให้ลูกค้า เขาเสียหายเมื่อดัชนีขึ้น เพราะ call ที่เขาขายจะมีค่ามากขึ้น</p>
+  <p>เพื่อไม่ให้รับ risk ทิศทางมากเกินไป เขาอาจซื้อ E-mini futures มาชดเชย นี่คือ delta hedging</p>
 
   <div class="flow">
     <div class="step">market maker ขาย call</div>
-    <div class="step">call มีความเสี่ยงถ้า S&amp;P 500 ขึ้น</div>
-    <div class="step">market maker ซื้อ futures เพื่อ offset ความเสี่ยงขึ้น</div>
-    <div class="step">นี่คือการ hedge delta แบบ intuition</div>
+    <div class="step">ดัชนีขึ้นแล้ว position เสี่ยงมากขึ้น</div>
+    <div class="step">เขาซื้อ futures เพื่อ offset directional exposure</div>
   </div>
 
-  <h2>4. Gamma: ความเร็วที่ delta เปลี่ยน</h2>
-  <p>ปัญหาคือ delta ไม่ได้อยู่นิ่ง ถ้า S&amp;P 500 ขยับไปเรื่อย ๆ option อาจเริ่มตอบสนองแรงขึ้นหรือเบาลง</p>
-  <p>Gamma คือคำที่ใช้เรียก "ความเร็วในการเปลี่ยนของ delta"</p>
+  <h2>3. Gamma คือปัญหาว่า hedge เมื่อกี้ไม่คงที่</h2>
+  <p>แม้คุณ hedge delta พอดีตอน 10:00 แต่พอดัชนีขยับไป 10 จุด delta ของ option อาจเปลี่ยน ทำให้ hedge เดิมไม่พอดีแล้ว</p>
+  <p>gamma คือความเร็วที่ delta เปลี่ยน ดังนั้น gamma สูงแปลว่า hedge ที่ต้องถือเปลี่ยนเร็ว</p>
 
-  <section class="callout">
-    <strong>คำถาม gamma:</strong>
-    ถ้าดัชนีขยับต่อ hedge ที่ต้องทำจะเปลี่ยนเร็วแค่ไหน?
-  </section>
+  <h2>4. ทำไม 0DTE gamma สำคัญ</h2>
+  <p>option ใกล้หมดอายุและใกล้ ATM มีโอกาสที่ delta จะเปลี่ยนเร็วมาก เพราะการขยับเล็ก ๆ ตัดสินได้ว่า option จะหมดอายุมีค่าหรือไร้ค่า</p>
+  <p>นี่คือเหตุผลที่ paper สนใจ net gamma ของ market maker ในช่วง intraday</p>
 
-  <p>ถ้า gamma สูง market maker อาจต้องปรับ hedge บ่อยกว่า เพราะ position ที่เมื่อกี้ดู hedge พอดี อาจไม่พอดีแล้วหลังดัชนีขยับอีกนิด</p>
-
-  <h2>5. ทำไม 0DTE ทำให้ gamma สำคัญ</h2>
-  <p>0DTE option เหลือเวลาแค่วันเดียว ผลลัพธ์ใกล้ถูกตัดสินแล้วว่า option จะมีค่าเมื่อหมดอายุหรือไม่</p>
-  <p>ดังนั้นใกล้ strike มาก ๆ การขยับเล็กน้อยของ S&amp;P 500 อาจเปลี่ยนสถานะของ option ได้เร็วกว่า option ที่ยังเหลือเวลาอีกหลายเดือน</p>
-
+  <h2>5. Net delta / net gamma คืออะไร</h2>
+  <p>market maker ถือ option จำนวนมากหลาย strike หลาย expiry. คำว่า net คือผลรวมสุทธิหลังทุก position หักล้างกันแล้ว</p>
   <div class="grid">
-    <section class="card">
-      <h3>Option เหลือหลายเดือน</h3>
-      <p>ยังมีเวลาให้สถานการณ์เปลี่ยน ความเสี่ยงมักไม่ต้องรีบปรับทุกจุด</p>
-    </section>
-    <section class="card">
-      <h3>0DTE ใกล้ strike</h3>
-      <p>เวลาเหลือน้อยมาก การขยับเล็ก ๆ อาจเปลี่ยน hedge ที่ควรถือเร็วขึ้น</p>
-    </section>
+    <section class="card"><h3>Net delta</h3><p>directional exposure สุทธิที่ต้อง hedge</p></section>
+    <section class="card"><h3>Net gamma</h3><p>ความเร็วที่ hedge need สุทธิเปลี่ยนเมื่อดัชนีขยับ</p></section>
   </div>
 
-  <h2>6. เชื่อมกลับไปที่เปเปอร์</h2>
-  <p>เปเปอร์บอกว่า short-dated options ไวต่อราคาสินทรัพย์อ้างอิงมากกว่า และ market maker ต้องปรับ hedge ตาม net delta กับ net gamma ของ position ที่ถืออยู่</p>
-  <p>จุดสำคัญที่เรายังไม่ต้องพิสูจน์วันนี้คือ: ถ้า market maker มี positive net gamma การ hedge โดยเฉลี่ยจะออกมาเป็นทิศทางสวนราคา</p>
-
-  <div class="flow">
-    <div class="step">S&amp;P 500 ขึ้น</div>
-    <div class="step">hedge ที่เหมาะสมเปลี่ยน</div>
-    <div class="step">positive net gamma ทำให้ market maker มีแนวโน้มขาย futures</div>
-    <div class="step">การขายสวนทางราคาอาจช่วยลดแรงแกว่ง</div>
-  </div>
-
-  <p>นี่คือประตูสู่ claim หลักของ paper: 0DTE ไม่ได้จำเป็นต้องทำให้ volatility สูงขึ้นเสมอไป ถ้า hedging flow ของ market maker เป็นแบบสวนทางราคาโดยเฉลี่ย</p>
-
-  <h2>7. อย่าเพิ่งจำเกินนี้</h2>
-  <div class="grid">
-    <section class="card">
-      <h3>Delta</h3>
-      <p>option ไวต่อการขยับของ S&amp;P 500 แค่ไหนตอนนี้</p>
-    </section>
-    <section class="card">
-      <h3>Gamma</h3>
-      <p>delta และ hedge ที่ต้องทำเปลี่ยนเร็วแค่ไหนเมื่อดัชนีขยับ</p>
-    </section>
-    <section class="card">
-      <h3>0DTE</h3>
-      <p>ทำให้เรื่องนี้เร่งขึ้น เพราะเวลาหมดอายุอยู่ใกล้มาก</p>
-    </section>
-  </div>
-
-  <h2>8. Retrieval exercise</h2>
+  <h2>6. Retrieval</h2>
   <section class="quiz">
-    <p>ลองตอบเองก่อนเปิดเฉลย เป้าหมายไม่ใช่ตอบสวย แต่คือดึงความเข้าใจออกจากหัว</p>
-
-    <details>
-      <summary>ถ้า S&amp;P 500 ขึ้น call option มักเกิดอะไรขึ้น?</summary>
-      <p>call มักมีค่ามากขึ้น เพราะ call ได้ประโยชน์จากดัชนีขึ้น โดยเฉพาะถ้าอยู่ใกล้ strike และใกล้หมดอายุ</p>
-    </details>
-
-    <details>
-      <summary>ทำไม market maker ต้อง hedge?</summary>
-      <p>เพราะหลังรับอีกฝั่งของ order เขาไม่อยากปล่อยให้ตัวเองเสี่ยงทิศทางตลาดมากเกินไป จึงใช้ position อีกฝั่งเพื่อลดความเสี่ยง</p>
-    </details>
-
-    <details>
-      <summary>ทำไม 0DTE มัก sensitive กว่า option ที่เหลือเวลานาน?</summary>
-      <p>เพราะเวลาเหลือน้อย ผลลัพธ์ใกล้ตัดสินแล้ว การขยับเล็ก ๆ ใกล้ strike จึงเปลี่ยนมูลค่าและ hedge ที่ต้องทำได้เร็วกว่า</p>
-    </details>
+    <details><summary>delta ตอบคำถามอะไร?</summary><p>option หรือ portfolio ไวต่อการขยับทิศทางของดัชนีแค่ไหนตอนนี้</p></details>
+    <details><summary>gamma ตอบคำถามอะไร?</summary><p>delta และ hedge ที่ต้องทำเปลี่ยนเร็วแค่ไหนเมื่อดัชนีขยับ</p></details>
+    <details><summary>ทำไม 0DTE ทำให้ gamma น่าสนใจขึ้น?</summary><p>เพราะใกล้หมดอายุแล้ว การขยับใกล้ strike ทำให้ delta เปลี่ยนเร็วมาก</p></details>
   </section>
 
-  <h2>9. อ่านต่อแบบจำกัดพื้นที่</h2>
-  <p>ถ้าจะกลับไปอ่าน paper ให้อ่านเฉพาะ Abstract และ Introduction บรรทัดที่พูดถึง net delta, net gamma, และ E-mini futures ก่อน อย่าเพิ่งอ่าน regression table</p>
-  <p>Primary source: <a href="../The_Market_for_0DTE_options.md">The Market for 0DTE options</a>. บทก่อนหน้า: <a href="0002-0dte-from-zero-before-the-paper.html">0DTE จากศูนย์</a>. Glossary: <a href="../reference/0001-0dte-paper-glossary.html">0DTE paper glossary</a>.</p>
-  <p>ถ้าจุดไหนยังไม่ชัด ให้ถาม agent ต่อได้ทันที โดยเฉพาะถ้าอยากให้ยกตัวอย่างเป็นตัวเลขเล็ก ๆ แบบไม่ใช้สูตร</p>
+  <p>ต่อไป: <a href="0004-positive-net-gamma-and-counter-cyclical-hedging.html">0004 Positive Net Gamma</a></p>
 </main>
 </body>
 </html>

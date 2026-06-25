@@ -8,83 +8,57 @@
 </head>
 <body>
 <main>
-  <h1>บทสุดท้าย: อธิบาย paper ทั้งฉบับให้เป็นเรื่องเดียว</h1>
-  <p class="deck">ถ้าคุณเรียนถึงบทนี้ เป้าหมายคือเล่า paper ได้เอง: claim, mechanism, evidence, limitation, และ research hypothesis</p>
+  <h1>บท 0012: สรุป paper ทั้งฉบับแบบเล่าเองได้</h1>
+  <p class="deck">เป้าหมายคือคุณสามารถเล่า question, mechanism, evidence, limitation และ hypothesis ต่อได้เอง</p>
 
   <section class="callout">
-    <strong>หนึ่งประโยคของ paper:</strong>
-    0DTE trading บน S&amp;P 500 ไม่ได้เพิ่ม volatility โดยเฉลี่ยใน sample นี้ แต่สัมพันธ์กับ volatility ที่ต่ำลง เพราะ market maker มี positive net gamma จาก position เก่าที่กลายเป็น 0DTE และ hedge ผ่าน E-mini futures แบบสวนทางราคา
+    <strong>หนึ่งประโยค:</strong>
+    paper นี้พบว่า 0DTE trading ไม่ได้เพิ่ม S&amp;P 500 volatility โดยเฉลี่ยใน sample แต่สัมพันธ์กับ volatility ที่ต่ำลง เพราะ market maker มี positive net gamma จาก stale SPXW positions ที่กลายเป็น 0DTE และ hedge ผ่าน E-mini futures แบบสวนราคา
   </section>
 
-  <h2>1. Story chain ทั้งฉบับ</h2>
+  <h2>1. Story chain</h2>
   <div class="flow">
-    <div class="step">0DTE volume โตมาก และคนกังวลว่า hedge จะทำให้ตลาดแกว่งแรง</div>
-    <div class="step">paper ใช้ variation จาก expiration calendar เพื่อวัดผลของวันที่มี 0DTE</div>
+    <div class="step">0DTE volume โตมาก จึงเกิดความกลัวว่า hedge จะเพิ่ม volatility</div>
+    <div class="step">paper ใช้ expiration-calendar variation เพื่อวัด effect ของวันที่มี 0DTE</div>
     <div class="step">พบว่า volatility ต่ำลงโดยเฉลี่ยในวันที่มี 0DTE</div>
-    <div class="step">วัด net delta/net gamma ของ market maker จาก option volume และ position</div>
+    <div class="step">วัด market maker net delta/net gamma จาก option open-close volume</div>
     <div class="step">พบว่า 0DTE เพิ่ม positive net gamma ของ market maker</div>
-    <div class="step">positive net gamma ทำให้ hedge สวนทางราคาใน E-mini futures</div>
-    <div class="step">แหล่งของ gamma คือ stale positions จาก longer-dated SPXW ที่กลายเป็น 0DTE</div>
+    <div class="step">positive net gamma ทำให้ hedge สวนราคาใน E-mini futures</div>
+    <div class="step">แหล่งหลักของ gamma คือ stale positions ไม่ใช่ new 0DTE trades ในวันนั้น</div>
   </div>
 
   <h2>2. paper claim อะไร</h2>
   <ul>
-    <li>0DTE trading days มี index volatility ต่ำลงโดยเฉลี่ย</li>
-    <li>market maker net gamma เพิ่มขึ้นในวันที่มี 0DTE</li>
-    <li>intraday evidence สอดคล้องกับ hedging mechanism</li>
-    <li>positive net gamma ส่วนใหญ่ไม่ได้เกิดจาก new 0DTE trades ระหว่างวัน</li>
+    <li>0DTE trading days มี intraday volatility ต่ำลงโดยเฉลี่ย</li>
+    <li>0DTE trading เพิ่ม market maker net gamma</li>
+    <li>0DTE net gamma ทำนาย volatility ถัดไปที่ต่ำลง</li>
+    <li>E-mini order flow สวนทาง index return มากขึ้นเมื่อ net gamma สูง</li>
+    <li>positive gamma ส่วนใหญ่เกิดจาก longer-dated SPXW positions ที่กลายเป็น 0DTE</li>
   </ul>
 
   <h2>3. paper ไม่ได้ claim อะไร</h2>
   <ul>
-    <li>ไม่ได้บอกว่า 0DTE ไม่มีทางเพิ่ม volatility ในทุกสถานการณ์</li>
-    <li>ไม่ได้บอกว่า market maker ทุกเจ้า hedge แบบเดียวกันเสมอ</li>
+    <li>ไม่ได้บอกว่า 0DTE ลด volatility ทุกสถานการณ์</li>
+    <li>ไม่ได้บอกว่า extreme events เป็นไปไม่ได้</li>
     <li>ไม่ได้ link E-mini order flow กับ market maker รายตัวโดยตรง</li>
-    <li>ไม่ได้ให้ trading strategy สำเร็จรูป</li>
+    <li>ไม่ได้ให้ trading recommendation</li>
   </ul>
 
-  <h2>4. ถ้าจะใช้เป็น research hypothesis</h2>
-  <p>เปลี่ยน paper เป็น hypothesis ได้แบบนี้:</p>
+  <h2>4. วิธีใช้ paper เป็น research hypothesis</h2>
   <div class="grid">
-    <section class="card">
-      <h3>Hypothesis 1</h3>
-      <p>วันที่ SPXW ใกล้ expiry และ market maker net gamma เป็นบวกสูง intraday volatility ของ S&amp;P 500 ควรต่ำลง</p>
-    </section>
-    <section class="card">
-      <h3>Hypothesis 2</h3>
-      <p>เมื่อ net gamma สูง E-mini futures order flow ควรสวนทางกับ recent index return มากขึ้น</p>
-    </section>
-    <section class="card">
-      <h3>Hypothesis 3</h3>
-      <p>ข้อมูล position ก่อน expiry อาจอธิบาย 0DTE hedging pressure ได้ดีกว่า volume ในวัน expiry อย่างเดียว</p>
-    </section>
+    <section class="card"><h3>Hypothesis 1</h3><p>วันที่ market maker net gamma เป็นบวกสูง intraday volatility ของ S&amp;P 500 ควรต่ำลง</p></section>
+    <section class="card"><h3>Hypothesis 2</h3><p>E-mini futures order flow ควรสวนทางกับ recent index return มากขึ้นเมื่อ 0DTE gamma exposure สูง</p></section>
+    <section class="card"><h3>Hypothesis 3</h3><p>ข้อมูล stale positions ก่อน expiry อาจสำคัญกว่า 0DTE volume ในวัน expiry อย่างเดียว</p></section>
   </div>
 
   <h2>5. Final retrieval</h2>
   <section class="quiz">
-    <details>
-      <summary>main claim ของ paper คืออะไร?</summary>
-      <p>0DTE trading ลด index volatility โดยเฉลี่ยใน sample ผ่าน market maker hedging ที่สวนทางราคา</p>
-    </details>
-    <details>
-      <summary>กลไกสำคัญที่สุดคืออะไร?</summary>
-      <p>positive net gamma ของ market maker ทำให้ hedge ด้วย E-mini futures แบบขายเมื่อขึ้นและซื้อเมื่อลง</p>
-    </details>
-    <details>
-      <summary>ข้อจำกัดสำคัญที่ต้องพูดทุกครั้งคืออะไร?</summary>
-      <p>ผลเป็น average effect และหลักฐาน E-mini เป็น circumstantial ไม่ได้ตาม trade ของ market maker รายตัว</p>
-    </details>
+    <details><summary>main mechanism ของ paper คืออะไร?</summary><p>positive net gamma ของ market maker ทำให้ hedge ด้วย E-mini futures แบบสวนราคาและลด volatility โดยเฉลี่ย</p></details>
+    <details><summary>source ของ positive gamma มาจากไหนเป็นหลัก?</summary><p>stale positions จาก longer-dated SPXW contracts ที่กลายเป็น 0DTE</p></details>
+    <details><summary>limitation สำคัญคืออะไร?</summary><p>ผลเป็น average effect และ E-mini evidence เป็น circumstantial ไม่ได้ track market maker trades รายตัว</p></details>
   </section>
 
-  <h2>6. วิธีทบทวนทั้ง course</h2>
-  <ol>
-    <li>อ่าน 0002-0005 เพื่อปู intuition</li>
-    <li>อ่าน 0006-0008 เพื่อเข้าใจผลหลักและการวัด</li>
-    <li>อ่าน 0009-0010 เพื่อเข้าใจ mechanism</li>
-    <li>อ่าน 0011-0012 เพื่ออ่าน tables และเล่า paper ทั้งฉบับ</li>
-  </ol>
-
-  <p>ย้อนกลับ: <a href="0011-how-to-read-regression-tables.html">0011 Regression tables</a>. เริ่ม course: <a href="0001-how-to-learn-this-paper-from-zero.html">0001 How to learn this paper</a>. Primary source: <a href="../The_Market_for_0DTE_options.md">local paper</a>.</p>
+  <p>กลับหน้า paper: <a href="../../topics/0dte/the-market-for-0dte-options.html">The Market for 0DTE options contents</a></p>
 </main>
 </body>
 </html>

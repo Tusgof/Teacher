@@ -8,55 +8,38 @@
 </head>
 <body>
 <main>
-  <h1>Intraday evidence: หลักฐานว่า hedge เกิดในตลาด E-mini</h1>
-  <p class="deck">บทนี้เชื่อมกลไกกับข้อมูลจริง: ถ้า market maker hedge สวนทางราคา เราควรเห็นอะไรใน futures order flow</p>
+  <h1>บท 0009: หลักฐาน intraday และ E-mini futures</h1>
+  <p class="deck">ถ้า mechanism จริง เราควรเห็นสองอย่าง: net gamma สูงแล้ว volatility ถัดไปต่ำลง และ E-mini flow สวนทาง index return มากขึ้น</p>
 
   <section class="callout">
     <strong>prediction ของกลไก:</strong>
-    เมื่อ 0DTE net gamma สูงขึ้น E-mini order flow ควรตอบสนองต่อ S&amp;P 500 return แบบสวนทางมากขึ้น และ volatility ถัดไปควรต่ำลง
+    positive 0DTE net gamma → market maker rebalance ผ่าน E-mini futures แบบสวนราคา → volatility ในช่วงถัดไปลดลง
   </section>
 
-  <h2>1. ทำไมต้องดู intraday</h2>
-  <p>ถ้า hedge ของ 0DTE สำคัญจริง มันควรเกิดเร็ว เพราะ option หมดอายุวันนี้ ไม่ใช่เดือนหน้า</p>
-  <p>paper จึงดูช่วง 10 นาทีและถามว่า net gamma ตอนนี้ทำนาย volatility กับ futures order flow ในช่วงถัดไปได้ไหม</p>
+  <h2>1. ทำไมต้องดู intraday ไม่ใช่รายวันอย่างเดียว</h2>
+  <p>0DTE หมดอายุวันนี้ ถ้า hedging mechanism สำคัญจริง ผลควรเกิดภายในนาทีหรือชั่วโมง ไม่ใช่รอหลายวัน</p>
+  <p>paper จึงใช้ช่วง 10 นาทีและดู response ไปถึงประมาณหนึ่งชั่วโมง</p>
 
-  <h2>2. หลักฐานชุดแรก: net gamma ทำนาย volatility ต่ำลง</h2>
-  <p>paper พบว่าเมื่อ 0DTE net gamma ของ market maker สูงขึ้น volatility ในช่วงถัดไปต่ำลงโดยเฉลี่ย</p>
-  <p>ผลนี้อยู่ประมาณภายในชั่วโมงถัดไป แล้วค่อย ๆ จางลง ซึ่งเข้ากับภาพว่า hedge ถูกปรับภายในวัน</p>
+  <h2>2. Figure 3-4 / Table 6 อ่านอย่างไร</h2>
+  <p>คำถามคือ เมื่อ 0DTE net gamma สูงขึ้น volatility ในช่วงถัดไปต่ำลงไหม</p>
+  <p>ผลคือ coefficient ของ 0DTE net gamma ต่อ future volatility เป็นลบและสำคัญ โดยผลแรงในช่วงใกล้ ๆ แล้วค่อย ๆ จางลงในประมาณหนึ่งชั่วโมง</p>
 
-  <h2>3. หลักฐานชุดที่สอง: E-mini order flow สวนทางราคา</h2>
-  <p>ถ้าดัชนีขึ้นและ market maker มี positive net gamma เขาควรขาย futures มากขึ้น</p>
-  <p>ถ้าดัชนีลง เขาควรซื้อ futures มากขึ้น</p>
-  <p>paper พบว่า negative relationship ระหว่าง index return กับ E-mini order flow แข็งแรงขึ้นเมื่อ 0DTE net gamma สูง</p>
+  <h2>3. Figure 5 / Table 8 อ่านอย่างไร</h2>
+  <p>คำถามคือ E-mini order flow ตอบสนองต่อ index return แบบสวนทางมากขึ้นไหมเมื่อ net gamma สูง</p>
+  <p>ถ้าดัชนีขึ้นแล้ว flow ถัดไปเป็นขาย futures มากขึ้น หรือดัชนีลงแล้ว flow เป็นซื้อ futures มากขึ้น นั่นตรงกับ counter-cyclical hedging</p>
 
-  <div class="flow">
-    <div class="step">0DTE net gamma สูง</div>
-    <div class="step">S&amp;P 500 ขยับ</div>
-    <div class="step">E-mini flow ตอบสนองสวนทางมากขึ้น</div>
-    <div class="step">volatility ถัดไปต่ำลงโดยเฉลี่ย</div>
-  </div>
+  <h2>4. หลักฐานนี้แข็งแรงแค่ไหน</h2>
+  <p>paper ระบุเองว่า evidence เรื่อง E-mini เป็น circumstantial เพราะไม่สามารถบอกได้ว่า futures order แต่ละรายการมาจาก SPX option market maker รายใด</p>
+  <p>แต่ direction, timing และ strength ของความสัมพันธ์สอดคล้องกับกลไก market maker hedging</p>
 
-  <h2>4. ข้อจำกัดที่ต้องพูดให้ตรง</h2>
-  <p>paper บอกชัดว่า evidence ตรงนี้เป็น circumstantial เพราะเขาไม่สามารถผูก E-mini order flow แต่ละรายการเข้ากับ market maker รายตัวได้โดยตรง</p>
-  <p>แต่ direction, strength, timing ของหลักฐานสอดคล้องกับกลไก hedging</p>
-
-  <h2>5. Retrieval exercise</h2>
+  <h2>5. Retrieval</h2>
   <section class="quiz">
-    <details>
-      <summary>ถ้ากลไก hedge จริง ผลควรเห็นเร็วหรือช้า?</summary>
-      <p>ควรเห็นเร็วภายในวัน เพราะ 0DTE หมดอายุวันเดียวกันและต้อง hedge ทันเวลา</p>
-    </details>
-    <details>
-      <summary>เมื่อ 0DTE net gamma สูง paper พบ volatility ถัดไปเป็นอย่างไร?</summary>
-      <p>ต่ำลงโดยเฉลี่ย และผลค่อย ๆ จางในเวลาประมาณหนึ่งชั่วโมง</p>
-    </details>
-    <details>
-      <summary>ทำไมหลักฐาน E-mini ยังไม่ใช่หลักฐานตรงสมบูรณ์?</summary>
-      <p>เพราะ paper ไม่สามารถ link futures order flow กับ market maker รายตัวได้โดยตรง</p>
-    </details>
+    <details><summary>ถ้า 0DTE hedging สำคัญ ผลควรเห็นเร็วหรือช้า?</summary><p>ควรเห็นเร็วภายในวัน เพราะ 0DTE หมดอายุวันเดียวกัน</p></details>
+    <details><summary>net gamma สูงแล้ว future volatility ใน paper เป็นอย่างไร?</summary><p>ต่ำลงโดยเฉลี่ยในช่วงถัดไป และผลค่อย ๆ จางในเวลาประมาณหนึ่งชั่วโมง</p></details>
+    <details><summary>ทำไม E-mini evidence ยังเรียกว่า circumstantial?</summary><p>เพราะ paper ไม่สามารถ link order flow รายการนั้นกับ market maker รายตัวได้โดยตรง</p></details>
   </section>
 
-  <p>อ่านต่อ: <a href="0010-where-positive-gamma-comes-from.html">0010 Where positive gamma comes from</a>. ย้อนกลับ: <a href="0008-measuring-net-delta-and-net-gamma.html">0008 Measuring net gamma</a>. Primary source: <a href="../The_Market_for_0DTE_options.md">local paper</a>.</p>
+  <p>ต่อไป: <a href="0010-where-positive-gamma-comes-from.html">0010 Source of Positive Gamma</a></p>
 </main>
 </body>
 </html>

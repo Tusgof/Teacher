@@ -8,77 +8,57 @@
 </head>
 <body>
 <main>
-  <nav class="crumbs">
-    <a href="../../index.html">Library</a>
-    <span>/</span>
-    <a href="../../topics/0dte/index.html">0DTE</a>
-    <span>/</span>
-    <a href="../../topics/0dte/the-market-for-0dte-options.html">The Market for 0DTE options</a>
-  </nav>
+  <nav class="crumbs"><a href="../../index.html">Library</a><span>/</span><a href="../../topics/0dte/index.html">0DTE</a><span>/</span><a href="../../topics/0dte/the-market-for-0dte-options.html">The Market for 0DTE options</a></nav>
 
-  <h1>เริ่มจากศูนย์: เราจะอ่าน paper นี้ยังไง</h1>
-  <p class="deck">บทนี้คือแผนที่ก่อนเริ่มเรียนจริง สำหรับคนที่ยังไม่รู้ 0DTE, options Greeks, market maker, hedging, microstructure หรือ regression tables</p>
+  <h1>บท 0001: paper นี้กำลังถามอะไร</h1>
+  <p class="deck">เริ่มจากศูนย์จริง: ก่อนรู้ delta, gamma, market maker หรือ regression เราต้องรู้ก่อนว่า paper นี้พยายามแก้ความเข้าใจผิดเรื่องอะไร</p>
 
   <section class="callout">
-    <strong>เป้าหมายของทั้ง course:</strong>
-    อ่าน <em>The Market for 0DTE options</em> ให้เข้าใจทั้ง story, mechanism, evidence, limitation และแปลงเป็น research hypothesis ได้ โดยไม่ต้องเริ่มจากสูตร
+    <strong>คำถามหลักของ paper:</strong>
+    0DTE options ทำให้ S&amp;P 500 แกว่งแรงขึ้นจริงไหม หรือในข้อมูลจริง market maker hedging กลับช่วยลด volatility โดยเฉลี่ย
   </section>
 
-  <h2>1. อย่าเริ่มจาก Abstract แบบนักวิจัย</h2>
-  <p>ถ้าพื้นฐานยังเป็นศูนย์ Abstract ของ paper นี้จะอัดคำยากเกินไป: 0DTE, liquidity providers, volatility attenuation, net gamma, E-mini futures, exogenous variation</p>
-  <p>เราจะไม่อ่านแบบไล่หน้า เราจะเรียนแบบสร้างบันไดก่อน แล้วค่อยกลับไปอ่าน paper จริง</p>
+  <h2>1. ทำไมคนกลัว 0DTE</h2>
+  <p>0DTE คือ option ที่หมดอายุภายในวันเดียวกัน เมื่อเหลือเวลาไม่กี่ชั่วโมง ราคา option จะไวต่อการขยับของดัชนีมากขึ้น</p>
+  <p>ความกลัวคือ ถ้าลูกค้าแห่ซื้อหรือขาย 0DTE ฝั่งเดียว market maker ที่รับอีกฝั่งอาจต้อง hedge ด้วย futures แบบไล่ตามราคา แล้วทำให้ตลาดแกว่งแรงกว่าเดิม</p>
 
-  <h2>2. บันไดความเข้าใจ</h2>
   <div class="flow">
-    <div class="step">เข้าใจ option, call, put, strike, expiration</div>
-    <div class="step">เข้าใจ 0DTE และทำไม same-day expiry ทำให้ risk ไวขึ้น</div>
-    <div class="step">เข้าใจ market maker และเหตุผลที่ต้อง hedge</div>
-    <div class="step">เข้าใจ delta/gamma แบบไม่ใช้สูตร</div>
-    <div class="step">เข้าใจ positive net gamma และ counter-cyclical hedging</div>
-    <div class="step">เข้าใจข้อมูล, identification, regression tables, และข้อจำกัดของ paper</div>
+    <div class="step">ดัชนีขยับ</div>
+    <div class="step">0DTE option เปลี่ยนค่าเร็ว</div>
+    <div class="step">market maker ต้องปรับ hedge</div>
+    <div class="step">hedge flow อาจกระทบ futures market</div>
+    <div class="step">futures market เชื่อมกลับไปที่ S&amp;P 500 volatility</div>
   </div>
 
-  <h2>3. สิ่งที่ต้องกันสับสนตั้งแต่แรก</h2>
+  <h2>2. paper ตอบสวนความกลัวอย่างไร</h2>
+  <p>paper พบว่าโดยเฉลี่ย วันที่มี 0DTE trading volatility ของ S&amp;P 500 ต่ำลง ไม่ใช่สูงขึ้น</p>
+  <p>กลไกที่ paper เสนอคือ market maker มี positive net gamma จาก positions เก่าที่กำลังหมดอายุ ทำให้เขา hedge แบบสวนราคา: ดัชนีขึ้นแล้วขาย futures, ดัชนีลงแล้วซื้อ futures</p>
+
+  <h2>3. คำที่ยังไม่ต้องรู้ลึก แต่ต้องรู้บทบาท</h2>
   <div class="grid">
-    <section class="card">
-      <h3>Volume</h3>
-      <p>ซื้อขายเยอะ ไม่ได้แปลว่า market maker เหลือ risk เยอะเสมอไป</p>
-    </section>
-    <section class="card">
-      <h3>Inventory</h3>
-      <p>position ที่ค้างอยู่จริง เป็นตัวสร้าง hedging need</p>
-    </section>
-    <section class="card">
-      <h3>Hedging flow</h3>
-      <p>การซื้อขาย futures เพื่อคุม risk ซึ่งอาจส่งผลต่อ volatility</p>
-    </section>
+    <section class="card"><h3>Market maker</h3><p>ผู้รับซื้อขายให้ตลาดมีสภาพคล่อง และพยายามไม่ให้ตัวเองเสี่ยงทิศทางตลาดเกินไป</p></section>
+    <section class="card"><h3>Hedging</h3><p>การซื้อขายอีกสินทรัพย์หนึ่งเพื่อลดความเสี่ยง เช่น ใช้ E-mini futures hedge SPX options</p></section>
+    <section class="card"><h3>Volatility attenuation</h3><p>แรงที่ทำให้ตลาดแกว่งเบาลง ไม่ใช่แรงที่ทำให้ราคาไปทิศใดทิศหนึ่ง</p></section>
   </div>
 
-  <h2>4. วิธีเรียนแต่ละบท</h2>
+  <h2>4. เราจะเรียน paper นี้อย่างไร</h2>
   <ol>
-    <li>อ่านบทสั้น ๆ ให้จบก่อน ไม่ต้องเปิด paper พร้อมกัน</li>
-    <li>ตอบ retrieval exercise ก่อนเปิดเฉลย</li>
-    <li>ถ้าตอบไม่ได้ ให้ย้อนอ่านเฉพาะ section ก่อนหน้า</li>
-    <li>หลังบท 0006 ค่อยเริ่มเปิด paper บางช่วงตามที่บทเรียนชี้</li>
+    <li>เข้าใจ option และ 0DTE ก่อน</li>
+    <li>เข้าใจ delta/gamma และทำไม hedge ต้องเปลี่ยน</li>
+    <li>เข้าใจ positive net gamma ว่าทำไมทำให้ hedge สวนราคา</li>
+    <li>เข้าใจว่า paper แยก volume, inventory, hedging flow อย่างไร</li>
+    <li>เข้าใจ evidence: daily effect, identification, intraday E-mini flow, source ของ gamma</li>
+    <li>เข้าใจ limitation: average effect, circumstantial E-mini evidence, ไม่ใช่ trading recommendation</li>
   </ol>
 
-  <h2>5. Checkpoint ก่อนเริ่ม</h2>
+  <h2>5. Retrieval</h2>
   <section class="quiz">
-    <details>
-      <summary>เราควรอ่าน paper นี้แบบไล่หน้าทันทีไหม?</summary>
-      <p>ยังไม่ควร ถ้าพื้นฐานเป็นศูนย์ควรสร้าง intuition ก่อน แล้วค่อยกลับไปอ่าน paper จริง</p>
-    </details>
-    <details>
-      <summary>สามคำที่ต้องแยกให้ได้คืออะไร?</summary>
-      <p>volume, inventory, hedging flow เพราะสามคำนี้ตอบคนละคำถาม</p>
-    </details>
-    <details>
-      <summary>บทแรกที่เรียนเนื้อหาจริงต่อจากนี้คือบทไหน?</summary>
-      <p>บท 0002 เรื่อง 0DTE จากศูนย์ ก่อนเข้า delta/gamma และ empirical evidence</p>
-    </details>
+    <details><summary>ความกลัวหลักเกี่ยวกับ 0DTE คืออะไร?</summary><p>กลัวว่า hedging ของ market maker จะไล่ตามราคาและเพิ่ม volatility ของ S&amp;P 500</p></details>
+    <details><summary>paper พบผลเฉลี่ยต่อ volatility เป็นทิศไหน?</summary><p>พบว่า volatility ต่ำลงโดยเฉลี่ยในวันที่มี 0DTE trading</p></details>
+    <details><summary>กลไกหลักที่ paper เสนอคืออะไร?</summary><p>market maker มี positive net gamma และ hedge สวนราคาใน E-mini futures</p></details>
   </section>
 
-  <p>อ่านต่อ: <a href="0002-0dte-from-zero-before-the-paper.html">0002 0DTE จากศูนย์</a>. กลับไปหน้า paper: <a href="../../topics/0dte/the-market-for-0dte-options.html">สารบัญบทเรียน</a>.</p>
+  <p>ต่อไป: <a href="0002-0dte-from-zero-before-the-paper.html">0002 0DTE จากศูนย์</a></p>
 </main>
 </body>
 </html>

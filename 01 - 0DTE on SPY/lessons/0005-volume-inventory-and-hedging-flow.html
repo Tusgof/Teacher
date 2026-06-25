@@ -3,65 +3,50 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Volume, Inventory, Hedging Flow</title>
+  <title>Volume Inventory Hedging Flow</title>
   <link rel="stylesheet" href="../assets/lesson.css">
 </head>
 <body>
 <main>
-  <h1>Volume, Inventory, Hedging Flow: สามอย่างที่ห้ามปนกัน</h1>
-  <p class="deck">บทนี้กันความสับสนสำคัญที่สุดข้อหนึ่งของ paper: 0DTE volume เยอะ ไม่ได้แปลว่า market maker ต้องมี risk เยอะทันที</p>
+  <h1>บท 0005: Volume, Inventory, Hedging Flow ห้ามปนกัน</h1>
+  <p class="deck">หนึ่งในจุดที่คนอ่าน 0DTE ผิดคือเห็น volume เยอะแล้วคิดว่า market maker risk ต้องเยอะเสมอ</p>
 
   <section class="callout">
-    <strong>จำประโยคนี้:</strong>
-    Volume คือมีการซื้อขายมากแค่ไหน, inventory คือใครค้าง position อะไรอยู่, hedging flow คือ market maker ต้องซื้อขาย futures เพื่อคุม risk อย่างไร
+    <strong>สามคำสามคำถาม:</strong>
+    volume = ซื้อขายเยอะแค่ไหน, inventory = ใครเหลือ position อะไรค้างอยู่, hedging flow = market maker ต้องซื้อขาย futures เพื่อคุม risk อย่างไร
   </section>
 
-  <h2>1. Volume คือเสียงดังของตลาด</h2>
-  <p>ถ้า 0DTE volume สูง แปลว่ามีการซื้อขาย 0DTE จำนวนมาก แต่ยังไม่บอกว่าใครเหลือ exposure หลังตลาดจับคู่ order แล้ว</p>
-  <p>ใน paper ปี 2023 0DTE เป็นสัดส่วนใหญ่ของ SPX option volume แต่นั่นเป็นแค่จุดเริ่มต้นของคำถาม</p>
+  <h2>1. Volume คือจำนวนการซื้อขาย</h2>
+  <p>paper แสดงว่า 0DTE volume โตมาก และในปี 2023 เป็นสัดส่วนใหญ่ของ SPX option volume</p>
+  <p>แต่ volume สูงยังไม่บอกว่า market maker เหลือ exposure สุทธิเท่าไร เพราะ buy และ sell orders อาจ match กันได้</p>
 
-  <h2>2. Inventory คือของที่ค้างอยู่ในมือ</h2>
-  <p>ถ้าลูกค้าฝั่งหนึ่งซื้อ call และลูกค้าอีกฝั่งขาย call ผ่าน market maker การซื้อขายอาจเยอะมาก แต่ market maker อาจ match flow ได้เยอะ ทำให้ inventory สุทธิไม่ใหญ่</p>
-  <p>ดังนั้น paper จึงถามต่อว่า market maker เหลือ net delta หรือ net gamma แค่ไหน ไม่ใช่ดู volume อย่างเดียว</p>
+  <h2>2. Inventory คือ position ที่ค้างจริง</h2>
+  <p>สมมติลูกค้า A ซื้อ call จาก market maker และลูกค้า B ขาย call ให้ market maker ในขนาดใกล้กัน market maker อาจจับคู่ flow ได้มาก ทำให้ inventory สุทธิเล็ก</p>
+  <p>paper พบว่า intraday 0DTE order flows มักถูก match ได้มาก ทำให้ new 0DTE trades ในวันนั้นไม่ใช่แหล่งหลักของ net gamma</p>
 
-  <h2>3. Hedging flow คือแรงที่ไปโดนตลาด futures</h2>
-  <p>เมื่อตัว inventory ทำให้ market maker มี risk เขา hedge ด้วย E-mini futures เพราะ SPX cash index เอาไปซื้อขายตรง ๆ ไม่ได้</p>
-  <p>นี่คือ flow ที่อาจส่งผลต่อ volatility ของ S&amp;P 500</p>
+  <h2>3. Hedging flow คือสิ่งที่ไปโดน futures market</h2>
+  <p>เมื่อ inventory ทำให้ market maker มี delta/gamma risk เขาจะ hedge ด้วย E-mini futures</p>
+  <p>flow นี้คือจุดที่ paper ใช้เชื่อม option market กับ volatility ของ S&amp;P 500</p>
 
   <div class="flow">
-    <div class="step">ลูกค้าซื้อขาย option</div>
-    <div class="step">market maker รับและ match order</div>
-    <div class="step">position ที่เหลือกลายเป็น inventory</div>
+    <div class="step">ลูกค้า trade options</div>
+    <div class="step">market maker absorb หรือ match flow</div>
+    <div class="step">position ที่เหลือเป็น inventory</div>
     <div class="step">inventory สร้าง net delta/net gamma</div>
-    <div class="step">market maker hedge ผ่าน E-mini futures</div>
+    <div class="step">market maker hedge ด้วย E-mini futures</div>
   </div>
 
-  <h2>4. ทำไมบทนี้สำคัญต่อ paper</h2>
-  <p>ความกลัวทั่วไปคือ "0DTE volume เยอะ จึงน่าจะทำให้ตลาดแกว่งแรง" แต่ paper แยกให้ละเอียดกว่า:</p>
-  <ul>
-    <li>0DTE volume เยอะจริง</li>
-    <li>market maker match intraday buy/sell flow ได้มาก</li>
-    <li>risk สำคัญกลับมาจาก position เก่าที่กลายเป็น 0DTE</li>
-    <li>hedging flow จาก risk นั้นเป็นแบบสวนทางราคาโดยเฉลี่ย</li>
-  </ul>
+  <h2>4. ทำไมบทนี้สำคัญต่อ conclusion</h2>
+  <p>paper ไม่ได้บอกว่า "0DTE volume เยอะจึง volatility ลด" แต่บอกว่า position ที่ market maker ถือ โดยเฉพาะ stale positions ที่กลายเป็น 0DTE สร้าง positive net gamma และ hedging flow สวนราคา</p>
 
-  <h2>5. Retrieval exercise</h2>
+  <h2>5. Retrieval</h2>
   <section class="quiz">
-    <details>
-      <summary>Volume สูงบอกอะไร และยังไม่บอกอะไร?</summary>
-      <p>บอกว่าซื้อขายเยอะ แต่ยังไม่บอกว่า market maker เหลือ exposure สุทธิเท่าไร</p>
-    </details>
-    <details>
-      <summary>Inventory สำคัญกว่า volume ตรงไหน?</summary>
-      <p>inventory คือ position ที่ค้างอยู่จริง และเป็นตัวสร้าง hedging need</p>
-    </details>
-    <details>
-      <summary>Hedging flow ใน paper ไปโผล่ที่ตลาดไหน?</summary>
-      <p>ตลาด S&amp;P 500 E-mini futures ซึ่งเป็นเครื่องมือหลักในการ hedge SPX options</p>
-    </details>
+    <details><summary>volume สูงบอก net risk ของ market maker ได้ทันทีไหม?</summary><p>ไม่ได้ เพราะ buy/sell flows อาจ match กันและเหลือ net inventory น้อย</p></details>
+    <details><summary>inventory คืออะไร?</summary><p>position ที่ market maker หรือผู้เล่นถือค้างอยู่จริงหลังการซื้อขาย</p></details>
+    <details><summary>hedging flow ใน paper ไปผ่านตลาดไหน?</summary><p>ผ่าน S&amp;P 500 E-mini futures</p></details>
   </section>
 
-  <p>อ่านต่อ: <a href="0006-volatility-measurement-and-main-result.html">0006 Volatility and main result</a>. ย้อนกลับ: <a href="0004-positive-net-gamma-and-counter-cyclical-hedging.html">0004 Positive net gamma</a>. Primary source: <a href="../The_Market_for_0DTE_options.md">local paper</a>.</p>
+  <p>ต่อไป: <a href="0006-volatility-measurement-and-main-result.html">0006 Volatility และผลหลัก</a></p>
 </main>
 </body>
 </html>
