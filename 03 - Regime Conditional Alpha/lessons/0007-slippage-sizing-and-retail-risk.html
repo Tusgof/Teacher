@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slippage, sizing, บัญชีเล็ก</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Slippage, sizing, บัญชีเล็ก</h1>
+  <p class="deck">strategy ที่ edge ใกล้ศูนย์จะแพ้ execution ได้ง่ายมาก</p>
+  <h2>Slippage คืออะไร</h2><p>slippage คือราคาที่ได้จริงแย่กว่าราคากลางที่คิดไว้ ใน 0DTE ช่วงเช้า bid-ask อาจกว้างและราคาเคลื่อนเร็ว</p>
+  <h2>ทำไมบัญชีเล็กเสี่ยง</h2><p>mean debit 0.584 กับ 3 contracts ใช้เงินประมาณ 175 ดอลลาร์ ถ้า stop loss 50% แพ้ราว 87.60 ดอลลาร์ หรือ 5.8% ของบัญชี 1,500 ดอลลาร์</p>
+  <h2>simulation 12 เดือน</h2><p>ที่ win rate 65.4% median outcome ประมาณ -175 ดอลลาร์ และ ruin probability 9.8% ถ้า win rate 60% ruin probability สูงถึง 61.3%</p>
+  <section class="quiz"><h2>ถามตัวเอง</h2><ol><li>ทำไม edge ใกล้ศูนย์ทำให้ slippage สำคัญมาก</li><li>แพ้ครั้งละ 5.8% ของบัญชีเล็กมีปัญหาอย่างไร</li></ol></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

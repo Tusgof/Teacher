@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Strike gap และการเลือก strike</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Strike gap และการเลือก strike</h1>
+  <p class="deck">paper นี้มี contribution สำคัญตรงการแยกผลของระยะ breakout-to-strike gap</p>
+  <h2>Strike gap คืออะไร</h2><p>ถ้า SPY breakout ที่ 572.35 และ long call อยู่ strike 573 gap คือ 0.65 ดอลลาร์ ระยะนี้มีผลต่อ debit และ delta ของ spread</p>
+  <h2>trade-off</h2><p>gap เล็ก option ตอบสนองเร็วแต่แพงกว่า gap ใหญ่ถูกกว่าแต่ต้องให้ SPY ไปต่อมากขึ้น</p>
+  <figure class="paper-figure"><img src="../images/Regime_Conditional_Alpha_Figure_1.png" alt="Strike gap win rate"><figcaption>Figure 1: gap 0.96-2.00 ทำผลดีกว่าใน simulation ส่วน 0.47-0.96 แย่สุด</figcaption></figure>
+  <table><thead><tr><th>Gap</th><th>Win rate</th><th>EV</th></tr></thead><tbody><tr><td>0.00-0.47</td><td>64.8%</td><td>-2.64</td></tr><tr><td>0.47-0.96</td><td>58.5%</td><td>-11.11</td></tr><tr><td>0.96-1.48</td><td>67.9%</td><td>+1.61</td></tr><tr><td>1.48-2.00</td><td>70.4%</td><td>+4.40</td></tr></tbody></table>
+  <section class="quiz"><h2>ถามตัวเอง</h2><ol><li>gap ส่งผลต่อ debit อย่างไร</li><li>ทำไม gap ที่ดีที่สุดใน simulation ยังไม่ควรเชื่อแบบไม่ระวัง</li></ol></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

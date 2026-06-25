@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Breakeven, EV, confidence interval</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Breakeven, EV, confidence interval</h1>
+  <p class="deck">บทนี้ทำให้รู้ว่าทำไม win rate สูงยังอาจไม่พอ</p>
+  <h2>ทำไมต้องชนะ 66.7%</h2><p>ถ้าชนะได้ 1 หน่วยแต่แพ้เสีย 2 หน่วย ต้องชนะ 2 ใน 3 ครั้งถึงคุ้มทุน paper ใช้ profit target +25% และ stop loss -50% จึงต้องชนะ 66.7%</p>
+  <h2>ผลหลัง filter</h2><table><tbody><tr><td>Filtered trades</td><td>214</td></tr><tr><td>Observed win rate</td><td>65.4%</td></tr><tr><td>95% CI</td><td>58.8%-71.5%</td></tr><tr><td>Breakeven</td><td>66.7%</td></tr><tr><td>Mean EV</td><td>-1.64 ดอลลาร์ต่อ trade</td></tr></tbody></table>
+  <h2>อ่าน confidence interval</h2><p>ช่วง 58.8%-71.5% คร่อม breakeven แปลว่าข้อมูลยังเข้ากันได้ทั้งกับ strategy ที่กำไรและ strategy ที่ขาดทุน</p>
+  <figure class="paper-figure"><img src="../images/Regime_Conditional_Alpha_Figure_5.png" alt="EV by win rate"><figcaption>Figure 5: จุดตัดสำคัญคือ 66.7% ต่ำกว่านี้ EV ติดลบ</figcaption></figure>
+  <section class="quiz"><h2>ถามตัวเอง</h2><ol><li>ทำไม 65.4% จึงยังไม่ใช่หลักฐานว่า trade ได้</li><li>CI คร่อม breakeven แปลว่าอะไร</li></ol></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

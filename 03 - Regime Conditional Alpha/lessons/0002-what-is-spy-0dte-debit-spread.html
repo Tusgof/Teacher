@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SPY 0DTE debit spread จากศูนย์</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>SPY 0DTE debit spread จากศูนย์</h1>
+  <p class="deck">ก่อนเข้า strategy ต้องรู้ก่อนว่า trade หนึ่งหน้าตาอย่างไรและแพ้ชนะจากอะไร</p>
+  <h2>SPY คือ underlying</h2><p>SPY คือ ETF ที่วิ่งตาม S&amp;P 500 ถ้า SPY ขึ้น call มีแนวโน้มแพงขึ้น ถ้า SPY ลง put มีแนวโน้มแพงขึ้น</p>
+  <h2>0DTE คือ option ที่หมดอายุวันนี้</h2><p>เวลาที่เหลือน้อยทำให้ option ต้องได้ทิศทางเร็ว ถ้าราคาไม่ไปต่อ premium จะละลายจาก time decay</p>
+  <h2>Debit vertical spread</h2><p>แทนที่จะซื้อ call เดี่ยว paper ใช้ debit spread: ซื้อ strike หนึ่งและขาย strike ที่ไกลกว่าเพื่อลดต้นทุนและจำกัด risk เช่น ซื้อ 573 call ขาย 575 call เป็น bull call spread</p>
+  <div class="grid"><div class="card"><h3>ชนะ</h3><p>spread ขึ้น 25% จาก debit ที่จ่าย</p></div><div class="card"><h3>แพ้</h3><p>spread ลง 50% จาก debit ที่จ่าย</p></div><div class="card"><h3>หมดเวลา</h3><p>ปิดก่อน 3:30 PM ถ้ายังไม่แตะ target/stop</p></div></div>
+  <section class="quiz"><h2>ถามตัวเอง</h2><ol><li>ทำไม debit spread เหมาะกับบัญชีเล็กกว่าซื้อ option เดี่ยว</li><li>0DTE ทำให้การเข้าช้าหรือผิดทิศทางอันตรายขึ้นอย่างไร</li></ol></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

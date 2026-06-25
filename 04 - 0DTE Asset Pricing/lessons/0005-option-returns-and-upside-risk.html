@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Call/put returns และ upside risk</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Call/put returns และ upside risk</h1>
+  <p class="deck">paper ใช้ average option returns เป็นหลักฐานทางอ้อมของ pricing kernel</p>
+  <h2>call returns</h2><p>0DTE calls มี average returns ต่ำ และยิ่ง strike สูงยิ่งติดลบ นี่แปลว่าตลาดตั้งราคา payoff ตอนตลาดขึ้นแรงไว้แพงมาก ผู้ซื้อ call จึงได้ผลตอบแทนคาดหวังต่ำ</p>
+  <figure class="paper-figure"><img src="../images/Asset_Pricing_Figure_4.png" alt="Call returns"><figcaption>Figure 4: call returns ลดลงตาม strike ใน 0DTE เป็นหลักฐานของ upside risk compensation</figcaption></figure>
+  <h2>put returns</h2><p>puts ก็ติดลบโดยเฉพาะ OTM puts แปลว่ายังมี compensation สำหรับ downside risk แต่ paper เน้นว่า OTM call returns แย่กว่า OTM puts ใน 0DTE</p>
+  <figure class="paper-figure"><img src="../images/Asset_Pricing_Figure_5.png" alt="Put returns"><figcaption>Figure 5: put returns ติดลบ สะท้อน downside risk premium แต่ไม่ใช่เรื่องเดียวที่สำคัญใน 0DTE</figcaption></figure>
+  <section class="quiz"><h2>ถามตัวเอง</h2><ol><li>ถ้า call buyer เฉลี่ยขาดทุน แปลว่า call ถูกหรือแพงเมื่อเทียบกับ payoff</li><li>ทำไมผลของ OTM calls สำคัญต่อคำว่า upside risk</li></ol></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

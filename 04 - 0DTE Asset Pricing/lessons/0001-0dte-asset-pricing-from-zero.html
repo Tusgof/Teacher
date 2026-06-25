@@ -3,154 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>0DTE Asset Pricing จากศูนย์</title>
+  <title>ภาพรวม paper: 0DTE price บอกอะไร</title>
   <link rel="stylesheet" href="../assets/lesson.css">
 </head>
 <body>
 <main>
-  <nav class="course-nav" aria-label="Course navigation">
-    <div class="course-nav-meta">
-      <span>0DTE Asset Pricing</span>
-      <strong>บท 1 / 1: Asset pricing ของ 0DTE จากศูนย์</strong>
-    </div>
-    <div class="course-nav-actions">
-      <a href="../../index.html">Library</a>
-      <a href="../../topics/0dte/index.html">0DTE</a>
-      <a href="../../topics/0dte/0dte-asset-pricing.html">สารบัญ</a>
-    </div>
-    <div class="course-nav-row">
-      <span class="course-step disabled">ก่อนหน้า</span>
-      <label for="lesson-jump-top">เลือกบท</label>
-      <select id="lesson-jump-top" class="lesson-jump">
-        <option selected>01. Asset pricing ของ 0DTE จากศูนย์</option>
-      </select>
-      <span class="course-step disabled">ถัดไป</span>
-    </div>
-  </nav>
-
-  <h1>0DTE Asset Pricing จากศูนย์</h1>
-  <p class="deck">เปเปอร์นี้ไม่ได้ถามว่าเทรด 0DTE ยังไง แต่ถามว่า “ราคาของ 0DTE option บอกอะไรเกี่ยวกับความกลัว ความต้องการประกัน และผลตอบแทนที่นักลงทุนเรียกร้องระหว่างวัน”</p>
-
-  <section class="callout">
-    <h2>คำตอบสั้นของ paper</h2>
-    <p>0DTE options ให้ภาพ asset pricing ที่ต่างจาก option อายุยาว: นักลงทุนดูเหมือนยอมจ่ายแพงไม่ใช่แค่เพื่อกันตลาดลง แต่ยังเพื่อกันตลาดขึ้นแรงด้วย ความเสี่ยงฝั่ง upside จึงมี compensation สูงมากใน 0DTE และ pricing kernel มีรูป U-shape ชัดเจน โดยเฉพาะช่วงหมดอายุภายในวันเดียว</p>
-  </section>
-
-  <h2>1. Asset pricing แปลว่าอะไร</h2>
-  <p>asset pricing คือการถามว่า “ราคานี้ชดเชยความเสี่ยงอะไรอยู่” ถ้าของหนึ่งจ่ายเงินตอนโลกแย่ คนมักยอมจ่ายแพง เพราะมันเป็นประกัน ถ้าของหนึ่งจ่ายเงินตอนโลกดี คนอาจไม่ต้องการจ่ายแพง เพราะโลกดีอยู่แล้ว</p>
-  <p>แต่ paper นี้พบสิ่งแปลกสำหรับ 0DTE: option price บอกว่านักลงทุนยอมจ่ายสูงมากสำหรับ payoff ตอนตลาดขึ้นแรงระหว่างวันด้วย ไม่ใช่แค่ตอนตลาดลงแรง</p>
-
-  <h2>2. สามคำที่ต้องเข้าใจก่อน</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Physical distribution</h3>
-      <p>ภาพความน่าจะเป็นจากข้อมูลจริงในอดีต เช่น S&amp;P 500 ระหว่าง 10:00 ถึงปิดตลาดมักขึ้นหรือลงเท่าไร</p>
-    </div>
-    <div class="card">
-      <h3>Risk-neutral distribution</h3>
-      <p>ภาพความน่าจะเป็นที่ reverse-engineer จากราคา option ไม่ใช่ความเชื่อจริงตรง ๆ แต่เป็นความน่าจะเป็นที่ถูกบิดด้วย risk premium</p>
-    </div>
-    <div class="card">
-      <h3>Pricing kernel</h3>
-      <p>ตัวบอกว่า market ให้ “น้ำหนักราคา” กับ state ไหนมากกว่าความน่าจะเป็นจริง ถ้า state หนึ่งแพงกว่าที่ historical probability บอก แปลว่าคนน่าจะอยากประกัน state นั้น</p>
-    </div>
-  </div>
-
-  <p>จำภาพง่าย ๆ: physical distribution คือ “โลกจริงเกิดบ่อยแค่ไหน” ส่วน risk-neutral distribution คือ “ตลาด option กำลังตั้งราคาเหมือนให้ความสำคัญกับโลกนั้นแค่ไหน” pricing kernel คือช่องว่างระหว่างสองภาพนี้</p>
-
-  <h2>3. ทำไม 0DTE สำคัญ</h2>
-  <p>ตั้งแต่ CBOE ทำให้ weekly options มีครบทุกวันซื้อขาย 0DTE กลายเป็น maturity ที่ volume สูงมาก Paper ใช้ S&amp;P 500 0DTE หลายเวลาระหว่างวัน เช่น 10:00, 10:30, 11:00 ไปจน 14:00 แล้วดู payoff ถึง market close</p>
-
-  <figure class="paper-figure">
-    <img src="../images/Asset_Pricing_Figure_1.png" alt="Yearly fraction of trading volume in 0DTE options">
-    <figcaption>Figure 1: สัดส่วน volume ของ 0DTE โตขึ้นมากจนเป็นส่วนใหญ่ของ S&amp;P 500 options จุดนี้ทำให้ paper มองว่า 0DTE ไม่ใช่ตลาดเล็ก แต่เป็นตลาดที่อาจบอก risk preference ระหว่างวันได้</figcaption>
-  </figure>
-
-  <h2>4. ผลหลักที่ 1: call returns แย่มากเมื่อ strike สูง</h2>
-  <p>ถ้าราคา call option ถูกพอ คนซื้อ call เฉลี่ยควรได้ return ดีขึ้นเมื่อ strike สูงขึ้น เพราะ payoff เป็นการเดิมพันตลาดขึ้นแรง แต่ paper พบว่าใน 0DTE call returns ต่ำและยิ่ง strike สูงยิ่งแย่ จน OTM calls ติดลบชัดเจน</p>
-  <p>การอ่านแบบ asset pricing คือ ตลาดกำลังตั้งราคา payoff ตอน S&amp;P 500 ขึ้นแรงไว้แพงมาก คนซื้อจึงได้ expected return ต่ำ คนขาย call จึงได้รับ compensation สำหรับการรับความเสี่ยง “ตลาดขึ้นแรง”</p>
-
-  <figure class="paper-figure">
-    <img src="../images/Asset_Pricing_Figure_4.png" alt="Average call returns across strikes">
-    <figcaption>Figure 4: average call returns ของ 0DTE ลดลงเมื่อ strike สูงขึ้น นี่คือหลักฐานทางอ้อมว่า pricing kernel สูงใน positive return states</figcaption>
-  </figure>
-
-  <h2>5. ผลหลักที่ 2: variance risk premium ของ 0DTE สูง และมาจาก upside มาก</h2>
-  <p>variance risk premium คือค่าชดเชยสำหรับการรับความเสี่ยงว่า market จะเหวี่ยงแรง ถ้าคุณ long straddle หรือ long volatility คุณได้ประโยชน์เมื่อราคาเหวี่ยงแรง แต่ paper พบว่า long volatility strategies ใน 0DTE ให้ average return ติดลบ แปลว่าคนยอมจ่าย premium เพื่อซื้อประกันความผันผวนระหว่างวัน</p>
-
-  <figure class="paper-figure">
-    <img src="../images/Asset_Pricing_Figure_6.png" alt="Average returns of option strategies">
-    <figcaption>Figure 6: delta-hedged calls และ straddles เฉลี่ยติดลบ แปลว่าการถือ long volatility มีค่าใช้จ่ายสูง และคนขาย volatility ได้รับ premium โดยเฉลี่ย</figcaption>
-  </figure>
-
-  <p>จุดที่แปลกคือ upside component ของ variance risk premium ใหญ่กว่าด้าน downside ใน 0DTE ซึ่งตรงข้ามกับภาพ option อายุยาวที่ปกติ downside risk สำคัญกว่า</p>
-
-  <h2>6. ผลหลักที่ 3: equity premium ระหว่างวันถูก positive returns ดึงลง</h2>
-  <p>ในโลกปกติ state ที่ตลาดขึ้นควรช่วยสร้าง equity premium บวก แต่ paper พบว่าใน 0DTE positive return states กลับมี contribution ติดลบ เพราะตลาด option ให้ราคากับ payoff ตอนตลาดขึ้นสูงเกินกว่าความน่าจะเป็นจริงจะอธิบายได้</p>
-
-  <figure class="paper-figure">
-    <img src="../images/Asset_Pricing_Figure_7.png" alt="Equity premium decomposition">
-    <figcaption>Figure 7: equity premium ส่วนใหญ่ของ 0DTE มาจาก return ติดลบถึงใกล้ศูนย์ ส่วน positive returns มี contribution ติดลบ สอดคล้องกับ pricing kernel แบบ U-shape</figcaption>
-  </figure>
-
-  <h2>7. Pricing kernel แบบ U-shape คืออะไร</h2>
-  <p>ถ้านักลงทุน risk-averse แบบมาตรฐาน pricing kernel ควรสูงตอนตลาดลงและต่ำตอนตลาดขึ้น เพราะเงินตอนตลาดแย่มีค่ามากกว่าเงินตอนตลาดดี แต่ paper พบว่า 0DTE มี pricing kernel สูงทั้งตอนตลาดลงและตอนตลาดขึ้นแรง จึงเหมือนตัว U</p>
-
-  <figure class="paper-figure">
-    <img src="../images/Asset_Pricing_Figure_8.png" alt="Average pricing kernels">
-    <figcaption>Figure 8: 0DTE มี U-shape ชัดมาก โดยฝั่ง positive returns สูงผิดปกติ เมื่อ maturity ยาวขึ้น U-shape อ่อนลงและกลับใกล้ภาพมาตรฐานมากขึ้น</figcaption>
-  </figure>
-
-  <h2>8. SSD bounds: option price สอดคล้องกับ risk-averse investor ไหม</h2>
-  <p>SSD bounds เป็นกรอบราคาว่า option ควรอยู่ช่วงไหนถ้าผู้ลงทุนที่มีเหตุผลแบบ risk-averse สามารถเทรด index, risk-free asset, และ option ได้ ถ้าราคาอยู่นอกกรอบ แปลว่า option นั้น “mispriced” ในความหมายเฉพาะของ paper: ไม่ได้แปลว่า arbitrage ฟรี แต่แปลว่าไม่สอดคล้องกับ risk-averse pricing จากข้อมูล underlying market</p>
-
-  <table>
-    <thead><tr><th>ผลจาก paper</th><th>แปลแบบไม่ใช้คณิต</th></tr></thead>
-    <tbody>
-      <tr><td>มีแค่ประมาณ 25% ของ calls และ 35% ของ puts ที่อยู่ใน SSD bounds</td><td>0DTE จำนวนมากตั้งราคาไม่สอดคล้องกับกรอบ risk-averse แบบมาตรฐาน</td></tr>
-      <tr><td>ATM options มีเพียงราว 6% ที่ satisfy bounds</td><td>บริเวณ ATM คือจุดที่ mispricing ตามนิยาม paper เด่นที่สุด</td></tr>
-      <tr><td>22DTE ส่วนใหญ่ satisfy bounds</td><td>ตลาด option อายุยาวเชื่อมกับ underlying market ดีกว่า 0DTE</td></tr>
-    </tbody>
-  </table>
-
-  <h2>9. Trading strategy จาก SSD violation</h2>
-  <p>paper ทดสอบว่า mispricing มีมูลค่าจริงไหม โดยสร้าง strategy: ถ้า ATM option แพงเกินกรอบ ให้ขาย option และ delta hedge; ถ้าถูกเกินกรอบ ให้ซื้อ option และ delta hedge ถ้าอยู่ในกรอบก็ถือ risk-free asset</p>
-  <p>ผลคือ strategy ทำกำไร risk-adjusted ดีมากก่อนปี 2022 แต่หลัง daily 0DTE availability ผลกำไรแผ่วลง Paper ตีความว่า liquidity, attention, และ integration กับ underlying market ดีขึ้น ทำให้ anomaly ถูกกินไป</p>
-
-  <figure class="paper-figure">
-    <img src="../images/Asset_Pricing_Figure_9.png" alt="Cumulative returns of SSD violation strategy">
-    <figcaption>Figure 9: cumulative return ของ SSD violation strategy โตเสถียรก่อน 2022 แต่หลังจากตลาด 0DTE เปิดครบทุกวัน กลยุทธ์เริ่มหยุดนิ่งมากขึ้น</figcaption>
-  </figure>
-
-  <h2>10. ข้อจำกัดที่ควรรู้</h2>
-  <ul>
-    <li>คำว่า mispriced ใน paper ไม่ใช่ arbitrage ฟรี แต่เป็นการผิดกรอบ SSD/risk-averse pricing</li>
-    <li>ผลขึ้นกับการประมาณ physical distribution จากข้อมูล historical high-frequency returns</li>
-    <li>0DTE ราคาถูกเป็นดอลลาร์ ทำให้ return บางวันสุดโต่ง ต้อง winsorize บางส่วน</li>
-    <li>หลังปี 2022 profitability ลดลง แปลว่า finding เชิง trading อาจไม่คงทนเท่า finding เชิง asset pricing</li>
-  </ul>
-
-  <h2>11. สรุปแบบพูดเองได้</h2>
-  <p>paper นี้ใช้ราคา 0DTE options เพื่ออ่านว่า market ให้ราคากับ state ระหว่างวันอย่างไร ผลหลักคือ 0DTE สะท้อน pricing kernel แบบ U-shape: นักลงทุนยอมจ่ายแพงทั้งเพื่อประกันตลาดลงแรงและตลาดขึ้นแรง ทำให้ upside variance risk premium สำคัญผิดปกติ หลาย option violate SSD bounds และ strategy ที่ exploit violation เคยทำกำไรดี แต่ edge trading ลดลงหลังตลาด 0DTE มีทุกวันและมี attention มากขึ้น</p>
-
-  <section class="quiz">
-    <h2>Retrieval practice</h2>
-    <ol>
-      <li>physical distribution กับ risk-neutral distribution ต่างกันอย่างไร</li>
-      <li>ถ้า OTM call returns ติดลบมาก แปลว่าตลาดตั้งราคา payoff ฝั่งตลาดขึ้นแรงถูกหรือแพง</li>
-      <li>pricing kernel แบบ U-shape หมายความว่าเงินใน state ไหนถูกให้ราคาสูง</li>
-      <li>ทำไมคำว่า mispriced ใน paper นี้ไม่เท่ากับ arbitrage ฟรี</li>
-      <li>ทำไม profitability ของ SSD strategy หลังปี 2022 จึงสำคัญต่อการตีความ paper</li>
-    </ol>
-  </section>
-
-  <nav class="course-nav course-nav-bottom" aria-label="Course navigation bottom">
-    <div class="course-nav-actions">
-      <a href="../../index.html">Library</a>
-      <a href="../../topics/0dte/index.html">0DTE</a>
-      <a href="../../topics/0dte/0dte-asset-pricing.html">สารบัญ</a>
-    </div>
-  </nav>
+  <h1>ภาพรวม paper: 0DTE price บอกอะไร</h1>
+  <p class="deck">บทเปิดทางของ paper asset pricing: ราคาของ 0DTE option กำลังบอกอะไรเกี่ยวกับ risk premium ระหว่างวัน</p>
+  <section class="callout"><h2>คำตอบใหญ่</h2><p>paper พบว่า 0DTE option prices สะท้อน pricing kernel แบบ U-shape: ตลาดให้ราคาสูงทั้งกับ state ตลาดลงแรงและตลาดขึ้นแรง โดย upside risk สำคัญผิดปกติเมื่อเทียบกับ option อายุยาว</p></section>
+  <h2>เส้นทางเรียน</h2><ol><li>asset pricing ถามอะไร</li><li>physical vs risk-neutral distribution</li><li>pricing kernel</li><li>option returns</li><li>variance risk premium</li><li>equity premium และ predictability</li><li>SSD bounds</li><li>strategy และ after 2022</li></ol>
+  <figure class="paper-figure"><img src="../images/Asset_Pricing_Figure_1.png" alt="0DTE volume"><figcaption>Figure 1: 0DTE กลายเป็นสัดส่วนใหญ่ของ S&amp;P 500 option volume ทำให้ตลาดนี้สำคัญต่อ asset pricing</figcaption></figure>
+  <section class="quiz"><h2>ถามตัวเอง</h2><ol><li>paper นี้ถามเรื่อง trading rule หรือเรื่องราคาสะท้อน risk premium</li><li>ทำไม volume 0DTE ที่โตขึ้นถึงสำคัญ</li></ol></section>
 </main>
+<script src="../assets/course-nav.js"></script>
 </body>
 </html>

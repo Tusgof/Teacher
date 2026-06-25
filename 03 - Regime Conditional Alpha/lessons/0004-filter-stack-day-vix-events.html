@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ทำไมต้องกรองวัน VIX และข่าว</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>ทำไมต้องกรองวัน VIX และข่าว</h1>
+  <p class="deck">paper บอกว่า edge ถ้ามี ไม่ได้มาจาก ORB อย่างเดียว แต่มาจาก filter stack</p>
+  <h2>สาม filter</h2><table><thead><tr><th>Filter</th><th>ความหมาย</th></tr></thead><tbody><tr><td>Monday/Wednesday/Friday</td><td>เลือกวันที่ simulation ให้ baseline win rate ดีกว่า</td></tr><tr><td>VIX 15-25</td><td>ผันผวนพอให้วิ่ง แต่ไม่ปั่นจน fakeout เยอะ</td></tr><tr><td>No macro event</td><td>เลี่ยง FOMC, CPI, NFP, Fed speech</td></tr></tbody></table>
+  <h2>ผล VIX regime</h2><p>VIX ต่ำกว่า 15 ราคาไม่วิ่งพอ ส่วน VIX สูงกว่า 35 ราคาเหวี่ยงและ fakeout ง่าย sweet spot คือ 15-25 แต่ก็แค่เข้าใกล้คุ้มทุน</p>
+  <figure class="paper-figure"><img src="../images/Regime_Conditional_Alpha_Figure_4.png" alt="VIX regime"><figcaption>Figure 4: เฉพาะ VIX 15-25 ที่เข้าใกล้ breakeven 66.7%</figcaption></figure>
+  <section class="quiz"><h2>ถามตัวเอง</h2><ol><li>VIX ต่ำเกินไปเสียเปรียบอย่างไร</li><li>VIX สูงเกินไปเสียเปรียบอย่างไร</li></ol></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>
