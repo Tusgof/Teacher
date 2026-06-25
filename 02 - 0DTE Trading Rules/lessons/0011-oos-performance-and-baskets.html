@@ -1,24 +1,75 @@
 <!doctype html>
 <html lang="th">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>OOS Performance and Baskets</title><link rel="stylesheet" href="../assets/lesson.css"></head>
-<body><main>
-  <h1>OOS performance: อะไรใช้ได้จริงใน paper</h1>
-  <p class="deck">บทนี้อ่าน Table 10-11: conditional rules ไม่ได้ชนะทุก strategy แต่บางกลุ่มและ baskets ดูมี economic value</p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OOS Performance and Baskets</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>บท 0011: ผล OOS ที่ paper บอกว่าใช้ได้คืออะไร</h1>
+  <p class="deck">Table 10-11 คือจุดที่ paper ตอบคำถามว่า conditional rules มี economic value หลังต้นทุนไหม</p>
 
-  <h2>1. Strategy-specific results</h2>
-  <p>Table 10 รายงานว่า put ratio spreads เด่นที่สุดใน individual series: expanding spec มี mean net 2.58 bps และ Sharpe 1.26 ส่วน iron butterfly/condor ยังมี Sharpe 0.82</p>
-  <p>แต่ call ratio spreads แย่ และ strategy อื่นไม่แข็งเท่ากัน นี่คือคำว่า selective timing</p>
-
-  <h2>2. Baskets ช่วย smooth</h2>
-  <p>Table 11 ใช้ rolling 252-day signals แล้วรวมเป็น equal-weight baskets: top-three by SR net ได้ Sharpe 1.27, top-three by mean ได้ 1.17, all-strategies basket ได้ 1.01</p>
-  <p>การกระจายหลาย strategy ไม่ได้ลบ tail risk แต่ช่วยลด strategy-specific drawdown</p>
-
-  <h2>3. อ่านผลให้รอบคอบ</h2>
-  <section class="callout"><strong>อย่าตีความเกิน:</strong> paper ไม่ได้บอกว่าทุก 0DTE strategy มี edge แต่บอกว่าบาง strategy families สามารถ timed ได้ภายใต้ OOS discipline</section>
-
-  <section class="quiz">
-    <details><summary>strategy เด่นใน Table 10 คืออะไร?</summary><p>put ratio spread เด่นที่สุดใน individual conditional results</p></details>
-    <details><summary>basket ช่วยอะไร?</summary><p>ช่วย smooth strategy-specific drawdowns และทำให้ evidence ดูเป็น investable object มากขึ้น</p></details>
+  <section class="callout">
+    <strong>ข้อสรุปที่ต้องแม่น:</strong>
+    conditional timing ช่วยบาง strategy ไม่ใช่ทุก strategy. ผลเด่นคือ put ratio spread และ baskets บางแบบ ส่วน strategy หลายตัวอ่อนหรือไม่น่าสนใจ
   </section>
-  <p>อ่านต่อ: <a href="0012-final-synthesis-and-research-hypotheses.html">0012 Final synthesis</a>.</p>
-</main></body></html>
+
+  <h2>1. อ่าน Table 10: strategy-specific OOS</h2>
+  <p>Table 10 ใช้ logistic benchmark แยกทีละ strategy ไม่ pool ข้าม strategy และใช้ representative moneyness จาก Table 8</p>
+  <p>สิ่งที่รายงานมี hit rate, Brier score, calibration slope, mean net PNL, Sharpe net และจำนวน OOS observations</p>
+
+  <h2>2. ตัวเลขเด่นใน Table 10</h2>
+  <div class="grid">
+    <section class="card">
+      <h3>Put ratio spread</h3>
+      <p>expanding spec: mean net ประมาณ 2.58 bps, Sharpe net 1.26. เป็น individual strategy ที่เด่นที่สุดใน table</p>
+    </section>
+    <section class="card">
+      <h3>Iron butterfly/condor</h3>
+      <p>Sharpe net ประมาณ 0.82. ไม่ใช่สูงสุด แต่ยังน่าสนใจเมื่อเทียบกับหลาย strategy อื่น</p>
+    </section>
+    <section class="card">
+      <h3>Call ratio spread</h3>
+      <p>ยัง unattractive ใน paper. นี่สำคัญ เพราะแปลว่า model ไม่ได้ทำให้ทุกอย่างดูดี</p>
+    </section>
+  </div>
+
+  <h2>3. Hit rate สูงไม่พอ</h2>
+  <p>บาง strategy อาจ hit rate สูง แต่ mean net หรือ Sharpe ไม่ดี เพราะวันที่ผิดอาจเสียหนักกว่าวันที่ถูก</p>
+  <p>นี่เป็นเหตุผลที่ paper ไม่ดู hit rate อย่างเดียว แต่ดู mean net, Sharpe, ES1%, worst day และ max drawdown ด้วย</p>
+
+  <h2>4. อ่าน Table 11: investment series และ baskets</h2>
+  <p>Table 11 ใช้ rolling 252-day signals แล้วสร้าง daily OOS strategy returns</p>
+  <p>ที่น่าสนใจคือ equal-weight baskets: top-three by SR net ได้ Sharpe ประมาณ 1.27, top-three by mean PNL ได้ 1.17, และ all-strategies basket ได้ 1.01</p>
+
+  <h2>5. ทำไม basket ดีขึ้น</h2>
+  <p>แต่ละ strategy มีวันที่แย่ไม่เหมือนกัน การ equal-weight หลาย strategy จึงช่วยลด strategy-specific drawdown</p>
+  <p>แต่ basket ไม่ได้ลบ tail risk ทั้งหมด มันแค่ทำให้ evidence ดูเป็น portfolio object มากกว่าชุดผลลัพธ์แยกเดี่ยว</p>
+
+  <h2>6. แปลคำว่า selective timing</h2>
+  <section class="callout">
+    selective timing = ไม่ใช่เทรดทุก strategy ทุกวัน แต่เลือก strategy/ทิศทางตาม state ด้วย protocol ที่ไม่แอบใช้ข้อมูลอนาคต
+  </section>
+
+  <h2>7. Retrieval</h2>
+  <section class="quiz">
+    <details>
+      <summary>strategy เด่นสุดใน Table 10 คืออะไร?</summary>
+      <p>put ratio spread โดยเฉพาะ expanding specification ที่ Sharpe net ประมาณ 1.26</p>
+    </details>
+    <details>
+      <summary>ทำไม hit rate สูงอย่างเดียวไม่พอ?</summary>
+      <p>เพราะขนาดกำไรขาดทุนไม่เท่ากัน วันที่ผิดอาจเสียมากกว่าวันที่ถูกหลายเท่า</p>
+    </details>
+    <details>
+      <summary>basket ช่วยอะไรใน Table 11?</summary>
+      <p>ช่วยลด strategy-specific drawdown และทำให้ผล conditional timing เป็น portfolio series ที่ตีความง่ายขึ้น</p>
+    </details>
+  </section>
+
+  <p>ต่อไป: <a href="0012-final-synthesis-and-research-hypotheses.html">0012 Final Synthesis</a></p>
+</main>
+</body>
+</html>

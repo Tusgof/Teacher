@@ -1,26 +1,69 @@
 <!doctype html>
 <html lang="th">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Classification vs Return Prediction</title><link rel="stylesheet" href="../assets/lesson.css"></head>
-<body><main>
-  <h1>ทำไม direction classification ดีกว่า return prediction</h1>
-  <p class="deck">Table 9 คือบทเรียนสำคัญ: ใน 0DTE noisy payoffs การทำนายขนาด return ตรง ๆ อ่อนกว่าการทำนายทิศทางกำไร/ขาดทุน</p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Classification vs Return Prediction</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>บท 0010: ทำไมทำนายทิศทางดีกว่าทำนาย return ตรง ๆ</h1>
+  <p class="deck">Table 9 คือจุดเปลี่ยนของ paper: ใน 0DTE การถามว่า "จะกำไรไหม" ทำงานดีกว่าถามว่า "จะกำไรกี่ bps"</p>
 
-  <h2>1. Return target ยากเกินไป</h2>
-  <p>0DTE payoff มี tail moves และ noise สูง การทำนายว่าพรุ่งนี้ strategy จะได้กี่ bps จึงยากและไม่ stable</p>
-
-  <h2>2. Binary target ตรงกับ decision มากกว่า</h2>
-  <p>คำถาม trading ที่เรียบง่ายกว่าคือ net PNL จะเป็นบวกหรือไม่ ถ้า probability มากกว่า 0.5 ก็ long strategy ถ้าน้อยกว่าก็ short strategy</p>
-
-  <h2>3. hard vs soft mapping</h2>
-  <div class="grid">
-    <section class="card"><h3>Hard</h3><p>เต็มขนาด: sign(p - 0.5)</p></section>
-    <section class="card"><h3>Soft</h3><p>ขนาดตามความมั่นใจ: 2p - 1</p></section>
-  </div>
-  <p>paper พบว่า binary-hard มักดีกว่าใน test หลัก จึงใช้ logistic benchmark เป็นแกน</p>
-
-  <section class="quiz">
-    <details><summary>Table 9 เปรียบเทียบอะไร?</summary><p>เปรียบเทียบ direct return prediction กับ logistic binary hard/soft mapping</p></details>
-    <details><summary>ทำไม logistic น่าใช้ใน paper นี้?</summary><p>เพราะ decision เป็น directional, probability bounded, และ model variance ต่ำกว่า nonlinear model ที่ซับซ้อน</p></details>
+  <section class="callout">
+    <strong>ภาพจำ:</strong>
+    0DTE payoff noisy และ tail-heavy มาก การทำนายขนาด return เป๊ะ ๆ ยากเกินไป แต่การทำนายว่าผลสุทธิจะบวกหรือลบอาจพอมีสัญญาณให้ใช้
   </section>
-  <p>อ่านต่อ: <a href="0011-oos-performance-and-baskets.html">0011 OOS performance</a>.</p>
-</main></body></html>
+
+  <h2>1. Return prediction คืออะไร</h2>
+  <p>model แบบ return target พยายามทำนายตัวเลข เช่น strategy นี้วันนี้จะได้ +1.2 bps หรือ -0.8 bps</p>
+  <p>ปัญหาคือ 0DTE มี rare jumps และ payoff ที่ไม่เรียบ ตัวเลขจริงอาจกระโดดแรงจน model ทำนายขนาดได้ยาก</p>
+
+  <h2>2. Direction classification คืออะไร</h2>
+  <p>แทนที่จะทำนายขนาด ให้ model ตอบคำถามง่ายกว่า: net PNL วันนี้จะมากกว่า 0 ไหม</p>
+  <p>ถ้า model ให้ probability ว่าบวกมากกว่า 50% เรา long strategy ถ้าน้อยกว่า 50% เรา short strategy</p>
+
+  <h2>3. Hard mapping vs soft mapping</h2>
+  <div class="grid">
+    <section class="card">
+      <h3>Hard mapping</h3>
+      <p>ถ้า p &gt; 0.5 เข้าเต็มขนาดฝั่ง long; ถ้า p &lt; 0.5 เข้าเต็มขนาดฝั่ง short</p>
+    </section>
+    <section class="card">
+      <h3>Soft mapping</h3>
+      <p>ขนาด position ขึ้นกับความมั่นใจ เช่น p ใกล้ 0.5 ก็ถือเล็กลง</p>
+    </section>
+  </div>
+
+  <h2>4. ทำไม logistic benchmark เหมาะ</h2>
+  <p>logistic regression ให้ probability ระหว่าง 0 ถึง 1 และตรงกับคำถามว่า PNL จะบวกไหม</p>
+  <p>ในข้อมูล noisy และ sample ต่อ strategy ไม่ใหญ่มาก model ที่เรียบกว่าอาจ overfit น้อยกว่า model ซับซ้อน เช่น tree boosting</p>
+
+  <h2>5. Table 9 บอกอะไร</h2>
+  <p>Table 9 เปรียบเทียบ return prediction กับ binary hard/soft mapping บน stacked OOS panel</p>
+  <p>ผลคือ direct return prediction อ่อนกว่า ส่วน binary designs โดยเฉพาะ hard mapping ให้ Sharpe และ mean net PNL ดีกว่าในหลาย model families</p>
+
+  <h2>6. สิ่งที่ไม่ควรตีความเกิน</h2>
+  <p>Table 9 ไม่ได้บอกว่า logistic คือ model ที่ดีที่สุดตลอดกาล มันบอกว่าใน setting นี้ การตั้งโจทย์เป็น directional classification เหมาะกว่าการทำนาย return magnitude ตรง ๆ</p>
+
+  <h2>7. Retrieval</h2>
+  <section class="quiz">
+    <details>
+      <summary>return prediction ถามคำถามว่าอะไร?</summary>
+      <p>ถามว่า strategy จะได้ return หรือ PNL ขนาดเท่าไร</p>
+    </details>
+    <details>
+      <summary>direction classification ถามคำถามว่าอะไร?</summary>
+      <p>ถามว่า net PNL จะบวกหรือไม่บวก</p>
+    </details>
+    <details>
+      <summary>ทำไม binary-hard จึงเป็น main implementation ใน paper?</summary>
+      <p>เพราะใน OOS comparison มันให้ผลเศรษฐกิจดีกว่าและตรงกับ decision long/short ที่เรียบง่าย</p>
+    </details>
+  </section>
+
+  <p>ต่อไป: <a href="0011-oos-performance-and-baskets.html">0011 OOS Performance</a></p>
+</main>
+</body>
+</html>

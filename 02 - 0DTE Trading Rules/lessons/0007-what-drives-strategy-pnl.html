@@ -1,25 +1,72 @@
 <!doctype html>
 <html lang="th">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>What Drives Strategy PNL</title><link rel="stylesheet" href="../assets/lesson.css"></head>
-<body><main>
-  <h1>Strategy PNL ถูกขับด้วยอะไร</h1>
-  <p class="deck">Section 4 ถามว่า PNL ของ strategies load กับ variance, skewness และ directional movement อย่างไร</p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What Drives Strategy PNL</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>บท 0007: PNL ของ strategy ถูกขับด้วยอะไร</h1>
+  <p class="deck">Section 4 ไม่ได้ถามว่า strategy ไหนกำไรมากสุด แต่ถามว่าเวลามันกำไรหรือขาดทุน มันสัมพันธ์กับสภาพตลาดแบบไหน</p>
 
-  <section class="callout"><strong>แกนสำคัญ:</strong> PNL ของหลาย 0DTE strategies ถูกขับโดย directional asymmetry และ realized skewness มากกว่า realized variance อย่างเดียว</section>
-
-  <h2>1. variance อย่างเดียวอธิบายไม่พอ</h2>
-  <p>ถ้า strategy เป็น straddle/strangle เราคาดว่า realized variance สำคัญ แต่ paper พบว่าในหลาย structures variance alone อธิบายได้น้อย</p>
-
-  <h2>2. skewness คือทิศทางแบบไม่สมมาตร</h2>
-  <p>realized skewness proxy แยกว่าการขยับขึ้นกับลงมีน้ำหนักไม่เท่ากันอย่างไร สำหรับ directional spreads และ risk reversals ช่องทางนี้สำคัญมาก</p>
-
-  <h2>3. อ่าน Table 5-6</h2>
-  <p>Table 5 ใส่ implied/realized variance และ skewness เพื่อดูความไวของ PNL ส่วน Table 6 ทำ inference ให้เข้มขึ้นด้วย date clustering และ BH multiple-testing adjustment</p>
-  <p>ผลที่แข็งแรงที่สุดคือ directional-skew links หลายตัว ไม่ใช่ generic variance story</p>
-
-  <section class="quiz">
-    <details><summary>paper บอกว่า realized variance alone พอไหม?</summary><p>ไม่พอ โดยเฉพาะ strategies ที่มี directional หรือ skew exposure</p></details>
-    <details><summary>ทำไม Table 6 สำคัญ?</summary><p>เพราะช่วยกันการเห็น pattern หลอก ๆ จาก repeated testing และ standard errors ที่เบาเกินไป</p></details>
+  <section class="callout">
+    <strong>ข้อค้นพบหลัก:</strong>
+    สำหรับหลาย 0DTE strategies, realized variance อย่างเดียวอธิบาย PNL ได้น้อย. สิ่งที่สำคัญกว่ามักเป็น directional move และ realized skewness หรือความไม่สมมาตรของการขยับขึ้น/ลง
   </section>
-  <p>อ่านต่อ: <a href="0008-conditional-rules-and-vix-regimes.html">0008 Conditional rules</a>.</p>
-</main></body></html>
+
+  <h2>1. variance กับ direction ต่างกันอย่างไร</h2>
+  <p>variance ถามว่า "ตลาดแกว่งแรงไหม" โดยไม่สนว่าขึ้นหรือลง</p>
+  <p>direction ถามว่า "ตลาดไปทางไหน" ซึ่งสำคัญมากกับ bull call spread, bear put spread, risk reversal และ ratio spreads</p>
+
+  <div class="grid">
+    <section class="card">
+      <h3>ตลาดลงแรง</h3>
+      <p>variance สูง และมักช่วย bear put spread แต่ทำร้าย bull call spread</p>
+    </section>
+    <section class="card">
+      <h3>ตลาดขึ้นแรง</h3>
+      <p>variance สูงเหมือนกัน แต่ผลต่อ directional strategies กลับด้าน</p>
+    </section>
+  </div>
+
+  <h2>2. ทำไม realized variance alone ไม่พอ</h2>
+  <p>ถ้าเราบอกแค่ว่า "วันนี้ variance สูง" เรายังไม่รู้ว่าตลาดสูงเพราะลงแรงหรือขึ้นแรง</p>
+  <p>สำหรับ strategy ที่มีทิศทาง แค่รู้ว่าแกว่งแรงยังไม่พอ ต้องรู้ทิศทางและความไม่สมมาตรของการแกว่งด้วย</p>
+
+  <h2>3. skewness proxy แบบเข้าใจง่าย</h2>
+  <p>paper แยก realized semivariance ฝั่งขึ้นกับฝั่งลง แล้วเอามาเป็น realized skewness proxy</p>
+  <p>ไม่ต้องจำสูตร ให้จำว่า skewness proxy ช่วยบอกว่า "การแกว่งวันนี้หนักไปทางขึ้นหรือทางลง"</p>
+
+  <h2>4. อ่าน Table 5</h2>
+  <p>Table 5 regress strategy PNL กับ implied/realized variance และ skewness โดยใส่ combo fixed effects เพื่อกันความต่างของ strike design</p>
+  <p>สิ่งที่ควรมองคือ R2 เพิ่มไหมเมื่อเพิ่ม realized skewness. สำหรับหลาย asymmetric strategies เช่น risk reversal, bull call spread, bear put spread, fit ดีขึ้นมาก</p>
+
+  <h2>5. อ่าน Table 6</h2>
+  <p>Table 6 ทำให้ inference เข้มขึ้นด้วย date-clustered standard errors และ Benjamini-Hochberg multiple-testing adjustment</p>
+  <p>ภาษาคนคือ: ผู้เขียนไม่อยากให้เราเชื่อ coefficient ที่อาจเกิดจากการลองหลายแบบแล้วบังเอิญเจอ เขาจึงปรับ p-values ให้ conservative ขึ้น</p>
+
+  <h2>6. ทำไมบทนี้ปูทางสู่ conditional rules</h2>
+  <p>ถ้า PNL ถูกขับด้วย state เช่น implied variance, implied skewness, และ recent realized conditions คำถามต่อไปคือ: ตอน 10:00 เรารู้ state พอที่จะเลือก trade ได้ไหม</p>
+
+  <h2>7. Retrieval</h2>
+  <section class="quiz">
+    <details>
+      <summary>variance สูงบอกทิศทางตลาดไหม?</summary>
+      <p>ไม่บอก มันบอกแค่ว่าตลาดแกว่งแรง แต่ไม่บอกว่าขึ้นหรือลง</p>
+    </details>
+    <details>
+      <summary>ทำไม directional strategies ต้องสนใจ skewness/direction?</summary>
+      <p>เพราะตลาดขึ้นแรงกับลงแรงมีผลต่อ strategy คนละทาง แม้ variance จะสูงเหมือนกัน</p>
+    </details>
+    <details>
+      <summary>Table 6 ทำหน้าที่อะไร?</summary>
+      <p>ตรวจว่าความสัมพันธ์ที่เห็นใน Table 5 ยังน่าเชื่อขึ้นไหมเมื่อใช้ standard errors และ multiple-testing adjustment ที่เข้มขึ้น</p>
+    </details>
+  </section>
+
+  <p>ต่อไป: <a href="0008-conditional-rules-and-vix-regimes.html">0008 Conditional Rules</a></p>
+</main>
+</body>
+</html>

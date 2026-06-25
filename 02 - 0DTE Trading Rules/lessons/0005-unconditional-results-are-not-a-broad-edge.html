@@ -1,29 +1,65 @@
 <!doctype html>
 <html lang="th">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Unconditional Results</title><link rel="stylesheet" href="../assets/lesson.css"></head>
-<body><main>
-  <h1>Unconditional results: ทำทุกวันไม่ใช่ broad edge</h1>
-  <p class="deck">Section 3 ถามว่า ถ้าเปิด strategy ทุกวันที่ 10:00 ET แล้วถือถึงปิดตลาด ผลเป็นอย่างไร</p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unconditional Results</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>บท 0005: ทำทุกวันไม่ใช่ broad edge</h1>
+  <p class="deck">Section 3 ของ paper ถามว่า ถ้าเปิด strategy ทุกวันโดยไม่เลือก state ผลเฉลี่ยดีพอไหม</p>
 
-  <section class="callout"><strong>ข้อสรุป:</strong> unconditional strategy PNL กระจายกว้าง, เปลี่ยนตาม regime, และ mean carry ไม่เสถียรพอจะเรียกว่า edge ทั่วไป</section>
+  <section class="callout">
+    <strong>Unconditional rule:</strong>
+    เข้า position ทุกวันที่ 10:00 ET ด้วย strategy เดิม แล้วถือถึง 16:00 ET โดยไม่สนว่าวันนั้น VIX สูงหรือต่ำ ตลาดเพิ่งขึ้นหรือลง หรือ spread กว้างแค่ไหน
+  </section>
 
-  <h2>1. Unconditional แปลว่าอะไร</h2>
-  <p>คือเข้า position ทุกวันโดยไม่ถามว่าวันนั้น state เป็นอย่างไร เช่น VIX สูงหรือต่ำ, skew เป็นแบบไหน, เมื่อวาน strategy เพิ่งเสียหรือกำไร</p>
+  <h2>1. ทำไมต้องเริ่มจาก unconditional</h2>
+  <p>เพราะมันเป็น baseline ที่ซื่อที่สุด ถ้าแค่ "ทำทุกวัน" ก็ทำเงินหลังต้นทุนและ risk ได้ดี เราไม่ต้องมี model ซับซ้อน</p>
+  <p>แต่ paper พบว่าภาพไม่ง่ายแบบนั้น: strategy-level payoff distributions กว้าง, tail-heavy, และ regime-sensitive</p>
 
-  <h2>2. สิ่งที่ Table 1-2 สอน</h2>
-  <p>บาง strategy ดูมี mean PNL บวกในบางช่วง แต่สัญญาณเปลี่ยนหลัง 2022 daily-expiration expansion และมี time variation สูง</p>
-  <p>นี่ทำให้ paper ไม่หยุดที่ unconditional average แต่ไปถามต่อว่าเราควร condition ด้วย state ที่เห็นตอน 10:00 ได้ไหม</p>
-
-  <h2>3. ภาพจำ</h2>
+  <h2>2. อ่าน Table 1 แบบไม่หลง</h2>
+  <p>Table 1 ดู static option strategies จาก 10:00 ถึง 16:00 โดยเน้น near-ATM combinations</p>
+  <p>เวลามอง table ให้ถาม 4 ข้อนี้:</p>
   <div class="flow">
-    <div class="step">ทำทุกวัน = ง่ายต่อการทดสอบ</div>
-    <div class="step">แต่ 0DTE payoff = tail-heavy และ state-dependent</div>
-    <div class="step">mean average = ไม่พอสำหรับ implementation</div>
+    <div class="step">Mean PNL เป็นบวกไหม</div>
+    <div class="step">Sharpe ดีไหม หรือแค่ mean บวกเล็ก ๆ แต่ volatility สูง</div>
+    <div class="step">strategy นั้นมี payoff tail แบบไหน</div>
+    <div class="step">ผลนี้ยังไม่หักต้นทุนจริงเต็มที่หรือยัง</div>
   </div>
 
-  <section class="quiz">
-    <details><summary>unconditional strategy คืออะไร?</summary><p>strategy ที่เปิด position ทุกวันโดยไม่ใช้ state variables เพื่อเลือกวันหรือขนาด position</p></details>
-    <details><summary>ทำไมผล unconditional จึงไม่พอ?</summary><p>เพราะ payoff กระจายกว้างและเปลี่ยนตาม regime ทำให้ average edge ไม่มั่นคง</p></details>
+  <h2>3. ทำไมผลเฉลี่ยอาจหลอก</h2>
+  <p>สมมติ strategy ได้ +0.01% ของ underlying ในวันปกติหลายวัน แต่มีวันที่เสีย -1.0% หนึ่งวัน ค่าเฉลี่ยอาจยังดูไม่แย่มาก แต่คนเทรดจริงรับ drawdown และ margin/capital pressure หนัก</p>
+  <p>0DTE มีเวลาสั้นมาก เหตุการณ์ tail จึงไม่ได้เป็นเรื่องไกลตัว มันคือส่วนหนึ่งของ distribution ที่ต้องวัด</p>
+
+  <h2>4. Regime shift ปี 2022 สำคัญอย่างไร</h2>
+  <p>SPXW เพิ่ม Tuesday/Thursday expirations ในปี 2022 ทำให้ 0DTE มีทุก weekday มากขึ้น ตลาดหลังจุดนี้อาจไม่เหมือนก่อนหน้า</p>
+  <p>paper จึงตรวจ structural break ว่า average PNL ของ strategies เปลี่ยนไหม ข้อสรุปคือมี time variation เพียงพอที่จะไม่ควรเชื่อ full-sample mean แบบง่าย ๆ</p>
+
+  <h2>5. บทเรียนจาก Section 3</h2>
+  <section class="callout">
+    ถ้ากลยุทธ์ต้องอาศัยค่าเฉลี่ยย้อนหลังทั้ง sample แต่พอแบ่ง regime แล้วผลเปลี่ยน แปลว่าเราควรหาวิธี condition ตาม state มากกว่าทำทุกวันแบบไม่เลือก
   </section>
-  <p>อ่านต่อ: <a href="0006-frictions-and-tail-risk.html">0006 Frictions and tail risk</a>.</p>
-</main></body></html>
+
+  <h2>6. Retrieval</h2>
+  <section class="quiz">
+    <details>
+      <summary>unconditional strategy ใช้ข้อมูล state เพื่อเลือกวันไหม?</summary>
+      <p>ไม่ใช้ มันเข้า position ทุกวันตาม rule เดิม</p>
+    </details>
+    <details>
+      <summary>ทำไม full-sample mean อาจไม่น่าเชื่อพอ?</summary>
+      <p>เพราะ payoff เปลี่ยนตาม regime และ tail days อาจครอบงำ mean ที่ดูเล็ก</p>
+    </details>
+    <details>
+      <summary>Section 3 พาเราไปสู่คำถามอะไรต่อ?</summary>
+      <p>ถ้า unconditional อ่อน เราควรใช้ข้อมูล state ตอน 10:00 เพื่อเลือก trade ได้ไหม</p>
+    </details>
+  </section>
+
+  <p>ต่อไป: <a href="0006-frictions-and-tail-risk.html">0006 Frictions and Tail Risk</a></p>
+</main>
+</body>
+</html>

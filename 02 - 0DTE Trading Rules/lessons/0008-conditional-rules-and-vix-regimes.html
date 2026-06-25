@@ -1,27 +1,65 @@
 <!doctype html>
 <html lang="th">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Conditional Rules and VIX Regimes</title><link rel="stylesheet" href="../assets/lesson.css"></head>
-<body><main>
-  <h1>Conditional rules: จากทำทุกวัน เป็นเลือกตาม state</h1>
-  <p class="deck">Section 5 เริ่มจากคำถามที่ practical กว่า: ถ้า payoff state-dependent เราใช้ข้อมูลตอน 10:00 ET เลือก trade ได้ไหม</p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conditional Rules and VIX Regimes</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>บท 0008: จากทำทุกวัน เป็นเลือกตาม state</h1>
+  <p class="deck">Section 5 เริ่มจากแนวคิดง่าย ๆ: ถ้า strategy ไม่ได้ดีทุกวัน เราควรถามว่าวันแบบไหนเหมาะกับ strategy แบบไหน</p>
 
-  <h2>1. VIX regime เป็น filter ง่าย</h2>
-  <p>paper แบ่งวันเป็น low/mid/high regime ด้วย 10:00 ET integrated implied variance จาก SPXW 0DTE options</p>
-  <p>Table 7 พบว่าบาง structures เปลี่ยน behavior ตาม regime เช่น downside-oriented structures ดีขึ้นใน high-VIX states</p>
+  <section class="callout">
+    <strong>Conditional rule:</strong>
+    ไม่เข้า strategy ทุกวันแบบตาบอด แต่ใช้ข้อมูลที่รู้ได้ตอน entry เช่น implied variance ตอน 10:00 เพื่อแบ่งสภาพตลาด แล้วเลือก exposure ให้เหมาะขึ้น
+  </section>
 
-  <h2>2. แต่ ex-post tercile ยังไม่พอ</h2>
-  <p>thresholds ใน Table 7 ใช้ full sample terciles จึงเป็นภาพอธิบาย state heterogeneity มากกว่า trading rule ที่พิสูจน์ OOS แล้ว</p>
+  <h2>1. VIX regime filter คืออะไร</h2>
+  <p>paper ใช้ integrated implied variance ของ SPXW 0DTE ตอน 10:00 ถึง 16:00 เป็นตัวแทน "วันนี้ตลาด price ความแกว่งไว้สูงหรือต่ำ"</p>
+  <p>จากนั้นแบ่งวันเป็น low, mid, high regime ด้วย terciles แล้วดูว่า strategy PNL ต่างกันไหม</p>
 
-  <h2>3. บทเรียน</h2>
-  <div class="flow">
-    <div class="step">unconditional average อ่อน</div>
-    <div class="step">state partitions เปลี่ยน payoff profile</div>
-    <div class="step">จึงต้องทดสอบ strict OOS rules</div>
+  <h2>2. Table 7 สอนอะไร</h2>
+  <p>Table 7 พบว่า strategy บางกลุ่มมี mean PNL ต่างกันตาม VIX regime เช่น downside-oriented structures อย่าง bear put spread และ put ratio spread ทำได้ดีกว่าใน high-VIX states</p>
+  <p>นี่เป็นหลักฐานว่า payoff ไม่ได้เหมือนกันทุกสภาพตลาด</p>
+
+  <h2>3. แต่ Table 7 ยังไม่ใช่ trading rule สุดท้าย</h2>
+  <p>เพราะ thresholds ของ regime ใช้ full-sample terciles. แปลว่าเรามองย้อนหลังทั้ง sample เพื่อแบ่ง low/mid/high</p>
+  <p>สิ่งนี้ใช้เป็น evidence ว่า state matters ได้ แต่ยังไม่ใช่ strict out-of-sample rule ที่พิสูจน์ว่าในเวลาจริงเรารู้ threshold และ trade ได้โดยไม่มองอนาคต</p>
+
+  <h2>4. ทำไมต้องแยก descriptive filter กับ implementable rule</h2>
+  <div class="grid">
+    <section class="card">
+      <h3>Descriptive</h3>
+      <p>บอกว่าอดีตมี pattern อะไร เช่น high-VIX days ทำให้บาง strategy ดีขึ้น</p>
+    </section>
+    <section class="card">
+      <h3>Implementable</h3>
+      <p>บอกว่าถ้าวันนั้นมาถึงจริง เรามีข้อมูลพอและตัดสินใจได้โดยไม่ใช้อนาคตไหม</p>
+    </section>
   </div>
 
+  <h2>5. บทเรียนของ Section 5.1</h2>
+  <p>VIX regime filter ไม่ใช่คำตอบสุดท้าย แต่ทำหน้าที่เป็นสะพาน: มันแสดงว่า conditional timing มีเหตุผลพอจะทดสอบต่อด้วย protocol ที่เข้มกว่า</p>
+
+  <h2>6. Retrieval</h2>
   <section class="quiz">
-    <details><summary>Table 7 เป็น trading rule สุดท้ายหรือไม่?</summary><p>ไม่ใช่ เป็น state filter แบบ ex-post ที่ชี้ว่า performance ขึ้นกับ regime</p></details>
-    <details><summary>ทำไมต้องใช้ข้อมูล 10:00 ET?</summary><p>เพราะเป็นเวลาที่ entry เกิดขึ้นและข้อมูลต้อง available ก่อนตัดสินใจ trade</p></details>
+    <details>
+      <summary>conditional rule ต่างจาก unconditional rule อย่างไร?</summary>
+      <p>conditional rule ใช้ state ตอน entry เพื่อเลือก trade ส่วน unconditional ทำเหมือนเดิมทุกวัน</p>
+    </details>
+    <details>
+      <summary>Table 7 ใช้ดูอะไร?</summary>
+      <p>ดูว่า strategy PNL ต่างกันไหมใน low, mid, high implied-variance regimes</p>
+    </details>
+    <details>
+      <summary>ทำไม Table 7 ยังไม่พอเป็น trading proof?</summary>
+      <p>เพราะ regime cutoffs ใช้ full-sample information จึงเป็น descriptive evidence มากกว่า strict OOS rule</p>
+    </details>
   </section>
-  <p>อ่านต่อ: <a href="0009-strict-out-of-sample-protocol.html">0009 Strict OOS protocol</a>.</p>
-</main></body></html>
+
+  <p>ต่อไป: <a href="0009-strict-out-of-sample-protocol.html">0009 Strict Out-of-Sample Protocol</a></p>
+</main>
+</body>
+</html>

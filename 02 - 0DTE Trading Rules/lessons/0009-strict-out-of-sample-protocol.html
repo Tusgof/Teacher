@@ -1,28 +1,88 @@
 <!doctype html>
 <html lang="th">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Strict OOS Protocol</title><link rel="stylesheet" href="../assets/lesson.css"></head>
-<body><main>
-  <h1>Strict out-of-sample protocol: กัน ex-post story</h1>
-  <p class="deck">บทนี้คือหัวใจของความน่าเชื่อถือใน trading-rule paper: model เห็นอะไรได้บ้าง ก่อนวันที่มันต้อง trade</p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Strict Out-of-Sample Protocol</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>บท 0009: Strict out-of-sample protocol คืออะไร</h1>
+  <p class="deck">นี่คือบทกันหลงสำคัญที่สุด: trading rule ที่ดีต้องไม่ใช้ข้อมูลอนาคต แม้โดยไม่ตั้งใจก็ตาม</p>
 
-  <section class="callout"><strong>กฎหลัก:</strong> predictors ต้องเป็นข้อมูลที่รู้ได้ตอน 10:00 ET เท่านั้น และ training ใช้ข้อมูลถึงวันก่อนหน้าเท่านั้น</section>
+  <section class="callout">
+    <strong>กฎเหล็ก:</strong>
+    ถ้าจะตัดสินใจตอน 10:00 ET model ใช้ได้เฉพาะข้อมูลที่รู้แล้วตอน 10:00 ET และตอน train สำหรับวัน t ใช้ข้อมูลได้ถึงวัน t-1 เท่านั้น
+  </section>
 
-  <h2>1. predictors ที่ใช้ได้</h2>
-  <p>paper ใช้ contemporaneous implied-state variables ตอน 10:00, lagged realized SPX variables, และ lagged strategy-PNL terms</p>
-  <p>ไม่มีการใช้ข้อมูลหลัง 10:00 ของวันเดียวกันเพื่อทำนายผล 10:00-16:00</p>
+  <h2>1. look-ahead bias แบบตัวอย่างง่าย</h2>
+  <p>สมมติคุณบอกว่า "ถ้ารู้ว่าบ่ายนี้ตลาดจะลง ให้ซื้อ bear put spread ตอน 10:00" นั่นไม่ใช่ strategy เพราะตอน 10:00 คุณยังไม่รู้ว่าบ่ายนี้จะลง</p>
+  <p>look-ahead bias คือการเอาข้อมูลอนาคตมาใช้ในอดีต ทำให้ backtest ดูเก่งเกินจริง</p>
 
-  <h2>2. expanding vs rolling</h2>
+  <h2>2. paper ให้ model เห็นอะไรตอน 10:00</h2>
   <div class="grid">
-    <section class="card"><h3>Expanding window</h3><p>train ด้วยข้อมูลสะสมเพิ่มขึ้นเรื่อย ๆ</p></section>
-    <section class="card"><h3>Rolling 252 days</h3><p>train ด้วยหน้าต่างล่าสุดประมาณหนึ่งปี trading days</p></section>
+    <section class="card">
+      <h3>Implied-state variables</h3>
+      <p>เช่น implied variance และ implied skewness ที่คำนวณได้จาก 0DTE options ตอน 10:00</p>
+    </section>
+    <section class="card">
+      <h3>Lagged realized variables</h3>
+      <p>ข้อมูล realized return/variance/skewness จากวันก่อนหน้า ไม่ใช่จากบ่ายวันนี้</p>
+    </section>
+    <section class="card">
+      <h3>Lagged strategy PNL</h3>
+      <p>PNL ของ strategy ในอดีต เช่น เมื่อวาน ค่าเฉลี่ย 5 วัน และความผันผวน 5 วัน</p>
+    </section>
   </div>
 
-  <h2>3. ทำไมเลือก representative moneyness</h2>
-  <p>เพื่อไม่ให้ pooling ของ strike designs จำนวนมากทำให้ผลดูดีเกินจริง paper เลือก near-ATM configuration ที่ representative ต่อ strategy type</p>
+  <h2>3. ทำไมต้องมี 252-day burn-in</h2>
+  <p>model ต้องมีข้อมูล train ก่อนจะเริ่มทำนายจริง paper ใช้ขั้นต่ำ 252 trading days หรือประมาณหนึ่งปีตลาด</p>
+  <p>ดังนั้น OOS forecasts เริ่มหลังช่วง burn-in ไม่ใช่เริ่มตั้งแต่วันแรกของ sample</p>
 
+  <h2>4. expanding window vs rolling window</h2>
+  <div class="grid">
+    <section class="card">
+      <h3>Expanding</h3>
+      <p>ใช้ข้อมูลตั้งแต่ต้น sample ถึงเมื่อวาน train model ข้อมูลค่อย ๆ เพิ่มขึ้นเรื่อย ๆ</p>
+    </section>
+    <section class="card">
+      <h3>Rolling 252d</h3>
+      <p>ใช้ข้อมูลล่าสุดประมาณ 252 วัน train model เหมาะถ้า regime เปลี่ยนและข้อมูลเก่าอาจไม่เหมือนปัจจุบัน</p>
+    </section>
+  </div>
+
+  <h2>5. ทำไมเลือก representative moneyness</h2>
+  <p>ถ้า strategy เดียวมี strike combinations เยอะมาก แล้วเอาทุกอันมารวมกัน ผลอาจดูดีจากการ averaging หรือ selection ที่ซับซ้อนเกินไป</p>
+  <p>paper จึงเลือกหนึ่ง near-ATM representative configuration ต่อ strategy type ใน Table 8 เพื่อให้ conditional test อ่านง่ายและลดการปนกันของหลาย design</p>
+
+  <h2>6. ภาพรวม protocol</h2>
+  <div class="flow">
+    <div class="step">เลือก strategy และ representative moneyness</div>
+    <div class="step">ทุกวันตอน 10:00 สร้าง predictors ที่รู้ได้จริง</div>
+    <div class="step">train model ด้วยข้อมูลถึงเมื่อวาน</div>
+    <div class="step">predict วันนี้ว่า net PNL จะบวกหรือไม่</div>
+    <div class="step">เข้า long หรือ short strategy ตามสัญญาณ</div>
+    <div class="step">วัด PNL ถึง 16:00 หลังหัก half-spread + 0.5bp</div>
+  </div>
+
+  <h2>7. Retrieval</h2>
   <section class="quiz">
-    <details><summary>no-look-ahead แปลว่าอะไร?</summary><p>model ห้ามใช้ข้อมูลที่ยังไม่รู้ตอนตัดสินใจ trade</p></details>
-    <details><summary>OOS forecasts เริ่มหลังอะไร?</summary><p>หลัง burn-in 252 trading days เพื่อให้ model มีข้อมูล train ก่อนเริ่มทดสอบจริง</p></details>
+    <details>
+      <summary>no-look-ahead แปลว่าอะไรใน paper นี้?</summary>
+      <p>model ใช้ได้เฉพาะข้อมูลที่รู้ตอน 10:00 และ training ใช้ข้อมูลถึงวันก่อนหน้าเท่านั้น</p>
+    </details>
+    <details>
+      <summary>rolling window ต่างจาก expanding อย่างไร?</summary>
+      <p>rolling ใช้ข้อมูลช่วงล่าสุดขนาดคงที่ ส่วน expanding ใช้ข้อมูลสะสมตั้งแต่ต้นจนถึงเมื่อวาน</p>
+    </details>
+    <details>
+      <summary>ทำไม representative moneyness ช่วยให้ test สะอาดขึ้น?</summary>
+      <p>เพราะลดการปนกันของ strike designs หลายแบบและทำให้ strategy-specific result ตีความง่ายขึ้น</p>
+    </details>
   </section>
-  <p>อ่านต่อ: <a href="0010-why-directional-classification-beats-return-prediction.html">0010 Classification beats return prediction</a>.</p>
-</main></body></html>
+
+  <p>ต่อไป: <a href="0010-why-directional-classification-beats-return-prediction.html">0010 Classification vs Return Prediction</a></p>
+</main>
+</body>
+</html>

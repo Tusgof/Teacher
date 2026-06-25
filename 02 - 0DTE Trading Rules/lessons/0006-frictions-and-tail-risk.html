@@ -1,25 +1,64 @@
 <!doctype html>
 <html lang="th">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Frictions and Tail Risk</title><link rel="stylesheet" href="../assets/lesson.css"></head>
-<body><main>
-  <h1>Friction และ Tail Risk: จุดที่ฆ่า edge ง่ายที่สุด</h1>
-  <p class="deck">บทนี้อ่าน Table 3-4 แบบภาษาคน: ทำไม mid-price backtest มักดูดีกว่า implementation จริง</p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frictions and Tail Risk</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>บท 0006: ต้นทุนและ tail risk คือด่านจริงของ 0DTE</h1>
+  <p class="deck">Table 3-4 คือจุดที่ paper เปลี่ยนจาก backtest สวย ๆ เป็นคำถามว่า implement ได้จริงไหม</p>
 
-  <h2>1. mid ไม่ใช่ execution เสมอไป</h2>
-  <p>paper เริ่มจาก mid benchmark แล้วหัก half-spread ต่อ leg และเพิ่ม 0.5bp slippage/fees เพื่อเข้าใกล้ implementability มากขึ้น</p>
-  <p>ผลคือ mean PNL และ Sharpe ของหลาย strategies ลดลงทันที</p>
-
-  <h2>2. ES1% คือคำเตือนเรื่องหางซ้าย</h2>
-  <p>ES1% ดูวันที่แย่สุดประมาณ 1% ว่าขาดทุนเฉลี่ยหนักแค่ไหน ใน 0DTE ตัวเลขนี้สำคัญเพราะ rare events เป็นส่วนหนึ่งของ strategy ไม่ใช่ noise ที่ควรตัดทิ้ง</p>
-
-  <h2>3. Table 4 บอกอะไร</h2>
-  <p>paper พบว่า ES1%, worst day, worst 5-day loss และ max drawdown ใหญ่พอที่จะทำให้ mean PNL อย่างเดียวใช้ตัดสินไม่ได้</p>
-
-  <section class="callout"><strong>กฎอ่าน 0DTE strategy:</strong> ถ้า mean เป็นบวก แต่ ES1% และ drawdown ใหญ่กว่ามาก อย่าเรียกว่า edge ก่อนเห็น risk governance</section>
-
-  <section class="quiz">
-    <details><summary>ทำไมต้องหัก bid/ask cost?</summary><p>เพราะ mid เป็น benchmark แต่ราคาที่ execute จริงต้องเสีย spread โดยเฉพาะ strategy หลาย leg</p></details>
-    <details><summary>ทำไม paper ไม่ winsorize extremes?</summary><p>เพราะ rare tail realizations คือ risk จริงของ 0DTE strategies ไม่ใช่ค่าผิดปกติที่ควรลบทิ้ง</p></details>
+  <section class="callout">
+    <strong>หลักคิด:</strong>
+    0DTE edge ที่เล็กมากสามารถหายไปได้ง่ายจาก bid/ask spread, slippage, fees และวันที่ขาดทุนหนัก. ดังนั้น mean PNL อย่างเดียวไม่พอ
   </section>
-  <p>อ่านต่อ: <a href="0007-what-drives-strategy-pnl.html">0007 What drives PNL</a>.</p>
-</main></body></html>
+
+  <h2>1. Mid price คือ benchmark ไม่ใช่ชีวิตจริง</h2>
+  <p>mid price คือราคากลางระหว่าง bid กับ ask ถ้า bid = 3.8 และ ask = 4.2 mid = 4.0</p>
+  <p>แต่ถ้าคุณซื้อจริง คุณมักซื้อใกล้ ask. ถ้าขายจริง คุณมักขายใกล้ bid. paper จึงเพิ่ม scenario ที่หัก half-spread ต่อ leg</p>
+
+  <h2>2. หลาย legs แปลว่าหลายครั้งที่เสีย spread</h2>
+  <p>single option มีหนึ่ง leg แต่ iron condor อาจมี 4 legs. ถ้าทุก leg เสีย spread ต้นทุนรวมของ strategy หลายขาจะกิน edge ได้เร็วมาก</p>
+  <p>paper จึงดูทั้ง mid, bid/ask, และ bid/ask + 0.5bp slippage/fees</p>
+
+  <h2>3. อ่าน Table 3</h2>
+  <p>Table 3 บอกว่าเมื่อย้ายจาก mid ไปสู่ implementable execution ค่าเฉลี่ยและ Sharpe หลาย strategies แย่ลง</p>
+  <p>ตัวอย่างจาก table: put ratio spread ยังดูดีที่สุดในกลุ่ม unconditional หลัง B/A+0.5bp โดย mean ประมาณ 0.0115% ของ underlying และ Sharpe 0.49 แต่ก็ยังต้องเทียบกับ ES1% ประมาณ 0.8228%</p>
+  <p>แปลแบบคน: ค่าเฉลี่ยบวกเล็ก ๆ แต่วันที่แย่มากใหญ่กว่าค่าเฉลี่ยรายวันหลายสิบเท่า</p>
+
+  <h2>4. ES1% คืออะไร</h2>
+  <p>ES1% คือการดูหางซ้ายที่แย่ที่สุดประมาณ 1% แล้วถามว่าในกลุ่มวันแย่สุดนั้น ขาดทุนเฉลี่ยหนักแค่ไหน</p>
+  <p>มันสำคัญกว่า worst day ตัวเดียว เพราะไม่ได้ดู outlier หนึ่งวัน แต่ดูบริเวณ tail ทั้งกลุ่ม</p>
+
+  <h2>5. อ่าน Table 4</h2>
+  <p>Table 4 รายงาน skewness, ES1%, max drawdown, worst day, worst 5-day loss และ loss probability</p>
+  <p>ถ้า strategy mean บวกแต่ ES1%, worst-day loss และ max drawdown ใหญ่ นั่นหมายความว่า strategy ต้องการ capital/risk governance ที่จริงจัง ไม่ใช่แค่ดูว่า average เป็นบวก</p>
+
+  <h2>6. สรุปบทนี้</h2>
+  <section class="callout">
+    paper กำลังบอกว่า 0DTE strategy ต้องประเมินแบบ implementable PNL หลังต้นทุน และต้องใช้ tail-risk diagnostics. ถ้าไม่ทำ คุณอาจเข้าใจผิดว่า strategy มี edge ทั้งที่จริงแค่รับ tail risk
+  </section>
+
+  <h2>7. Retrieval</h2>
+  <section class="quiz">
+    <details>
+      <summary>ทำไม mid-price result อาจดูดีเกินจริง?</summary>
+      <p>เพราะ mid ไม่รวมต้นทุน execution จริงจาก bid/ask spread และ slippage</p>
+    </details>
+    <details>
+      <summary>ทำไม multi-leg strategy เสีย friction มากกว่า option เดี่ยว?</summary>
+      <p>เพราะแต่ละ leg มี bid/ask spread ของตัวเอง ต้นทุนจึงสะสมตามจำนวน legs</p>
+    </details>
+    <details>
+      <summary>ES1% ช่วยเห็นอะไรที่ mean PNL ไม่เห็น?</summary>
+      <p>ช่วยเห็นขนาด loss ในกลุ่มวันที่แย่ที่สุด ซึ่งเป็นหัวใจของ risk ใน 0DTE</p>
+    </details>
+  </section>
+
+  <p>ต่อไป: <a href="0007-what-drives-strategy-pnl.html">0007 What Drives Strategy PNL</a></p>
+</main>
+</body>
+</html>

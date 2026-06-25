@@ -9,32 +9,66 @@
 <body>
 <main>
   <nav class="crumbs"><a href="../../index.html">Library</a><span>/</span><a href="../../topics/0dte/index.html">0DTE</a><span>/</span><a href="../../topics/0dte/0dte-trading-rules.html">0DTE Trading Rules</a></nav>
-  <h1>เริ่มอ่าน 0DTE Trading Rules จากศูนย์</h1>
-  <p class="deck">บทนี้คือแผนที่ก่อนเข้า paper: เราจะไม่เริ่มจากสูตร VRP หรือ model แต่จะเริ่มจากคำถามว่า strategy 0DTE ทำเงินจริงหลัง friction และ tail risk หรือไม่</p>
 
-  <section class="callout"><strong>หนึ่งประโยคของ paper:</strong> 0DTE มี variance risk premium บวก แต่ edge แบบ unconditional เล็กและเสี่ยงมาก; โอกาสที่น่าสนใจกว่าคือ conditional timing rules บางชุดที่ทดสอบแบบ out-of-sample</section>
+  <h1>บท 0001: paper นี้กำลังถามอะไร</h1>
+  <p class="deck">เริ่มจากศูนย์จริง: เราจะไม่เริ่มด้วยสูตร ไม่เริ่มด้วยตาราง และไม่บอกให้คุณไปอ่าน paper เองก่อน</p>
 
-  <h2>1. paper นี้ต่างจาก paper ก่อนอย่างไร</h2>
-  <p>paper ก่อนถามว่า 0DTE market maker hedging กระทบ volatility ของ S&amp;P 500 อย่างไร ส่วน paper นี้ถามว่า ถ้าเราสร้าง 0DTE option positions และ strategies ที่ implement ได้จริง มันทำเงินอย่างไร</p>
-  <p>ดังนั้นคำหลักจะเปลี่ยนจาก net gamma/hedging flow ไปเป็น payoff, PNL, execution costs, tail risk และ trading rules</p>
-
-  <h2>2. บันไดเรียน</h2>
-  <div class="flow">
-    <div class="step">เข้าใจ payoff, PNL, return และทำไมต้อง scale เทียบ underlying</div>
-    <div class="step">เข้าใจ variance risk premium และทำไม positive VRP ไม่เท่ากับ free money</div>
-    <div class="step">เข้าใจ multi-leg option strategies และ payoff shape</div>
-    <div class="step">อ่าน unconditional results: mean, Sharpe, friction, ES1%, drawdown</div>
-    <div class="step">อ่าน conditional rules: VIX regimes, OOS protocol, logistic direction prediction</div>
-    <div class="step">สรุปว่า paper claim อะไร และไม่ claim อะไร</div>
-  </div>
-
-  <h2>3. Retrieval</h2>
-  <section class="quiz">
-    <details><summary>paper นี้สนใจ market impact หรือ trading payoff มากกว่า?</summary><p>สนใจ trading payoff และ trading rules ของ 0DTE strategies มากกว่า market impact</p></details>
-    <details><summary>ทำไมไม่ควรดู mean PNL อย่างเดียว?</summary><p>เพราะ 0DTE distributions มี tail risk สูง mean อาจดูดีแต่ worst days และ drawdowns แย่มาก</p></details>
+  <section class="callout">
+    <strong>คำถามหลักของ paper:</strong>
+    ถ้าเราซื้อขาย SPXW 0DTE options หรือ strategy หลายขาแบบเป็นระบบ ตั้งแต่ 10:00 ET ถึงปิดตลาด 16:00 ET ผลตอบแทนจริงหลังต้นทุนและความเสี่ยงหางซ้ายเป็นอย่างไร และมีวิธีเลือกวันที่ควรเทรดได้ไหม
   </section>
 
-  <p>อ่านต่อ: <a href="0002-payoff-pnl-and-return.html">0002 Payoff, PNL, return</a>. Glossary: <a href="../reference/0001-0dte-trading-rules-glossary.html">Trading rules glossary</a>.</p>
+  <h2>1. paper นี้ไม่ใช่ paper เรื่อง market maker</h2>
+  <p>paper ก่อนของเราเน้นว่า market maker hedge แล้วกระทบ volatility อย่างไร แต่ paper นี้เปลี่ยนมุมมองมาเป็นคนทดสอบ strategy:</p>
+  <div class="grid">
+    <section class="card">
+      <h3>paper ก่อน</h3>
+      <p>ถามว่า 0DTE มีผลต่อ volatility ของตลาดผ่าน market maker hedging อย่างไร</p>
+    </section>
+    <section class="card">
+      <h3>paper นี้</h3>
+      <p>ถามว่า 0DTE positions และ multi-leg strategies ทำเงินจริงไหม ถ้าสร้างให้เทียบกันได้และหักต้นทุนจริง</p>
+    </section>
+  </div>
+
+  <h2>2. ทำไมคำว่า "Trading Rules" ไม่ได้แปลว่าแจกสูตรเทรด</h2>
+  <p>ชื่อ paper อาจทำให้คิดว่า paper จะบอกว่า "ซื้ออันนี้ทุกวันแล้วรวย" แต่ conclusion จริงระวังกว่านั้นมาก</p>
+  <p>ผู้เขียนพบว่า 0DTE มี variance risk premium บวกจริง แต่ขนาดเล็กมากในกรอบเวลาไม่กี่ชั่วโมง พอเข้า strategy จริง เจอต้นทุน bid/ask, slippage, และ tail risk แล้ว edge แบบทำทุกวันอ่อนลงมาก</p>
+  <p>ส่วนที่น่าสนใจคือ conditional rules: ใช้ข้อมูลที่รู้ได้ตอน 10:00 ET เพื่อเลือกทิศทางหรือเลือก strategy บางกลุ่ม ภายใต้การทดสอบ out-of-sample ที่ไม่แอบมองอนาคต</p>
+
+  <h2>3. แกนเรื่องทั้ง paper ใน 7 ขั้น</h2>
+  <div class="flow">
+    <div class="step"><strong>1.</strong> สร้าง option และ strategy ให้เทียบกันได้: moneyness 0.98 ถึง 1.02, entry 10:00, exit 16:00</div>
+    <div class="step"><strong>2.</strong> คำนวณ payoff, PNL, return ของ option และ multi-leg strategies</div>
+    <div class="step"><strong>3.</strong> ดูว่ามี variance risk premium หรือไม่: implied variance สูงกว่า realized variance ไหม</div>
+    <div class="step"><strong>4.</strong> ทดสอบ unconditional strategies: ถ้าทำทุกวัน ผลเฉลี่ยดีจริงไหม</div>
+    <div class="step"><strong>5.</strong> หัก execution costs และดู tail risk: mean ดีพอไหมเมื่อเจอวันที่แย่มาก</div>
+    <div class="step"><strong>6.</strong> ดูว่า PNL ถูกขับด้วยอะไร: variance, direction, skewness หรือ state อื่น</div>
+    <div class="step"><strong>7.</strong> สร้าง strict out-of-sample rules: ใช้ข้อมูล 10:00 เท่านั้น แล้วดู performance หลังต้นทุน</div>
+  </div>
+
+  <h2>4. ประโยคที่คุณควรเล่าได้หลังจบ course</h2>
+  <section class="callout">
+    paper นี้ไม่ได้บอกว่า 0DTE มี edge กว้าง ๆ ทุกวัน แต่บอกว่า unconditional edge ส่วนใหญ่เล็กและเสี่ยง ขณะที่ selective timing บาง strategy โดยเฉพาะ put ratio spread และ baskets บางแบบดูมี performance หลังต้นทุน ภายใต้ protocol ที่ระวัง look-ahead แล้ว
+  </section>
+
+  <h2>5. Retrieval</h2>
+  <section class="quiz">
+    <details>
+      <summary>paper นี้ถามเรื่อง market impact หรือ trading payoff?</summary>
+      <p>ถามเรื่อง trading payoff และ trading rules ของ SPXW 0DTE strategies เป็นหลัก</p>
+    </details>
+    <details>
+      <summary>ทำไม "0DTE มี VRP บวก" ยังไม่พอ?</summary>
+      <p>เพราะ VRP ในช่วง same-day เล็กมาก และต้องผ่านต้นทุน execution กับ tail risk ก่อนถึงจะเป็น edge ที่เทรดได้</p>
+    </details>
+    <details>
+      <summary>คำตอบรวมของ paper คือ broad edge หรือ selective timing?</summary>
+      <p>selective timing ไม่ใช่ broad unconditional edge</p>
+    </details>
+  </section>
+
+  <p>ต่อไป: <a href="0002-payoff-pnl-and-return.html">0002 Payoff, PNL, Return</a></p>
 </main>
 </body>
 </html>

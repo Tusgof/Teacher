@@ -1,28 +1,72 @@
 <!doctype html>
 <html lang="th">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Payoff PNL Return</title><link rel="stylesheet" href="../assets/lesson.css"></head>
-<body><main>
-  <h1>Payoff, PNL, Return: สามคำที่ต้องแยกก่อน</h1>
-  <p class="deck">ถ้าแยกสามคำนี้ไม่ได้ ตารางของ paper จะหลอกตาเราได้ง่ายมาก</p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payoff PNL Return</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>บท 0002: Payoff, PNL, Return แบบจับต้องได้</h1>
+  <p class="deck">ก่อนเข้า VRP หรือ strategy tables ต้องเข้าใจว่า paper วัดกำไรขาดทุนอย่างไร</p>
 
-  <section class="callout"><strong>จำสั้น ๆ:</strong> payoff คือสิ่งที่ option จ่ายตอนหมดอายุ, PNL คือ payoff ลบต้นทุนเข้า position, return คือ PNL เทียบกับเงินที่จ่ายซื้อ option หรือ premium</section>
-
-  <h2>1. Payoff คือปลายทาง</h2>
-  <p>สำหรับ call payoff จะดีเมื่อ S&amp;P 500 ปิดเหนือ strike ส่วน put payoff จะดีเมื่อ S&amp;P 500 ปิดต่ำกว่า strike</p>
-  <p>paper เปิด position ตอน 10:00 ET และถือไปถึง 16:00 ET เป็น baseline หลัก</p>
-
-  <h2>2. PNL คือสิ่งที่เราควรสนใจมากกว่า</h2>
-  <p>ถ้า option จ่าย 10 แต่ตอนเข้า position เราจ่าย 8 PNL คือบวก 2 ถ้าจ่าย 12 PNL คือขาดทุน 2</p>
-  <p>paper รายงาน PNL เป็นเปอร์เซ็นต์ของ underlying เพื่อให้ option และ strategy หลายแบบเทียบกันได้</p>
-
-  <h2>3. Return อาจดูเว่อร์ใน 0DTE</h2>
-  <p>option ใกล้หมดอายุบางตัวมีราคาเล็กมาก ถ้า payoff ขยับนิดเดียว return เทียบ premium อาจดูใหญ่มาก แต่ PNL ต่อ underlying อาจเล็ก</p>
-  <p>ดังนั้น paper ใช้ทั้ง return และ PNL แต่สำหรับ multi-leg strategies มักเน้น PNL scaled by spot มากกว่า</p>
-
-  <h2>4. Retrieval</h2>
-  <section class="quiz">
-    <details><summary>Payoff กับ PNL ต่างกันอย่างไร?</summary><p>payoff คือเงินที่จ่ายตอน expiry ส่วน PNL คือ payoff ลบต้นทุนเข้า position</p></details>
-    <details><summary>ทำไม return ของ OTM 0DTE อาจ misleading?</summary><p>เพราะ premium เล็กมาก ทำให้ return percentage ใหญ่ แม้ PNL ต่อ underlying จะเล็ก</p></details>
+  <section class="callout">
+    <strong>จำก่อน:</strong>
+    Payoff คือสิ่งที่ option จ่ายตอนหมดอายุ. PNL คือ payoff ลบราคาที่จ่ายตอนเข้า. Return คือ PNL หารด้วยเงินที่จ่ายซื้อ option. ใน 0DTE, return อาจดูใหญ่เว่อร์เพราะ premium เล็กมาก
   </section>
-  <p>อ่านต่อ: <a href="0003-variance-risk-premium-without-formulas.html">0003 Variance risk premium</a>.</p>
-</main></body></html>
+
+  <h2>1. ตัวอย่าง call ง่าย ๆ</h2>
+  <p>สมมติ 10:00 ET, S&amp;P 500 อยู่ที่ 5,000 จุด คุณซื้อ call strike 5,010 ที่ราคา 4 จุด และถือถึงปิดตลาด</p>
+  <div class="grid">
+    <section class="card">
+      <h3>กรณีปิดที่ 5,030</h3>
+      <p>call payoff = 5,030 - 5,010 = 20 จุด. PNL = 20 - 4 = +16 จุด</p>
+    </section>
+    <section class="card">
+      <h3>กรณีปิดที่ 5,005</h3>
+      <p>call หมดค่า. payoff = 0. PNL = 0 - 4 = -4 จุด</p>
+    </section>
+  </div>
+
+  <h2>2. ทำไม paper ชอบเทียบกับ underlying</h2>
+  <p>ถ้า S&amp;P 500 อยู่ที่ 5,000 จุด PNL +16 จุด เทียบกับ underlying คือ 16 / 5,000 = 0.32%</p>
+  <p>paper ใช้วิธี scale แบบนี้เพื่อให้ option หลาย strike และ strategies หลายแบบเทียบกันได้ ไม่ใช่ให้ premium เล็ก ๆ ทำให้ return ดูใหญ่เกินจริง</p>
+
+  <h2>3. Return อาจหลอกตาใน 0DTE</h2>
+  <p>จากตัวอย่างเดิม คุณจ่าย 4 จุดแล้วได้ PNL +16 จุด return ต่อ premium คือ +400% ดูน่าตื่นเต้นมาก</p>
+  <p>แต่ในมุม portfolio ที่อ้างอิง underlying 5,000 จุด มันคือ +0.32% ของ underlying เท่านั้น ทั้งสองเลขถูกทั้งคู่ แต่ตอบคนละคำถาม</p>
+
+  <div class="flow">
+    <div class="step"><strong>Return ต่อ premium:</strong> เหมาะกับดู leverage ของ option แต่ไวต่อ premium เล็กมาก</div>
+    <div class="step"><strong>PNL ต่อ underlying:</strong> เหมาะกับเทียบ strategy หลายแบบใน paper นี้</div>
+  </div>
+
+  <h2>4. multi-leg strategy คือบวก PNL ของแต่ละขา</h2>
+  <p>ถ้า strategy มี 2 ขา เช่น ซื้อ call หนึ่งตัวและขาย call อีกตัว PNL ของ strategy คือ signed sum ของ PNL ทุก leg</p>
+  <p>คำว่า signed สำคัญ: leg ที่ long กับ leg ที่ short มีเครื่องหมายตรงข้ามกัน</p>
+
+  <h2>5. เชื่อมกับ paper</h2>
+  <p>paper สร้าง option grid ด้วย moneyness เช่น 0.99, 1.00, 1.01 แล้วคำนวณ payoff ถึง 16:00. จากนั้นคำนวณ PNL = payoff - mid price และรายงานเป็น percentage of underlying</p>
+  <p>แปลว่าเมื่อคุณเห็น Table ที่บอก mean PNL เป็น bps หรือ % of underlying ให้คิดว่าเป็นกำไรขาดทุนของ strategy เทียบกับระดับดัชนี ไม่ใช่ return ต่อเงิน premium เสมอไป</p>
+
+  <h2>6. Retrieval</h2>
+  <section class="quiz">
+    <details>
+      <summary>ถ้าซื้อ call ราคา 4 จุด แล้วหมดอายุไร้ค่า PNL คือเท่าไร?</summary>
+      <p>-4 จุด เพราะ payoff เป็นศูนย์และคุณจ่าย premium ไป 4 จุด</p>
+    </details>
+    <details>
+      <summary>ทำไม return ต่อ premium ของ 0DTE อาจดูแรงมาก?</summary>
+      <p>เพราะ premium เหลือน้อยมาก ตัวหารเล็ก ทำให้เปอร์เซ็นต์ return ใหญ่ แม้ PNL ต่อ underlying ไม่ใหญ่มาก</p>
+    </details>
+    <details>
+      <summary>paper เน้น PNL scaled by spot เพราะอะไร?</summary>
+      <p>เพื่อให้ option และ multi-leg strategies ต่าง strike ต่างราคา เทียบกันได้ในหน่วยเดียว</p>
+    </details>
+  </section>
+
+  <p>ต่อไป: <a href="0003-variance-risk-premium-without-formulas.html">0003 Variance Risk Premium</a></p>
+</main>
+</body>
+</html>

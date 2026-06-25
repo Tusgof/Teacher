@@ -1,50 +1,100 @@
 <!doctype html>
 <html lang="th">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Final Synthesis</title><link rel="stylesheet" href="../assets/lesson.css"></head>
-<body><main>
-  <h1>บทสุดท้าย: เล่า 0DTE Trading Rules ให้ครบ</h1>
-  <p class="deck">เป้าหมายคือเล่า paper ได้เองโดยไม่หลงระหว่าง premium, implementation, tail risk และ OOS timing</p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Synthesis</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>บท 0012: สรุป paper ทั้งฉบับแบบเล่าเองได้</h1>
+  <p class="deck">หลังจบบทนี้ คุณควรเล่า paper ได้โดยไม่สับสนระหว่าง VRP, strategy PNL, friction, tail risk และ OOS conditional rules</p>
 
-  <section class="callout"><strong>หนึ่งประโยค:</strong> paper พบว่า 0DTE VRP มีอยู่จริงแต่เล็กและเทรดยากหลัง friction; unconditional strategy edges ไม่เสถียรและมี tail risk สูง; conditional 10:00 OOS directional rules บางชุด โดยเฉพาะ put ratio spreads และ baskets ให้ performance ที่มีนัยทางเศรษฐกิจ</section>
-
-  <h2>1. Story chain</h2>
-  <div class="flow">
-    <div class="step">สร้าง payoff และ PNL ของ SPXW 0DTE positions แบบ standardized</div>
-    <div class="step">พบ VRP บวก แต่ขนาดเล็กมากใน same-day horizon</div>
-    <div class="step">ทดสอบ strategies หลายแบบและพบ unconditional performance ไม่ใช่ broad edge</div>
-    <div class="step">หัก friction แล้ว tail risk/drawdown สำคัญกว่า mean PNL</div>
-    <div class="step">PNL load กับ directional skewness มากกว่า variance alone หลายกรณี</div>
-    <div class="step">ใช้ข้อมูล 10:00 ET สร้าง strict OOS directional rules</div>
-    <div class="step">ผลดีที่สุดเป็น selective timing ไม่ใช่ universal 0DTE rule</div>
-  </div>
-
-  <h2>2. paper claim อะไร</h2>
-  <ul>
-    <li>positive 0DTE VRP exists แต่ economic magnitude เล็ก</li>
-    <li>strategy PNL distributions wide, state-dependent, tail-heavy</li>
-    <li>frictions ทำให้ gross stories อ่อนลงมาก</li>
-    <li>directional classification ภายใต้ OOS protocol ดีกว่า direct return prediction</li>
-    <li>บาง strategies และ baskets ให้ net Sharpe ที่น่าสนใจ</li>
-  </ul>
-
-  <h2>3. paper ไม่ได้ claim อะไร</h2>
-  <ul>
-    <li>ไม่ได้ให้ live trading recommendation</li>
-    <li>ไม่ได้บอกว่ามี universal 0DTE edge</li>
-    <li>ไม่ได้ศึกษา dynamic intraday hedging</li>
-    <li>ไม่ได้เป็น causal market-impact design</li>
-  </ul>
-
-  <h2>4. Research hypotheses</h2>
-  <div class="grid">
-    <section class="card"><h3>Hypothesis 1</h3><p>0DTE strategy edge ควรถูกทดสอบแบบ conditional มากกว่า unconditional</p></section>
-    <section class="card"><h3>Hypothesis 2</h3><p>directional/skew state variables อาจมี predictive value มากกว่า realized variance alone</p></section>
-    <section class="card"><h3>Hypothesis 3</h3><p>strategy baskets อาจ robust กว่า individual strategy rules แต่ต้อง monitor drawdown และ stability</p></section>
-  </div>
-
-  <section class="quiz">
-    <details><summary>main conclusion คือ broad edge หรือ selective timing?</summary><p>selective timing: บาง strategy families timed ได้ แต่ไม่ใช่ edge กว้างทุก strategy</p></details>
-    <details><summary>ข้อจำกัดหลักคืออะไร?</summary><p>ศึกษา unhedged positions held to close และไม่ได้เป็น causal market-impact design หรือ live recommendation</p></details>
+  <section class="callout">
+    <strong>หนึ่งประโยค:</strong>
+    paper นี้พบว่า 0DTE variance risk premium มีอยู่จริง แต่เล็กและ monetize ยากใน same-day horizon; unconditional option strategies ไม่ใช่ broad edge เพราะ friction และ tail risk ใหญ่; conditional 10:00 ET directional rules บาง strategy และ baskets ให้ OOS performance ที่น่าสนใจหลังต้นทุน
   </section>
-  <p>กลับหน้า paper: <a href="../../topics/0dte/0dte-trading-rules.html">0DTE Trading Rules contents</a>. Primary source: <a href="../0DTE_Trading_Rules.md">local paper</a>.</p>
-</main></body></html>
+
+  <h2>1. Story chain ของ paper</h2>
+  <div class="flow">
+    <div class="step"><strong>เริ่มต้น:</strong> 0DTE volume โตมาก จึงอยากรู้ว่า actual 0DTE strategies ทำเงินไหม</div>
+    <div class="step"><strong>สร้างข้อมูล:</strong> ใช้ SPXW 0DTE จาก 09/2016 ถึง 2026-02-02, entry หลัก 10:00 ET, exit 16:00 ET</div>
+    <div class="step"><strong>วัด payoff:</strong> standardize moneyness 0.98-1.02 แล้วคำนวณ PNL ต่อ underlying</div>
+    <div class="step"><strong>พบ VRP:</strong> implied variance สูงกว่า realized variance โดยเฉลี่ย แต่ magnitude เล็ก</div>
+    <div class="step"><strong>ทดสอบ unconditional:</strong> strategy ทำทุกวันให้ผลกว้าง, tail-heavy, และ unstable ข้าม regime</div>
+    <div class="step"><strong>หัก friction:</strong> bid/ask และ slippage ทำให้ gross results อ่อนลง และ ES1% ใหญ่กว่า mean มาก</div>
+    <div class="step"><strong>หา drivers:</strong> strategy PNL หลายตัวสัมพันธ์กับ directional skewness มากกว่า variance alone</div>
+    <div class="step"><strong>ทำ OOS rules:</strong> logistic directional classification ด้วยข้อมูลที่รู้ตอน 10:00 ให้ selective performance บาง strategy</div>
+  </div>
+
+  <h2>2. สิ่งที่ paper claim</h2>
+  <ul>
+    <li>มี positive 0DTE variance risk premium แต่ขนาดเศรษฐกิจเล็กในกรอบเวลา same-day</li>
+    <li>unconditional strategy performance ไม่ใช่ broad edge ที่ทำทุกวันได้สบาย</li>
+    <li>execution costs และ tail risk เป็นส่วนหลักของการประเมิน ไม่ใช่รายละเอียดเล็ก ๆ</li>
+    <li>PNL ของหลาย strategy ถูกขับโดย directional asymmetry/skewness มากกว่า realized variance อย่างเดียว</li>
+    <li>strict OOS directional rules บางตัว โดยเฉพาะ put ratio spread และ baskets ให้ performance ที่น่าสนใจ</li>
+  </ul>
+
+  <h2>3. สิ่งที่ paper ไม่ได้ claim</h2>
+  <ul>
+    <li>ไม่ได้บอกว่าควรเทรด 0DTE สดทันที</li>
+    <li>ไม่ได้บอกว่าขาย volatility 0DTE ทุกวันเป็น free money</li>
+    <li>ไม่ได้บอกว่า model ใช้ได้กับทุก strategy</li>
+    <li>ไม่ได้ศึกษา dynamic intraday hedging</li>
+    <li>ไม่ได้เป็น causal paper เรื่อง market impact</li>
+  </ul>
+
+  <h2>4. วิธีอ่าน paper นี้แบบผู้วิจัย</h2>
+  <div class="grid">
+    <section class="card">
+      <h3>อย่าถามแค่ mean</h3>
+      <p>ถามด้วยว่า ES1%, worst day, max drawdown และ costs เป็นอย่างไร</p>
+    </section>
+    <section class="card">
+      <h3>อย่าถามแค่ hit rate</h3>
+      <p>ถามด้วยว่าการผิดแต่ละครั้งเสียหนักแค่ไหน และ Sharpe net หลังต้นทุนเป็นอย่างไร</p>
+    </section>
+    <section class="card">
+      <h3>อย่าถามแค่ model ชนะไหม</h3>
+      <p>ถามว่า protocol no-look-ahead จริงไหม และผล stable ข้าม regime หรือไม่</p>
+    </section>
+  </div>
+
+  <h2>5. Research hypotheses ที่เอาไปต่อได้</h2>
+  <div class="grid">
+    <section class="card">
+      <h3>Hypothesis 1</h3>
+      <p>0DTE strategy edge ควรเกิดจาก state-dependent timing มากกว่า unconditional carry</p>
+    </section>
+    <section class="card">
+      <h3>Hypothesis 2</h3>
+      <p>directional/skew variables มี predictive value ต่อ 0DTE strategy PNL มากกว่า variance level อย่างเดียว</p>
+    </section>
+    <section class="card">
+      <h3>Hypothesis 3</h3>
+      <p>strategy baskets อาจ robust กว่า single strategy แต่ต้อง monitor tail risk และ decay ของ signal ต่อเนื่อง</p>
+    </section>
+  </div>
+
+  <h2>6. Final retrieval</h2>
+  <section class="quiz">
+    <details>
+      <summary>ถ้าต้องสรุป paper นี้ในหนึ่งประโยค คุณควรพูดว่าอะไร?</summary>
+      <p>0DTE มี premium บางอย่างจริง แต่ edge แบบทำทุกวันอ่อน; สิ่งที่น่าสนใจกว่าคือ selective OOS timing rules หลังหักต้นทุนและยอมรับ tail risk</p>
+    </details>
+    <details>
+      <summary>ทำไม friction สำคัญกว่าที่ดูเหมือน?</summary>
+      <p>เพราะ expected edge ใน 0DTE same-day เล็กมาก และ strategy หลายขาต้องเสีย spread หลายครั้ง</p>
+    </details>
+    <details>
+      <summary>ข้อจำกัดที่ต้องพูดทุกครั้งคืออะไร?</summary>
+      <p>นี่ไม่ใช่ live trading recommendation และไม่ได้พิสูจน์ universal 0DTE edge; ผลเป็น selective และต้องติดตาม OOS stability ต่อ</p>
+    </details>
+  </section>
+
+  <p>กลับหน้า paper: <a href="../../topics/0dte/0dte-trading-rules.html">0DTE Trading Rules contents</a></p>
+</main>
+</body>
+</html>
