@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Regime-Conditional Alpha in SPY 0DTE ORB จากศูนย์</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <nav class="course-nav" aria-label="Course navigation">
+    <div class="course-nav-meta">
+      <span>Regime-Conditional Alpha in SPY 0DTE ORB</span>
+      <strong>บท 1 / 1: ORB 0DTE จากศูนย์ถึงข้อสรุปของ paper</strong>
+    </div>
+    <div class="course-nav-actions">
+      <a href="../../index.html">Library</a>
+      <a href="../../topics/0dte/index.html">0DTE</a>
+      <a href="../../topics/0dte/regime-conditional-alpha.html">สารบัญ</a>
+    </div>
+    <div class="course-nav-row">
+      <span class="course-step disabled">ก่อนหน้า</span>
+      <label for="lesson-jump-top">เลือกบท</label>
+      <select id="lesson-jump-top" class="lesson-jump">
+        <option selected>01. ORB 0DTE จากศูนย์ถึงข้อสรุปของ paper</option>
+      </select>
+      <span class="course-step disabled">ถัดไป</span>
+    </div>
+  </nav>
+
+  <h1>Regime-Conditional Alpha in SPY 0DTE ORB จากศูนย์</h1>
+  <p class="deck">เปเปอร์นี้ไม่ได้บอกว่า “ORB 0DTE ทำเงินง่าย” แต่ถามว่า ถ้าเอา opening range breakout ไปเล่นเป็น SPY 0DTE debit vertical spread แล้วกรองวัน, กรอง VIX, เลี่ยงวันข่าว, และเลือก strike ให้ดี ยังเหลือ edge จริงไหม</p>
+
+  <section class="callout">
+    <h2>คำตอบสั้นของ paper</h2>
+    <p>edge ถ้ามี ก็อยู่ “ริมขอบ” มาก ไม่ได้แข็งแรงพอให้เทรดแบบไม่ระวังได้ ผล simulation หลังกรองแล้วชนะ 65.4% แต่โครงสร้าง take profit 25% และ stop loss 50% ต้องชนะ 66.7% จึงจะคุ้ม ดังนั้น paper สรุปว่า strategy นี้อาจ viable เฉพาะตอนเงื่อนไขดีมากและ execution ดีมาก แต่ไม่ใช่เครื่องพิมพ์เงิน</p>
+  </section>
+
+  <h2>1. เริ่มจากศูนย์: เรากำลังเทรดอะไร</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>SPY</h3>
+      <p>ETF ที่ตามดัชนี S&amp;P 500 ถ้า SPY ขึ้น แปลว่าตลาดหุ้นใหญ่ของสหรัฐโดยรวมขึ้น</p>
+    </div>
+    <div class="card">
+      <h3>0DTE</h3>
+      <p>option ที่หมดอายุวันนี้ เวลาเหลือน้อยมาก ถ้าราคาไม่ไปทางที่ต้องการเร็ว premium จะละลายเร็ว</p>
+    </div>
+    <div class="card">
+      <h3>Call / Put</h3>
+      <p>call ได้ประโยชน์เมื่อ SPY ขึ้น ส่วน put ได้ประโยชน์เมื่อ SPY ลง</p>
+    </div>
+    <div class="card">
+      <h3>Debit vertical spread</h3>
+      <p>ซื้อ option ตัวหนึ่งและขาย option อีกตัวที่ strike ไกลกว่า จ่ายเงินสุทธิเล็กลง และรู้ maximum loss ตั้งแต่เข้าเทรด</p>
+    </div>
+  </div>
+
+  <p>ตัวอย่างง่าย: ถ้า SPY breakout ขึ้นแถว 572.35 paper จะมอง bull call spread เช่นซื้อ call strike 573 และขาย call strike 575 ที่หมดอายุวันเดียวกัน ถ้าจ่ายสุทธิ 0.61 ดอลลาร์ต่อ share หนึ่ง contract มี 100 shares จึงใช้เงิน 61 ดอลลาร์ต่อ contract</p>
+
+  <h2>2. ORB คือสัญญาณแบบไหน</h2>
+  <p>ORB ย่อจาก Opening Range Breakout แนวคิดคือ 5 นาทีแรกหลังตลาดเปิดเป็นช่วงที่ตลาดย่อยข่าวข้ามคืน ถ้าหลังจากนั้น SPY ทะลุ high ของช่วง 9:30-9:35 AM อาจแปลว่าฝั่งซื้อมีแรงต่อ ถ้าหลุด low อาจแปลว่าฝั่งขายมีแรงต่อ</p>
+
+  <div class="flow">
+    <div class="step"><strong>9:30-9:35</strong> วัดกรอบราคาแรกของวัน</div>
+    <div class="step"><strong>หลัง 9:35</strong> ถ้าทะลุกรอบบน มอง call spread; ถ้าหลุดกรอบล่าง มอง put spread</div>
+    <div class="step"><strong>ออกจากเทรด</strong> ได้กำไร 25% ของ debit หรือขาดทุน 50% ของ debit หรือปิดก่อน 3:30 PM</div>
+  </div>
+
+  <h2>3. ทำไมต้องกรอง ไม่ใช่เห็น breakout แล้วเข้าเลย</h2>
+  <p>paper พบว่า raw ORB signal ยังไม่พอ เพราะ payoff ของ strategy นี้เสียมากกว่ากำไรต่อครั้ง: ชนะได้ +25% แต่แพ้เสีย -50% แปลว่าต้องชนะ 2 ใน 3 ครั้ง หรือ 66.7% แค่คุ้มทุน</p>
+
+  <table>
+    <thead><tr><th>สิ่งที่ filter ทำ</th><th>เหตุผลแบบคนเริ่มจากศูนย์</th></tr></thead>
+    <tbody>
+      <tr><td>เทรดเฉพาะ Monday, Wednesday, Friday</td><td>simulation ตั้งต้นให้สามวันนี้มีโอกาสชนะดีกว่า Tuesday/Thursday</td></tr>
+      <tr><td>VIX ต้องอยู่ 15-25</td><td>VIX ต่ำเกินไป ราคาไม่วิ่งพอ; สูงเกินไป fakeout เยอะและ option แพง</td></tr>
+      <tr><td>เลี่ยง FOMC, CPI, NFP, Fed speech</td><td>วันข่าวใหญ่ราคาแกว่งผิดทางง่าย breakout อาจไม่ใช่ trend จริง</td></tr>
+    </tbody>
+  </table>
+
+  <figure class="paper-figure">
+    <img src="../images/Regime_Conditional_Alpha_Figure_3.png" alt="Unfiltered win rate by day of week">
+    <figcaption>Figure 3 ของ paper: ก่อน filter ทุกวันยังต่ำกว่า breakeven 66.7% จุดนี้สำคัญมาก เพราะแปลว่า ORB ดิบ ๆ ยังไม่ใช่ edge</figcaption>
+  </figure>
+
+  <h2>4. แกนสำคัญ: strike gap</h2>
+  <p>strike gap คือระยะจากราคา breakout ไปถึง long strike ที่เลือก เช่น SPY breakout ที่ 572.35 และ long call strike คือ 573 gap คือ 0.65 ดอลลาร์</p>
+  <p>gap เล็กเกินไป option แพงกว่า แต่ตอบสนองต่อราคาเร็วกว่า; gap ใหญ่ขึ้น option ถูกกว่า แต่ต้องให้ราคาไปต่อพอสมควรจึงจะกำไร Paper พบว่าช่วง gap ที่ไกลขึ้น โดยเฉพาะมากกว่า 0.96 ดอลลาร์ ทำ EV ดีกว่าใน simulation</p>
+
+  <figure class="paper-figure">
+    <img src="../images/Regime_Conditional_Alpha_Figure_1.png" alt="Win rate by breakout-to-strike gap quartile">
+    <figcaption>Figure 1: gap 0.96-1.48 และ 1.48-2.00 มี win rate สูงกว่า 66.7% ส่วน gap 0.47-0.96 แย่สุดใน simulation</figcaption>
+  </figure>
+
+  <table>
+    <thead><tr><th>Gap range</th><th>Win rate</th><th>EV ต่อ trade</th><th>อ่านว่าอะไร</th></tr></thead>
+    <tbody>
+      <tr><td>0.00-0.47</td><td>64.8%</td><td>-2.64 ดอลลาร์</td><td>ใกล้ ATM แต่ยังต่ำกว่า breakeven</td></tr>
+      <tr><td>0.47-0.96</td><td>58.5%</td><td>-11.11 ดอลลาร์</td><td>paper ให้ระวังมากที่สุด</td></tr>
+      <tr><td>0.96-1.48</td><td>67.9%</td><td>+1.61 ดอลลาร์</td><td>เริ่มเหนือ breakeven เล็กน้อย</td></tr>
+      <tr><td>1.48-2.00</td><td>70.4%</td><td>+4.40 ดอลลาร์</td><td>ดีที่สุดใน simulation แต่ยังต้องระวัง sample เล็ก</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5. ผลหลัก: หลัง filter แล้วยังไม่สบาย</h2>
+  <p>หลังใช้ filter ครบ เหลือ 214 trades จาก 756 วัน ได้ win rate 65.4% ช่วงความไม่แน่นอน 95% อยู่ที่ 58.8%-71.5% จุดอ่านคือ true win rate อาจต่ำกว่าคุ้มทุน หรืออาจสูงกว่าคุ้มทุนก็ได้ ข้อมูลยังไม่ได้ทำให้มั่นใจว่า edge แข็งแรง</p>
+
+  <figure class="paper-figure">
+    <img src="../images/Regime_Conditional_Alpha_Figure_4.png" alt="Win rate by VIX regime">
+    <figcaption>Figure 4: VIX 15-25 เป็น sweet spot เดียวที่เข้าใกล้ breakeven ส่วน VIX ต่ำ, elevated, extreme ล้วนแย่กว่าอย่างชัดเจน</figcaption>
+  </figure>
+
+  <div class="callout">
+    <h3>จุดที่ต้องจำ</h3>
+    <p>การที่ win rate 65.4% ต่ำกว่า breakeven 66.7% ไม่ได้แปลว่า paper ล้มเหลว แต่แปลว่าคำตอบของ paper คือ “edge อยู่ใกล้ศูนย์มาก” ถ้า fill แย่, spread กว้าง, เข้าไม่ทัน, หรือ market regime เปลี่ยน ผลลัพธ์อาจกลับเป็นลบทันที</p>
+  </div>
+
+  <h2>6. บัญชี $1,500 เสี่ยงอย่างไร</h2>
+  <p>paper ใช้ setup มาตรฐาน 3 contracts, mean debit 0.584 ดอลลาร์ ต่อ spread ใช้เงินประมาณ 58.40 ดอลลาร์ต่อ contract หรือ 175 ดอลลาร์สำหรับ 3 contracts ถ้า stop loss 50% แพ้ครั้งละประมาณ 87.60 ดอลลาร์ คิดเป็น 5.8% ของบัญชี 1,500 ดอลลาร์ สูงมากสำหรับ strategy ที่ edge อยู่ริมขอบ</p>
+
+  <figure class="paper-figure">
+    <img src="../images/Regime_Conditional_Alpha_Figure_5.png" alt="Expected value as a function of win rate">
+    <figcaption>Figure 5: เส้นสำคัญคือ breakeven 66.7% ถ้า win rate ต่ำกว่านั้น EV ติดลบ แม้ strategy จะดูเหมือนชนะบ่อยก็ตาม</figcaption>
+  </figure>
+
+  <h2>7. ข้อจำกัดที่ห้ามข้าม</h2>
+  <ul>
+    <li>นี่คือ simulation ไม่ใช่ trade log จาก fill จริงทุกครั้ง</li>
+    <li>โมเดลไม่ได้จับ intraday path, bid-ask queue, fill delay และสภาพตลาดเร็วจัดได้ครบ</li>
+    <li>confidence interval กว้างพอที่จะทำให้ edge อาจเป็นบวกหรือลบก็ได้</li>
+    <li>ผลลัพธ์ขึ้นกับ parameter calibration เช่น day-of-week baseline และ VIX multiplier</li>
+  </ul>
+
+  <h2>8. สรุปแบบพูดเองได้</h2>
+  <p>paper นี้บอกว่า ORB 0DTE debit spread อาจมีเงื่อนไขที่ใกล้ทำกำไรได้ คือ Monday/Wednesday/Friday, VIX 15-25, ไม่มีข่าวใหญ่, และ strike gap ไม่แย่ แต่ payoff structure ต้องชนะ 66.7% แค่คุ้มทุน ขณะที่ simulation หลัง filter ได้ 65.4% ดังนั้นข้อสรุปที่ถูกต้องคือ strategy นี้ fragile มาก และต้องพิสูจน์ด้วย execution จริงก่อนเชื่อว่าเป็น alpha</p>
+
+  <section class="quiz">
+    <h2>Retrieval practice</h2>
+    <ol>
+      <li>ทำไม strategy ที่กำไร +25% แต่ขาดทุน -50% ต้องชนะประมาณ 2 ใน 3 ครั้ง</li>
+      <li>VIX ต่ำกว่า 15 และสูงกว่า 35 แย่คนละแบบอย่างไร</li>
+      <li>strike gap คืออะไร และทำไม gap 0.47-0.96 จึงเป็นจุดที่ paper ให้ระวัง</li>
+      <li>ถ้า win rate หลัง filter คือ 65.4% คุณควรพูดว่า strategy นี้ “ทำเงินได้” หรือ “ยังอยู่ริมขอบ” เพราะอะไร</li>
+    </ol>
+  </section>
+
+  <nav class="course-nav course-nav-bottom" aria-label="Course navigation bottom">
+    <div class="course-nav-actions">
+      <a href="../../index.html">Library</a>
+      <a href="../../topics/0dte/index.html">0DTE</a>
+      <a href="../../topics/0dte/regime-conditional-alpha.html">สารบัญ</a>
+    </div>
+  </nav>
+</main>
+</body>
+</html>

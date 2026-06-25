@@ -12,3 +12,5 @@ Static teaching workspace for step-by-step paper learning.
 
 - `01 - 0DTE on SPY` contains the market-impact paper course.
 - `02 - 0DTE Trading Rules` contains the payoff/trading-rules paper course.
+- `03 - Regime Conditional Alpha` contains a one-lesson self-contained ORB/filter/strike-selection paper course.
+- `04 - 0DTE Asset Pricing` contains a one-lesson self-contained asset-pricing paper course.
