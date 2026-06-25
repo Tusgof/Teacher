@@ -142,17 +142,20 @@ li {
   content: counter(lesson, decimal-leading-zero);
   color: #6f5b35;
   font-weight: 600;
+  grid-row: 1 / span 2;
 }
 
 .lesson-link strong {
   color: #111827;
   display: block;
   font-weight: 600;
+  grid-column: 2;
 }
 
 .lesson-link span {
   color: #5f6b7a;
   display: block;
+  grid-column: 2;
   margin-top: 2px;
 }
 
