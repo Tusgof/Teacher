@@ -176,6 +176,69 @@ li {
   padding: 18px 20px;
 }
 
+.course-nav {
+  background: #fffdf8;
+  border: 1px solid #ded6c9;
+  border-radius: 8px;
+  margin: 0 0 28px;
+  padding: 14px;
+}
+
+.course-nav-bottom {
+  margin: 44px 0 0;
+}
+
+.course-nav-meta {
+  display: grid;
+  gap: 2px;
+  margin-bottom: 12px;
+}
+
+.course-nav-meta span {
+  color: #697586;
+  font-size: 0.9rem;
+}
+
+.course-nav-meta strong {
+  color: #111827;
+  font-weight: 600;
+}
+
+.course-nav-actions,
+.course-nav-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.course-nav-actions {
+  margin-bottom: 12px;
+}
+
+.course-nav a,
+.course-step,
+.lesson-jump {
+  background: #f7f4ee;
+  border: 1px solid #d8d0c2;
+  border-radius: 6px;
+  color: #1d4f91;
+  font-family: inherit;
+  font-size: 0.98rem;
+  padding: 7px 10px;
+  text-decoration: none;
+}
+
+.course-step.disabled {
+  color: #9aa4b2;
+  cursor: not-allowed;
+}
+
+.lesson-jump {
+  color: #1f2933;
+  min-width: min(100%, 310px);
+}
+
 details {
   background: #ffffff;
   border: 1px solid #d5dde6;
