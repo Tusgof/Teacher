@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Walk-forward, OOS, overfitting control</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Walk-forward, OOS, overfitting control</h1>
+  <p class="deck">ทำให้ผลวิจัยยากขึ้นแต่เชื่อถือได้ขึ้น</p>
+
+<h2>หลัก validation</h2><p>Backtest Validation Protocol บอกให้ใช้ chronological splits, keep final test untouched, verify timestamp, include costs, test parameter sensitivity, report subperiods, label evidence type และ treat metrics as estimates with uncertainty.</p>
+<h2>Walk-forward pattern</h2><ol><li>เลือก train window เช่น 252 trading days</li><li>fit rule/model เฉพาะข้อมูลอดีต</li><li>trade/validate ช่วงถัดไป</li><li>เลื่อน window หรือ expand</li><li>รวม OOS trades ทั้งหมด</li><li>ห้ามกลับไปแก้ rule จาก final test โดยไม่ reset protocol</li></ol>
+<h2>Overfitting signs</h2><ul><li>ผลดีเฉพาะ parameter ค่าเดียว</li><li>ผลดีเฉพาะ subperiod เดียว</li><li>feature จำนวนมากเทียบกับจำนวน trades น้อย</li><li>model complex แต่ไม่ชนะ simple baseline หลัง cost</li><li>win rate สูงแต่ payoff/tail แย่</li></ul>
+<h2>Evidence label</h2><p>ทุกผลลัพธ์ควรติดป้าย: in-sample, validation, OOS, paper trading, live-forward. ถ้าไม่มีป้าย ห้ามใช้ตัดสินเพิ่ม size.</p>
+<section class="quiz"><h2>Retrieval</h2><ol><li>ทำไม random split ไม่เหมาะกับ time series</li><li>parameter sensitivity บอกอะไร</li><li>final test ถูกใช้ทำอะไรเท่านั้น</li></ol></section>
+  <section class="callout"><h2>Source note</h2><p>บทนี้สังเคราะห์จาก LLM Wiki ไม่ใช่คำแนะนำการลงทุนหรือการรับประกันผลตอบแทน แกนที่ใช้: wiki/synthesis.md, wiki/questions/0dte-options-asset-pricing-research-track.md, wiki/sources/0dte-trading-rules.md, wiki/sources/regime-conditional-alpha-spy-0dte-orb.md, wiki/sources/market-for-zero-dte-options-liquidity-providers-volatility-attenuation.md, wiki/concepts/backtest-validation-protocol.md, wiki/concepts/strategy-research-workflow.md, wiki/concepts/zero-dte-options.md, wiki/concepts/zero-dte-strategy-templates.md, wiki/concepts/implementable-option-pnl.md, wiki/concepts/zero-dte-conditional-trading-rules.md, wiki/concepts/spy-zero-dte-opening-range-breakout.md, wiki/concepts/regime-filtering-for-zero-dte.md, wiki/concepts/strike-selection-for-zero-dte-spreads.md, wiki/concepts/monte-carlo-trading-simulation.md, wiki/concepts/risk-management.md, wiki/concepts/position-sizing.md, wiki/concepts/live-trading-infrastructure.md, wiki/concepts/trading-plan-and-journal.md</p></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

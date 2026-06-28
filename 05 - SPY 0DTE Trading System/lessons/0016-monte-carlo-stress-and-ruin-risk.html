@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monte Carlo, stress test, ruin risk</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Monte Carlo, stress test, ruin risk</h1>
+  <p class="deck">หลังมี trade distribution แล้ว ต้องถามว่าบัญชีรอดไหม ไม่ใช่แค่ค่าเฉลี่ยบวกไหม</p>
+
+<h2>Monte Carlo ใช้ทำอะไร</h2><p>Monte Carlo Trading Simulation page ระบุว่าใช้ประเมิน possible outcomes, drawdowns, ruin probability และ sensitivity แต่เป็นผลจาก assumptions ไม่ใช่หลักฐาน edge.</p>
+<h2>สำหรับ 0DTE ต้อง simulate อะไร</h2><ul><li>random trade order จาก historical OOS trades</li><li>clustered losing streak</li><li>worse slippage regime</li><li>event shock day</li><li>missed exit / broker failure</li><li>volatility regime shift</li><li>strategy decay after crowding</li></ul>
+<h2>Ruin definition</h2><p>ต้องนิยามก่อน เช่น drawdown เกิน 25%, 50%, margin call, daily stop fail, หรือ psychological stop. ORB source ใช้ drawdown เกิน 50% ของ $1,500 เป็น ruin proxy.</p>
+<h2>Stress outputs</h2><table><thead><tr><th>Output</th><th>ใช้ตัดสิน</th></tr></thead><tbody><tr><td>median outcome</td><td>ผลกลาง</td></tr><tr><td>10th percentile</td><td>สถานการณ์แย่แต่ไม่สุด</td></tr><tr><td>ruin probability</td><td>โอกาสบัญชีพังตามนิยาม</td></tr><tr><td>max losing streak</td><td>size และ psychology</td></tr><tr><td>time to recovery</td><td>ความทนทานของระบบ</td></tr></tbody></table>
+<section class="quiz"><h2>Retrieval</h2><ol><li>Monte Carlo พิสูจน์ edge ได้หรือไม่</li><li>ruin definition ควรนิยามก่อนหรือหลัง simulation</li><li>ทำไม clustered losses สำคัญกว่า random losses ปกติ</li></ol></section>
+  <section class="callout"><h2>Source note</h2><p>บทนี้สังเคราะห์จาก LLM Wiki ไม่ใช่คำแนะนำการลงทุนหรือการรับประกันผลตอบแทน แกนที่ใช้: wiki/synthesis.md, wiki/questions/0dte-options-asset-pricing-research-track.md, wiki/sources/0dte-trading-rules.md, wiki/sources/regime-conditional-alpha-spy-0dte-orb.md, wiki/sources/market-for-zero-dte-options-liquidity-providers-volatility-attenuation.md, wiki/concepts/backtest-validation-protocol.md, wiki/concepts/strategy-research-workflow.md, wiki/concepts/zero-dte-options.md, wiki/concepts/zero-dte-strategy-templates.md, wiki/concepts/implementable-option-pnl.md, wiki/concepts/zero-dte-conditional-trading-rules.md, wiki/concepts/spy-zero-dte-opening-range-breakout.md, wiki/concepts/regime-filtering-for-zero-dte.md, wiki/concepts/strike-selection-for-zero-dte-spreads.md, wiki/concepts/monte-carlo-trading-simulation.md, wiki/concepts/risk-management.md, wiki/concepts/position-sizing.md, wiki/concepts/live-trading-infrastructure.md, wiki/concepts/trading-plan-and-journal.md</p></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

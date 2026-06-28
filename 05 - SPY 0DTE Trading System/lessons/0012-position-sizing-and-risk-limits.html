@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Position sizing และ risk limits</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Position sizing และ risk limits</h1>
+  <p class="deck">ระบบที่มี edge ก็พังได้ถ้า size ผิด โดยเฉพาะ 0DTE ที่ payoff กระจุกและเร็ว</p>
+
+<h2>หลักจาก wiki</h2><p>Position Sizing page ย้ำว่า size มักกำหนด survivability มากกว่าสัญญาณ ระบบ 0DTE ที่ edge ยังไม่พิสูจน์ต้องเริ่มจาก risk เล็กกว่าที่ backtest บอกว่าทนได้ เพราะ live slippage และ future drawdown อาจแย่กว่าอดีต.</p>
+<h2>Risk budget hierarchy</h2><table><thead><tr><th>Limit</th><th>ตัวอย่าง</th></tr></thead><tbody><tr><td>Per trade max loss</td><td>0.25%-0.50% equity ในช่วงทดลอง</td></tr><tr><td>Daily loss limit</td><td>หยุดเทรดเมื่อเสีย 1R-2R หรือเกินแผน</td></tr><tr><td>Weekly/monthly drawdown</td><td>ลด size หรือ pause</td></tr><tr><td>Open exposure</td><td>ไม่ถือหลาย correlated 0DTE positions พร้อมกัน</td></tr><tr><td>Strategy kill switch</td><td>live-forward metrics หลุดจาก expected range</td></tr></tbody></table>
+<h2>ไม่ควรใช้ Kelly เต็ม</h2><p>แม้ Kelly เป็นแนวคิด sizing จาก quant foundations แต่ 0DTE estimates ไม่แน่นอนมาก ทั้ง edge, variance, tail, และ slippage. ถ้าจะใช้ ต้องเป็น fractional Kelly และหลังจากมี live-forward sample ที่พอเชื่อได้เท่านั้น.</p>
+<h2>Size จาก loss ไม่ใช่ profit dream</h2><p>เริ่มจาก “ถ้าระบบแพ้ 10 ครั้งในเดือนเดียว ฉันยังอยู่รอดไหม” ไม่ใช่ “ถ้าเดือนนี้ชนะจะได้กี่บาท”.</p>
+<section class="quiz"><h2>Retrieval</h2><ol><li>ทำไม historical max drawdown ไม่ใช่ขอบล่างของอนาคต</li><li>daily loss limit ป้องกันอะไร</li><li>ทำไม Kelly เต็มอันตรายใน 0DTE</li></ol></section>
+  <section class="callout"><h2>Source note</h2><p>บทนี้สังเคราะห์จาก LLM Wiki ไม่ใช่คำแนะนำการลงทุนหรือการรับประกันผลตอบแทน แกนที่ใช้: wiki/synthesis.md, wiki/questions/0dte-options-asset-pricing-research-track.md, wiki/sources/0dte-trading-rules.md, wiki/sources/regime-conditional-alpha-spy-0dte-orb.md, wiki/sources/market-for-zero-dte-options-liquidity-providers-volatility-attenuation.md, wiki/concepts/backtest-validation-protocol.md, wiki/concepts/strategy-research-workflow.md, wiki/concepts/zero-dte-options.md, wiki/concepts/zero-dte-strategy-templates.md, wiki/concepts/implementable-option-pnl.md, wiki/concepts/zero-dte-conditional-trading-rules.md, wiki/concepts/spy-zero-dte-opening-range-breakout.md, wiki/concepts/regime-filtering-for-zero-dte.md, wiki/concepts/strike-selection-for-zero-dte-spreads.md, wiki/concepts/monte-carlo-trading-simulation.md, wiki/concepts/risk-management.md, wiki/concepts/position-sizing.md, wiki/concepts/live-trading-infrastructure.md, wiki/concepts/trading-plan-and-journal.md</p></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

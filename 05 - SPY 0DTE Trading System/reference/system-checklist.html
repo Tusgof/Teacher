@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="th">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>SPY 0DTE System Checklist</title><link rel="stylesheet" href="../assets/lesson.css"></head>
+<body><main>
+<nav class="crumbs"><a href="../../index.html">Library</a><span>/</span><a href="../../topics/0dte/index.html">0DTE</a><span>/</span><a href="../../topics/0dte/spy-0dte-trading-system.html">SPY 0DTE Trading System</a></nav>
+<h1>SPY 0DTE System Checklist</h1><p class="deck">reference sheet สำหรับใช้ตรวจระบบก่อน research, paper trading, และ live rollout</p>
+<h2>1. Hypothesis Gate</h2><ul><li>ระบุ edge hypothesis ชัดเจน</li><li>แยก evidence type: paper insight, simulation, backtest, paper trade, live-forward</li><li>เขียนเหตุผลว่าทำไม edge อาจ persist</li></ul>
+<h2>2. Data Gate</h2><ul><li>มี SPY intraday bars และ option bid/ask chain</li><li>timestamp/timezone ตรวจได้</li><li>event calendar และ VIX available ก่อน entry</li><li>ไม่มี feature ที่รู้หลัง decision time</li></ul>
+<h2>3. Backtest Gate</h2><ul><li>event-driven backtest</li><li>bid/ask + slippage + fees</li><li>trade log และ skipped-trade log</li><li>parameter sensitivity และ subperiod analysis</li><li>OOS/walk-forward results แยกจาก in-sample</li></ul>
+<h2>4. Risk Gate</h2><ul><li>per-trade max loss</li><li>daily/weekly/monthly loss limit</li><li>ES/cVaR, worst day, max drawdown</li><li>Monte Carlo ruin probability</li><li>kill switch และ pause rule</li></ul>
+<h2>5. Live Gate</h2><ul><li>paper trading ผ่าน workflow</li><li>orders/fills/rejections logged</li><li>TP/SL/time stop ทำงานจริง</li><li>dashboard/alerts พร้อม</li><li>เริ่ม live ด้วย reduced size เท่านั้น</li></ul>
+</main></body></html>

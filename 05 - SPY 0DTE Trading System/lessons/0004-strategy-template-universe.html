@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>จักรวาล strategy templates ของ 0DTE</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>จักรวาล strategy templates ของ 0DTE</h1>
+  <p class="deck">รู้ว่าคุณกำลังเลือก payoff shape แบบไหน ไม่ใช่แค่เลือก call หรือ put</p>
+
+<h2>Template คือภาษาของ strategy</h2><p>0DTE Trading Rules ใน wiki แยก strategy templates เช่น straddles, strangles, iron butterflies, iron condors, risk reversals, bull call spreads, bear put spreads, call ratio spreads และ put ratio spreads. แต่ละแบบมี tail risk และ cost profile ต่างกัน.</p>
+<table><thead><tr><th>Template</th><th>เหมาะกับ hypothesis</th><th>ความเสี่ยงหลัก</th></tr></thead><tbody><tr><td>Long call/put</td><td>direction แรงและเร็ว</td><td>theta decay และ IV crush</td></tr><tr><td>Debit vertical spread</td><td>direction bounded risk</td><td>ต้องเลือก strike และ debit ดี</td></tr><tr><td>Straddle/strangle</td><td>volatility explosion</td><td>premium แพงและ timing ยาก</td></tr><tr><td>Iron condor/butterfly</td><td>range หรือ short volatility</td><td>tail loss และ gap move</td></tr><tr><td>Ratio spread</td><td>moderate move</td><td>asymmetric tail exposure</td></tr></tbody></table>
+<h2>บทเรียนจาก wiki</h2><p>positive variance risk premium ไม่ได้แปลว่าทุก short-vol strategy ควรเทรดได้ Broad unconditional 0DTE evidence ใน wiki ถูกอธิบายว่า noisy, cost-sensitive และ tail-heavy. ดังนั้น template ต้องผูกกับ hypothesis และ validation เฉพาะ template.</p>
+<h2>กฎออกแบบ</h2><ul><li>เริ่มจาก 1-2 templates ที่อธิบายได้ ไม่ใช่ยิงทั้งจักรวาล</li><li>เลือก PNL scaling ให้เหมาะ: underlying price, capital at risk, หรือ margin ไม่ใช่ premium return อย่างเดียว</li><li>รายงาน tail risk ต่อ template เสมอ</li></ul>
+<section class="quiz"><h2>Retrieval</h2><ol><li>ทำไม multi-leg template ทำให้ cost สำคัญขึ้น</li><li>ratio spread มี risk แบบใด</li><li>ทำไมไม่ควรเริ่มจาก strategy universe ใหญ่เกินไป</li></ol></section>
+  <section class="callout"><h2>Source note</h2><p>บทนี้สังเคราะห์จาก LLM Wiki ไม่ใช่คำแนะนำการลงทุนหรือการรับประกันผลตอบแทน แกนที่ใช้: wiki/synthesis.md, wiki/questions/0dte-options-asset-pricing-research-track.md, wiki/sources/0dte-trading-rules.md, wiki/sources/regime-conditional-alpha-spy-0dte-orb.md, wiki/sources/market-for-zero-dte-options-liquidity-providers-volatility-attenuation.md, wiki/concepts/backtest-validation-protocol.md, wiki/concepts/strategy-research-workflow.md, wiki/concepts/zero-dte-options.md, wiki/concepts/zero-dte-strategy-templates.md, wiki/concepts/implementable-option-pnl.md, wiki/concepts/zero-dte-conditional-trading-rules.md, wiki/concepts/spy-zero-dte-opening-range-breakout.md, wiki/concepts/regime-filtering-for-zero-dte.md, wiki/concepts/strike-selection-for-zero-dte-spreads.md, wiki/concepts/monte-carlo-trading-simulation.md, wiki/concepts/risk-management.md, wiki/concepts/position-sizing.md, wiki/concepts/live-trading-infrastructure.md, wiki/concepts/trading-plan-and-journal.md</p></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

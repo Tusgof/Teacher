@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trading plan, journal, governance</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Trading plan, journal, governance</h1>
+  <p class="deck">ระบบระยะยาวต้องมีวินัยการตัดสินใจ ไม่ใช่แก้ rule ตามอารมณ์หลังแพ้</p>
+
+<h2>Trading plan contents</h2><p>Trading Plan And Journal page ระบุว่า plan ต้องมี hypothesis, market, instruments, timeframe, data source, entry/exit, sizing, risk limits, expected holding period, backtest summary, weaknesses, execution assumptions, pause/reduce/retire rules.</p>
+<h2>Journal row ต่อ trade</h2><table><thead><tr><th>Field</th><th>Purpose</th></tr></thead><tbody><tr><td>signal snapshot</td><td>ดูว่าตัดสินจากข้อมูลอะไร</td></tr><tr><td>filter state</td><td>ตรวจ no-trade rules</td></tr><tr><td>order/fill</td><td>วัด execution quality</td></tr><tr><td>planned vs actual</td><td>จับ deviation</td></tr><tr><td>PNL decomposition</td><td>แยก edge กับ cost</td></tr><tr><td>error tag</td><td>แยก system loss กับ human/process error</td></tr><tr><td>review decision</td><td>continue, revise, pause, retire</td></tr></tbody></table>
+<h2>Governance rules</h2><ul><li>เปลี่ยน rule ได้เฉพาะรอบ review ไม่ใช่ระหว่างตลาดเปิด</li><li>ทุก change ต้องมี rationale และ before/after test</li><li>เพิ่ม size ได้เฉพาะเมื่อผ่าน live-forward sample gate</li><li>ถ้าเกิด execution incident ให้ pause จน root cause ชัด</li><li>ถ้าผลจริงหลุด confidence band ให้ลด size หรือหยุด</li></ul>
+<section class="quiz"><h2>Final retrieval</h2><ol><li>ระบบพร้อม live ต้องผ่าน gate อะไรบ้าง</li><li>journal แยก strategy loss กับ process error อย่างไร</li><li>เมื่อไหร่ควร retire strategy</li></ol></section>
+  <section class="callout"><h2>Source note</h2><p>บทนี้สังเคราะห์จาก LLM Wiki ไม่ใช่คำแนะนำการลงทุนหรือการรับประกันผลตอบแทน แกนที่ใช้: wiki/synthesis.md, wiki/questions/0dte-options-asset-pricing-research-track.md, wiki/sources/0dte-trading-rules.md, wiki/sources/regime-conditional-alpha-spy-0dte-orb.md, wiki/sources/market-for-zero-dte-options-liquidity-providers-volatility-attenuation.md, wiki/concepts/backtest-validation-protocol.md, wiki/concepts/strategy-research-workflow.md, wiki/concepts/zero-dte-options.md, wiki/concepts/zero-dte-strategy-templates.md, wiki/concepts/implementable-option-pnl.md, wiki/concepts/zero-dte-conditional-trading-rules.md, wiki/concepts/spy-zero-dte-opening-range-breakout.md, wiki/concepts/regime-filtering-for-zero-dte.md, wiki/concepts/strike-selection-for-zero-dte-spreads.md, wiki/concepts/monte-carlo-trading-simulation.md, wiki/concepts/risk-management.md, wiki/concepts/position-sizing.md, wiki/concepts/live-trading-infrastructure.md, wiki/concepts/trading-plan-and-journal.md</p></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

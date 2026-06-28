@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Edge hypotheses จาก LLM Wiki</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Edge hypotheses จาก LLM Wiki</h1>
+  <p class="deck">แปลง paper insight เป็นสมมติฐานที่ทดสอบได้ ไม่ใช่ความเชื่อ</p>
+
+<h2>Hypothesis 1: conditional timing</h2><p>0DTE Trading Rules ชี้ว่าการเทรดแบบ unconditional อ่อนแอ แต่ strict OOS conditional timing บาง template ดีขึ้นได้ ระบบจึงควรเริ่มจากคำถามว่า “วันไหนควรเทรด / วันไหนห้ามเทรด” มากกว่า “เทรดทุกวัน”.</p>
+<h2>Hypothesis 2: ORB + filter + strike selection</h2><p>SPY ORB source เสนอว่า ORB debit spread ต้องมี day filter, VIX 15-25, no macro event, liquidity filter และ strike gap. แต่หลักฐานเป็น simulation และ win rate อยู่ต่ำกว่า breakeven จึงเป็น replication hypothesis ไม่ใช่ live edge.</p>
+<h2>Hypothesis 3: risk premia และ payoff template</h2><p>0DTE Asset Pricing พบ U-shaped pricing kernel และ upside risk compensation แต่ wiki เตือนว่า asset-pricing insight ไม่ใช่ strategy signal โดยตรง. ต้องแปลงเป็น implementable PNL ก่อน.</p>
+<h2>Hypothesis 4: microstructure headwind</h2><p>Market-maker positive gamma อาจ attenuate volatility ทำให้ breakout continuation ยากขึ้นในบาง regime. นี่ควรถูกใช้เป็น filter หรือ diagnostic ไม่ใช่ละเลย.</p>
+<table><thead><tr><th>Hypothesis</th><th>หลักฐานขั้นต่ำก่อน live</th></tr></thead><tbody><tr><td>ORB continuation</td><td>real option-chain backtest หลัง bid/ask/slippage</td></tr><tr><td>Conditional classifier</td><td>walk-forward OOS และ calibration metrics</td></tr><tr><td>Short-vol template</td><td>ES1%, worst day, max drawdown, gap stress</td></tr><tr><td>Strike-gap edge</td><td>real fill validation แยกตาม gap bucket</td></tr></tbody></table>
+<section class="quiz"><h2>Retrieval</h2><ol><li>hypothesis ต่างจาก rule อย่างไร</li><li>ทำไม asset-pricing paper ยังไม่ใช่ trading system</li><li>simulation hypothesis ต้องผ่านอะไรต่อ</li></ol></section>
+  <section class="callout"><h2>Source note</h2><p>บทนี้สังเคราะห์จาก LLM Wiki ไม่ใช่คำแนะนำการลงทุนหรือการรับประกันผลตอบแทน แกนที่ใช้: wiki/synthesis.md, wiki/questions/0dte-options-asset-pricing-research-track.md, wiki/sources/0dte-trading-rules.md, wiki/sources/regime-conditional-alpha-spy-0dte-orb.md, wiki/sources/market-for-zero-dte-options-liquidity-providers-volatility-attenuation.md, wiki/concepts/backtest-validation-protocol.md, wiki/concepts/strategy-research-workflow.md, wiki/concepts/zero-dte-options.md, wiki/concepts/zero-dte-strategy-templates.md, wiki/concepts/implementable-option-pnl.md, wiki/concepts/zero-dte-conditional-trading-rules.md, wiki/concepts/spy-zero-dte-opening-range-breakout.md, wiki/concepts/regime-filtering-for-zero-dte.md, wiki/concepts/strike-selection-for-zero-dte-spreads.md, wiki/concepts/monte-carlo-trading-simulation.md, wiki/concepts/risk-management.md, wiki/concepts/position-sizing.md, wiki/concepts/live-trading-infrastructure.md, wiki/concepts/trading-plan-and-journal.md</p></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

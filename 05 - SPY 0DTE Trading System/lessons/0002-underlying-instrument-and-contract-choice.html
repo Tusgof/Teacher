@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SPY, SPXW, 0DTE และตัวเลือก instrument</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>SPY, SPXW, 0DTE และตัวเลือก instrument</h1>
+  <p class="deck">เข้าใจว่าคุณกำลังเทรด underlying, option, และ market microstructure แบบไหนก่อนคิด strategy</p>
+
+<h2>SPY กับ SPXW ต่างกันในเชิงระบบ</h2><p>LLM Wiki มีทั้งงานบน SPXW และงานจำลองบน SPY. SPXW เป็น index option ที่งาน 0DTE Trading Rules ใช้กับ Cboe 30-minute bars ส่วน SPY เป็น ETF ที่ retail เข้าถึงง่ายกว่าและ ORB simulation ใช้เป็น underlying. การจะสร้างระบบจริงต้องระบุให้ชัดว่าคุณเทรด SPY options หรือ SPXW เพราะ multiplier, settlement, liquidity, tax, margin, fill behavior และ data source ต่างกัน.</p>
+<h2>0DTE ทำให้ option กลายเป็นสินค้าเร็วมาก</h2><p>0DTE เหลือเวลาไม่กี่ชั่วโมงถึงหมดอายุ ทำให้ theta decay, gamma, bid/ask และ timing สำคัญมาก การรอผิด 5-10 นาทีอาจเปลี่ยน expected value ได้มากกว่าที่ backtest รายวันจับได้.</p>
+<h2>ข้อมูลที่ต้องมีต่อหนึ่ง quote snapshot</h2><table><thead><tr><th>Field</th><th>ทำไมต้องมี</th></tr></thead><tbody><tr><td>timestamp แบบ timezone ชัดเจน</td><td>กัน lookahead และเทียบกับ event time</td></tr><tr><td>underlying price</td><td>ใช้เลือก moneyness, strike gap, delta approximation</td></tr><tr><td>bid/ask/mid ของทุก leg</td><td>คำนวณ implementable PNL</td></tr><tr><td>volume/open interest ถ้ามี</td><td>ประเมิน liquidity และ stale quote</td></tr><tr><td>expiration, strike, type</td><td>สร้าง option chain และ strategy template</td></tr><tr><td>VIX/event calendar</td><td>regime filtering และ no-trade rules</td></tr></tbody></table>
+<h2>บทเรียนเชิง microstructure</h2><p>งาน volatility attenuation ใน wiki เตือนว่า 0DTE flow ไม่ได้แปลว่าจะทำให้ตลาดวิ่งแรงเสมอ ในบาง regime market-maker positive gamma อาจทำให้ hedging เป็น counter-cyclical และลด volatility ซึ่งเป็น headwind ต่อ strategy ที่ต้องการ continuation.</p>
+<section class="quiz"><h2>Retrieval</h2><ol><li>ทำไม SPY backtest ใช้แทน SPXW ตรง ๆ ไม่ได้</li><li>field ใดจำเป็นที่สุดเพื่อกัน mid-quote illusion</li><li>positive dealer gamma กระทบ directional breakout system อย่างไร</li></ol></section>
+  <section class="callout"><h2>Source note</h2><p>บทนี้สังเคราะห์จาก LLM Wiki ไม่ใช่คำแนะนำการลงทุนหรือการรับประกันผลตอบแทน แกนที่ใช้: wiki/synthesis.md, wiki/questions/0dte-options-asset-pricing-research-track.md, wiki/sources/0dte-trading-rules.md, wiki/sources/regime-conditional-alpha-spy-0dte-orb.md, wiki/sources/market-for-zero-dte-options-liquidity-providers-volatility-attenuation.md, wiki/concepts/backtest-validation-protocol.md, wiki/concepts/strategy-research-workflow.md, wiki/concepts/zero-dte-options.md, wiki/concepts/zero-dte-strategy-templates.md, wiki/concepts/implementable-option-pnl.md, wiki/concepts/zero-dte-conditional-trading-rules.md, wiki/concepts/spy-zero-dte-opening-range-breakout.md, wiki/concepts/regime-filtering-for-zero-dte.md, wiki/concepts/strike-selection-for-zero-dte-spreads.md, wiki/concepts/monte-carlo-trading-simulation.md, wiki/concepts/risk-management.md, wiki/concepts/position-sizing.md, wiki/concepts/live-trading-infrastructure.md, wiki/concepts/trading-plan-and-journal.md</p></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

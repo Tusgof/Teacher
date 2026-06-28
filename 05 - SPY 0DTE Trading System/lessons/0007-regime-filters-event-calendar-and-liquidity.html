@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Regime filters, event calendar, liquidity</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Regime filters, event calendar, liquidity</h1>
+  <p class="deck">เรียนวิธีลดวันที่ระบบไม่ควรเสี่ยง โดยไม่ overfit จนเหลือแต่วันที่สวยในอดีต</p>
+
+<h2>Filter families</h2><table><thead><tr><th>Filter</th><th>ตัวอย่าง</th><th>ความเสี่ยงถ้าใช้ผิด</th></tr></thead><tbody><tr><td>Calendar</td><td>weekday, expiration schedule</td><td>เลือกจากอดีตจน overfit</td></tr><tr><td>Volatility</td><td>VIX 15-25, realized vol</td><td>regime เปลี่ยนทำให้ threshold เก่าใช้ไม่ได้</td></tr><tr><td>Event</td><td>FOMC, CPI, NFP, Fed speech</td><td>event time/source ไม่ตรง ทำให้ leakage</td></tr><tr><td>Liquidity</td><td>bid/ask width, volume, quote age</td><td>มองข้าม stale quotes</td></tr><tr><td>Microstructure</td><td>gamma/vol attenuation proxy</td><td>ข้อมูลอาจหาไม่ได้หรือ noise สูง</td></tr></tbody></table>
+<h2>หลักจาก wiki</h2><p>Regime Filtering page ย้ำว่า filter มีประโยชน์แต่เป็น overfitting risk โดยเฉพาะเมื่อ filtered trades เหลือน้อย ต้องรายงาน confidence interval, subperiod behavior และ parameter sensitivity.</p>
+<h2>กฎขั้นต่ำ</h2><ul><li>ทุก filter ต้องใช้ข้อมูลที่รู้ก่อน entry</li><li>ระบุ source ของ event calendar และเวลา update</li><li>ทดสอบ threshold รอบ ๆ ค่า เช่น VIX 14-24, 15-25, 16-26</li><li>ห้ามเพิ่ม filter หลังเห็นผล test โดยไม่เริ่ม validation ใหม่</li></ul>
+<section class="quiz"><h2>Retrieval</h2><ol><li>filter ช่วยอะไรและเสี่ยงอะไร</li><li>ทำไม event calendar เป็น leakage source ได้</li><li>parameter sensitivity ต้องตอบคำถามอะไร</li></ol></section>
+  <section class="callout"><h2>Source note</h2><p>บทนี้สังเคราะห์จาก LLM Wiki ไม่ใช่คำแนะนำการลงทุนหรือการรับประกันผลตอบแทน แกนที่ใช้: wiki/synthesis.md, wiki/questions/0dte-options-asset-pricing-research-track.md, wiki/sources/0dte-trading-rules.md, wiki/sources/regime-conditional-alpha-spy-0dte-orb.md, wiki/sources/market-for-zero-dte-options-liquidity-providers-volatility-attenuation.md, wiki/concepts/backtest-validation-protocol.md, wiki/concepts/strategy-research-workflow.md, wiki/concepts/zero-dte-options.md, wiki/concepts/zero-dte-strategy-templates.md, wiki/concepts/implementable-option-pnl.md, wiki/concepts/zero-dte-conditional-trading-rules.md, wiki/concepts/spy-zero-dte-opening-range-breakout.md, wiki/concepts/regime-filtering-for-zero-dte.md, wiki/concepts/strike-selection-for-zero-dte-spreads.md, wiki/concepts/monte-carlo-trading-simulation.md, wiki/concepts/risk-management.md, wiki/concepts/position-sizing.md, wiki/concepts/live-trading-infrastructure.md, wiki/concepts/trading-plan-and-journal.md</p></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

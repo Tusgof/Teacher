@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Features, targets, conditional models</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Features, targets, conditional models</h1>
+  <p class="deck">ถ้าจะใช้ model ต้องเริ่มจาก label และ timestamp ไม่ใช่เริ่มจาก algorithm</p>
+
+<h2>Feature rule</h2><p>Feature Engineering page ระบุว่า every feature must be available at the decision timestamp. สำหรับ 0DTE นี่หมายถึง feature ที่ใช้ตัดสิน 9:36 ต้องรู้ก่อน 9:36 จริง ๆ.</p>
+<h2>Target choices</h2><table><thead><tr><th>Target</th><th>เหมาะกับอะไร</th><th>ความเสี่ยง</th></tr></thead><tbody><tr><td>future return</td><td>regression</td><td>noise สูงและเล็กกว่า cost</td></tr><tr><td>direction</td><td>logistic classifier</td><td>accuracy ไม่เท่ากับ profit</td></tr><tr><td>TP before SL</td><td>event-based 0DTE</td><td>ต้องใช้ intraday path ถูกต้อง</td></tr><tr><td>net PNL positive</td><td>direct trade filter</td><td>cost assumptions ฝังอยู่ใน label</td></tr><tr><td>no-trade class</td><td>ลด overtrading</td><td>class imbalance</td></tr></tbody></table>
+<h2>Model baseline</h2><p>0DTE Trading Rules พบว่า directional classification ดีกว่า direct return prediction ในบาง setting แต่ไม่ได้แปลว่า ML ซับซ้อนยิ่งดี เริ่มจาก logistic regression / simple rules, compare against unfiltered rule, then only add complexity if OOS improves after costs.</p>
+<h2>Validation discipline</h2><ul><li>chronological split เท่านั้น</li><li>scaler/feature selector fit ใน train window เท่านั้น</li><li>rolling/expanding window</li><li>report Brier score, calibration slope, hit rate, mean net PNL, ES, drawdown</li></ul>
+<section class="quiz"><h2>Retrieval</h2><ol><li>ทำไม target engineering สำคัญกว่า model choice</li><li>accuracy สูงแต่ strategy แพ้ได้อย่างไร</li><li>feature leakage ใน 0DTE เกิดจากอะไร</li></ol></section>
+  <section class="callout"><h2>Source note</h2><p>บทนี้สังเคราะห์จาก LLM Wiki ไม่ใช่คำแนะนำการลงทุนหรือการรับประกันผลตอบแทน แกนที่ใช้: wiki/synthesis.md, wiki/questions/0dte-options-asset-pricing-research-track.md, wiki/sources/0dte-trading-rules.md, wiki/sources/regime-conditional-alpha-spy-0dte-orb.md, wiki/sources/market-for-zero-dte-options-liquidity-providers-volatility-attenuation.md, wiki/concepts/backtest-validation-protocol.md, wiki/concepts/strategy-research-workflow.md, wiki/concepts/zero-dte-options.md, wiki/concepts/zero-dte-strategy-templates.md, wiki/concepts/implementable-option-pnl.md, wiki/concepts/zero-dte-conditional-trading-rules.md, wiki/concepts/spy-zero-dte-opening-range-breakout.md, wiki/concepts/regime-filtering-for-zero-dte.md, wiki/concepts/strike-selection-for-zero-dte-spreads.md, wiki/concepts/monte-carlo-trading-simulation.md, wiki/concepts/risk-management.md, wiki/concepts/position-sizing.md, wiki/concepts/live-trading-infrastructure.md, wiki/concepts/trading-plan-and-journal.md</p></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

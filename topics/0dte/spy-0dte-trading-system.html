@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SPY 0DTE Trading System</title>
+  <link rel="stylesheet" href="../../05%20-%20SPY%200DTE%20Trading%20System/assets/lesson.css">
+</head>
+<body>
+<main>
+  <nav class="crumbs"><a href="../../index.html">Library</a><span>/</span><a href="index.html">0DTE</a><span>/</span><span>SPY 0DTE Trading System</span></nav>
+  <h1>SPY 0DTE Trading System From Zero To Live</h1>
+  <p class="deck">หลักสูตร 18 บทแบบละเอียดสำหรับเรียนรู้ว่าถ้าจะสร้างระบบเทรด SPY 0DTE ต้องรู้อะไร ต้องวางอะไร ต้องทดสอบอะไร และต้องหยุดเมื่อไร โดยอ้างอิงจาก LLM Wiki</p>
+  <section class="callout"><h2>คำเตือนสำคัญ</h2><p>หลักสูตรนี้เป็นกรอบวิจัยและระบบควบคุมความเสี่ยง ไม่ใช่คำแนะนำการลงทุน ไม่รับประกันกำไร และย้ำว่าต้องผ่าน paper trading/live-forward gate ก่อนใช้เงินจริงหรือเพิ่มขนาด position</p></section>
+  <div class="lesson-list">
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0001-system-map-and-safety-frame.html"><strong>ภาพรวมระบบ: จากศูนย์ถึง live trading</strong><span>เข้าใจก่อนว่าระบบเทรด 0DTE ไม่ใช่สัญญาณเข้าอย่างเดียว แต่เป็น research + data + execution + risk + monitoring</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0002-underlying-instrument-and-contract-choice.html"><strong>SPY, SPXW, 0DTE และตัวเลือก instrument</strong><span>เข้าใจว่าคุณกำลังเทรด underlying, option, และ market microstructure แบบไหนก่อนคิด strategy</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0003-options-payoff-greeks-and-time-decay.html"><strong>Payoff, Greeks และ time decay ที่ต้องรู้</strong><span>เรียน option mechanics ที่จำเป็นต่อ 0DTE โดยไม่เริ่มจากสูตรหนัก</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0004-strategy-template-universe.html"><strong>จักรวาล strategy templates ของ 0DTE</strong><span>รู้ว่าคุณกำลังเลือก payoff shape แบบไหน ไม่ใช่แค่เลือก call หรือ put</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0005-edge-hypotheses-from-the-wiki.html"><strong>Edge hypotheses จาก LLM Wiki</strong><span>แปลง paper insight เป็นสมมติฐานที่ทดสอบได้ ไม่ใช่ความเชื่อ</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0006-orb-directional-system-blueprint.html"><strong>Blueprint: ระบบ ORB directional บน SPY 0DTE</strong><span>สร้างตัวอย่างระบบแบบมีกรอบ แต่ยังไม่ถือว่าใช้งานจริงจนกว่าจะ validate</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0007-regime-filters-event-calendar-and-liquidity.html"><strong>Regime filters, event calendar, liquidity</strong><span>เรียนวิธีลดวันที่ระบบไม่ควรเสี่ยง โดยไม่ overfit จนเหลือแต่วันที่สวยในอดีต</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0008-data-architecture-and-schema.html"><strong>Data architecture และ schema ที่ต้องมี</strong><span>ถ้าข้อมูลไม่ถูก ระบบเทรดจะดูดีใน backtest และพังใน live</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0009-backtest-engine-design.html"><strong>Backtest engine: event-driven ไม่ใช่ spreadsheet ง่าย ๆ</strong><span>เรียน backtest ที่ใกล้ live พอสำหรับ 0DTE ไม่ใช่คำนวณ payoff ท้ายวันแบบลอย ๆ</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0010-implementable-pnl-costs-and-slippage.html"><strong>Implementable PNL, costs, slippage</strong><span>กำไรที่ใช้ตัดสิน live ต้องเป็นกำไรหลัง bid/ask, fees, slippage และ fill assumptions</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0011-metrics-acceptance-gates-and-tail-risk.html"><strong>Metrics, acceptance gates, tail risk</strong><span>เรียนชุดตัวเลขที่ต้องผ่านก่อนระบบจะมีสิทธิ์ paper trade หรือ live</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0012-position-sizing-and-risk-limits.html"><strong>Position sizing และ risk limits</strong><span>ระบบที่มี edge ก็พังได้ถ้า size ผิด โดยเฉพาะ 0DTE ที่ payoff กระจุกและเร็ว</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0013-strike-selection-and-order-construction.html"><strong>Strike selection และ order construction</strong><span>การเลือก strike และการส่ง order คือจุดที่ edge เล็ก ๆ หายไปได้ทันที</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0014-features-targets-and-conditional-models.html"><strong>Features, targets, conditional models</strong><span>ถ้าจะใช้ model ต้องเริ่มจาก label และ timestamp ไม่ใช่เริ่มจาก algorithm</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0015-walk-forward-oos-and-overfitting-control.html"><strong>Walk-forward, OOS, overfitting control</strong><span>ทำให้ผลวิจัยยากขึ้นแต่เชื่อถือได้ขึ้น</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0016-monte-carlo-stress-and-ruin-risk.html"><strong>Monte Carlo, stress test, ruin risk</strong><span>หลังมี trade distribution แล้ว ต้องถามว่าบัญชีรอดไหม ไม่ใช่แค่ค่าเฉลี่ยบวกไหม</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0017-live-trading-infrastructure-and-paper-trading.html"><strong>Live infrastructure และ paper trading</strong><span>เปลี่ยนจาก research เป็น operation โดยไม่เอาเงินจริงไปทดสอบระบบที่ยังไม่พร้อม</span></a>
+    <a class="lesson-link" href="../../05%20-%20SPY%200DTE%20Trading%20System/lessons/0018-trading-plan-journal-and-governance.html"><strong>Trading plan, journal, governance</strong><span>ระบบระยะยาวต้องมีวินัยการตัดสินใจ ไม่ใช่แก้ rule ตามอารมณ์หลังแพ้</span></a>
+  </div>
+  <p><a href="../../05%20-%20SPY%200DTE%20Trading%20System/reference/system-checklist.html">เปิด reference checklist สำหรับสร้างระบบ</a></p>
+</main>
+</body>
+</html>

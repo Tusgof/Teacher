@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payoff, Greeks และ time decay ที่ต้องรู้</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Payoff, Greeks และ time decay ที่ต้องรู้</h1>
+  <p class="deck">เรียน option mechanics ที่จำเป็นต่อ 0DTE โดยไม่เริ่มจากสูตรหนัก</p>
+
+<h2>Payoff มาก่อน Greek</h2><p>call ได้ประโยชน์เมื่อ underlying ขึ้น, put ได้ประโยชน์เมื่อ underlying ลง, vertical spread จำกัดกำไรและขาดทุน. สำหรับ 0DTE การเลือก structure สำคัญเท่ากับการทำนายทิศทาง เพราะ payoff shape กำหนดว่าต้องถูกบ่อยแค่ไหนถึงคุ้ม.</p>
+<h2>Greek ที่ต้องใช้จริง</h2><table><thead><tr><th>Greek</th><th>ความหมายสำหรับระบบ SPY 0DTE</th></tr></thead><tbody><tr><td>Delta</td><td>option ตอบสนองต่อ SPY ขึ้นลงแค่ไหน ใช้คิด directional exposure</td></tr><tr><td>Gamma</td><td>delta เปลี่ยนเร็วแค่ไหน สำคัญมากเมื่อใกล้หมดอายุ</td></tr><tr><td>Theta</td><td>premium ละลายตามเวลา ทำให้ direction ต้องถูกและเร็ว</td></tr><tr><td>Vega</td><td>option sensitive ต่อ implied volatility แม้เหลือเวลาไม่นาน</td></tr></tbody></table>
+<h2>Breakeven ไม่ใช่แค่ชนะบ่อย</h2><p>ORB simulation ใช้ +25% take profit และ -50% stop loss จึงต้องชนะ 66.7% แค่คุ้มทุน ถ้าระบบของคุณชนะ 60% แต่ average loss ใหญ่กว่า average win มาก ระบบยังแพ้ได้.</p>
+<h2>System design implication</h2><ul><li>ต้อง log entry debit, target, stop, max loss, and realized fill</li><li>ต้องแยก PNL ก่อน cost และหลัง cost</li><li>ต้องตรวจว่า TP/SL ถูก hit ลำดับไหนใน intraday data ไม่ใช่เดาจาก OHLC หยาบ ๆ</li></ul>
+<section class="quiz"><h2>Retrieval</h2><ol><li>ทำไม win rate สูงอย่างเดียวไม่พอ</li><li>gamma ทำให้ 0DTE ต่างจาก option อายุยาวอย่างไร</li><li>ถ้า TP เล็กกว่า SL ระบบต้องการอะไรเพิ่ม</li></ol></section>
+  <section class="callout"><h2>Source note</h2><p>บทนี้สังเคราะห์จาก LLM Wiki ไม่ใช่คำแนะนำการลงทุนหรือการรับประกันผลตอบแทน แกนที่ใช้: wiki/synthesis.md, wiki/questions/0dte-options-asset-pricing-research-track.md, wiki/sources/0dte-trading-rules.md, wiki/sources/regime-conditional-alpha-spy-0dte-orb.md, wiki/sources/market-for-zero-dte-options-liquidity-providers-volatility-attenuation.md, wiki/concepts/backtest-validation-protocol.md, wiki/concepts/strategy-research-workflow.md, wiki/concepts/zero-dte-options.md, wiki/concepts/zero-dte-strategy-templates.md, wiki/concepts/implementable-option-pnl.md, wiki/concepts/zero-dte-conditional-trading-rules.md, wiki/concepts/spy-zero-dte-opening-range-breakout.md, wiki/concepts/regime-filtering-for-zero-dte.md, wiki/concepts/strike-selection-for-zero-dte-spreads.md, wiki/concepts/monte-carlo-trading-simulation.md, wiki/concepts/risk-management.md, wiki/concepts/position-sizing.md, wiki/concepts/live-trading-infrastructure.md, wiki/concepts/trading-plan-and-journal.md</p></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data architecture และ schema ที่ต้องมี</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Data architecture และ schema ที่ต้องมี</h1>
+  <p class="deck">ถ้าข้อมูลไม่ถูก ระบบเทรดจะดูดีใน backtest และพังใน live</p>
+
+<h2>Data layers</h2><div class="grid"><div class="card"><h3>Market bars</h3><p>SPY 1-min หรือ tick bars, OHLCV, timezone</p></div><div class="card"><h3>Option chain</h3><p>bid/ask/mid, strikes, expiration, type, quote time</p></div><div class="card"><h3>Derived state</h3><p>ORB high/low, VIX, realized vol, gap bucket, spread width</p></div><div class="card"><h3>Orders/fills</h3><p>submitted, accepted, partial fill, rejected, canceled, fill price</p></div><div class="card"><h3>Portfolio</h3><p>cash, margin, exposure, open risk, daily PNL</p></div><div class="card"><h3>Research labels</h3><p>TP first, SL first, close PNL, net PNL, no-trade reason</p></div></div>
+<h2>Timestamp discipline</h2><p>ทุก row ต้องตอบได้ว่า “ข้อมูลนี้รู้ได้เมื่อไร” ไม่ใช่แค่ “ข้อมูลนี้เป็นของวันนั้น” 0DTE ใช้เวลาระดับนาที การปนข้อมูล 10:00 ไปใช้ตัดสิน 9:36 คือ leakage.</p>
+<h2>Minimal tables</h2><table><thead><tr><th>Table</th><th>Primary key</th><th>Purpose</th></tr></thead><tbody><tr><td>underlying_bars</td><td>symbol,timestamp</td><td>สร้าง ORB และ realized features</td></tr><tr><td>option_quotes</td><td>timestamp,expiry,strike,type</td><td>เลือก leg และ cost model</td></tr><tr><td>signals</td><td>trade_id</td><td>เก็บ decision snapshot</td></tr><tr><td>orders</td><td>order_id</td><td>จำลอง/ตรวจ execution</td></tr><tr><td>fills</td><td>fill_id</td><td>คำนวณ live-forward PNL</td></tr><tr><td>risk_state</td><td>timestamp</td><td>daily loss, exposure, stop trading flag</td></tr></tbody></table>
+<section class="quiz"><h2>Retrieval</h2><ol><li>ทำไม option quote ต้องมี bid/ask ไม่ใช่ mid อย่างเดียว</li><li>decision timestamp ต่างจาก bar timestamp อย่างไร</li><li>order table กับ fill table ต่างกันอย่างไร</li></ol></section>
+  <section class="callout"><h2>Source note</h2><p>บทนี้สังเคราะห์จาก LLM Wiki ไม่ใช่คำแนะนำการลงทุนหรือการรับประกันผลตอบแทน แกนที่ใช้: wiki/synthesis.md, wiki/questions/0dte-options-asset-pricing-research-track.md, wiki/sources/0dte-trading-rules.md, wiki/sources/regime-conditional-alpha-spy-0dte-orb.md, wiki/sources/market-for-zero-dte-options-liquidity-providers-volatility-attenuation.md, wiki/concepts/backtest-validation-protocol.md, wiki/concepts/strategy-research-workflow.md, wiki/concepts/zero-dte-options.md, wiki/concepts/zero-dte-strategy-templates.md, wiki/concepts/implementable-option-pnl.md, wiki/concepts/zero-dte-conditional-trading-rules.md, wiki/concepts/spy-zero-dte-opening-range-breakout.md, wiki/concepts/regime-filtering-for-zero-dte.md, wiki/concepts/strike-selection-for-zero-dte-spreads.md, wiki/concepts/monte-carlo-trading-simulation.md, wiki/concepts/risk-management.md, wiki/concepts/position-sizing.md, wiki/concepts/live-trading-infrastructure.md, wiki/concepts/trading-plan-and-journal.md</p></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

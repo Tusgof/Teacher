@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ภาพรวมระบบ: จากศูนย์ถึง live trading</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>ภาพรวมระบบ: จากศูนย์ถึง live trading</h1>
+  <p class="deck">เข้าใจก่อนว่าระบบเทรด 0DTE ไม่ใช่สัญญาณเข้าอย่างเดียว แต่เป็น research + data + execution + risk + monitoring</p>
+
+<section class="callout"><h2>กรอบความจริงก่อนเริ่ม</h2><p>เป้าหมายของคอร์สนี้คือทำให้คุณมีความรู้พอออกแบบและตรวจสอบระบบเทรด SPY 0DTE อย่างมืออาชีพ ไม่ใช่รับประกันกำไรระยะยาว LLM Wiki ย้ำว่า 0DTE edge เล็ก, cost-sensitive, tail-heavy และต้องพิสูจน์ด้วย out-of-sample กับ implementable PNL ก่อน live.</p></section>
+<h2>ระบบเทรดจริงประกอบด้วยอะไร</h2><div class="grid"><div class="card"><h3>Hypothesis</h3><p>ทำไม edge น่าจะมีอยู่ และทำไมไม่ถูก arbitrage หายไปทันที</p></div><div class="card"><h3>Data</h3><p>SPY price, option chain, bid/ask, volume, VIX, event calendar และ timestamp ที่ถูกต้อง</p></div><div class="card"><h3>Strategy</h3><p>entry, structure, strike, exit, filter, sizing, no-trade rules</p></div><div class="card"><h3>Validation</h3><p>historical backtest, OOS, cost, slippage, drawdown, cVaR, sensitivity</p></div><div class="card"><h3>Execution</h3><p>order type, fill model, rejection handling, stop logic, paper trading, broker constraints</p></div><div class="card"><h3>Governance</h3><p>journal, review cadence, pause rules, retire rules, model-change control</p></div></div>
+<h2>Evidence ladder</h2><table><thead><tr><th>ระดับหลักฐาน</th><th>ใช้ตัดสินอะไรได้</th><th>ใช้ตัดสินอะไรไม่ได้</th></tr></thead><tbody><tr><td>Asset-pricing insight</td><td>รู้ว่า risk premia อาจอยู่ตรงไหน</td><td>ยังไม่ใช่ strategy live</td></tr><tr><td>Simulation</td><td>ทดสอบ EV และ risk ภายใต้ assumption</td><td>ยังไม่รู้ fill จริง</td></tr><tr><td>Historical backtest</td><td>เห็นอดีตหลัง cost model</td><td>ยังไม่ยืนยันอนาคต</td></tr><tr><td>Paper trading</td><td>ทดสอบ workflow และ execution</td><td>ยังไม่มีเงินจริง/psychology ครบ</td></tr><tr><td>Live-forward small size</td><td>หลักฐานจริงที่สุด</td><td>sample ยังน้อยและ regime อาจเปลี่ยน</td></tr></tbody></table>
+<h2>สิ่งที่ต้องห้าม</h2><ul><li>ห้ามดู win rate โดยไม่ดู payoff ratio</li><li>ห้ามใช้ mid quote เป็นผลลัพธ์ live</li><li>ห้าม optimize parameter แล้วประกาศว่าพบ edge โดยไม่มี OOS</li><li>ห้ามเพิ่ม size ก่อนผ่าน paper/live-forward gate</li><li>ห้ามตีความ simulation ORB ว่าเป็นหลักฐาน historical</li></ul>
+<section class="quiz"><h2>Retrieval</h2><ol><li>ทำไมระบบเทรดไม่เท่ากับ entry signal</li><li>simulation ต่างจาก historical backtest อย่างไร</li><li>ก่อน live ต้องพิสูจน์อะไรบ้าง</li></ol></section>
+  <section class="callout"><h2>Source note</h2><p>บทนี้สังเคราะห์จาก LLM Wiki ไม่ใช่คำแนะนำการลงทุนหรือการรับประกันผลตอบแทน แกนที่ใช้: wiki/synthesis.md, wiki/questions/0dte-options-asset-pricing-research-track.md, wiki/sources/0dte-trading-rules.md, wiki/sources/regime-conditional-alpha-spy-0dte-orb.md, wiki/sources/market-for-zero-dte-options-liquidity-providers-volatility-attenuation.md, wiki/concepts/backtest-validation-protocol.md, wiki/concepts/strategy-research-workflow.md, wiki/concepts/zero-dte-options.md, wiki/concepts/zero-dte-strategy-templates.md, wiki/concepts/implementable-option-pnl.md, wiki/concepts/zero-dte-conditional-trading-rules.md, wiki/concepts/spy-zero-dte-opening-range-breakout.md, wiki/concepts/regime-filtering-for-zero-dte.md, wiki/concepts/strike-selection-for-zero-dte-spreads.md, wiki/concepts/monte-carlo-trading-simulation.md, wiki/concepts/risk-management.md, wiki/concepts/position-sizing.md, wiki/concepts/live-trading-infrastructure.md, wiki/concepts/trading-plan-and-journal.md</p></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

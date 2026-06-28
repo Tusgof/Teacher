@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blueprint: ระบบ ORB directional บน SPY 0DTE</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Blueprint: ระบบ ORB directional บน SPY 0DTE</h1>
+  <p class="deck">สร้างตัวอย่างระบบแบบมีกรอบ แต่ยังไม่ถือว่าใช้งานจริงจนกว่าจะ validate</p>
+
+<h2>Core rule skeleton</h2><ol><li>ก่อนตลาดเปิด: เช็ก day, VIX, macro event, liquidity expectation</li><li>9:30-9:35 ET: วัด opening range high/low</li><li>หลัง 9:35: รอ decisive break</li><li>เลือก direction: call spread ถ้าทะลุบน, put spread ถ้าหลุดล่าง</li><li>เลือก strike: nearest OTM หรือ rule ที่ทดสอบแล้ว</li><li>ส่ง limit order ตาม bid/ask discipline</li><li>ออกด้วย TP/SL/time stop</li><li>log ทุกเหตุการณ์</li></ol>
+<h2>No-trade rules สำคัญกว่า entry</h2><p>ถ้าระบบ edge เล็กมาก วันที่ไม่ควรเทรดมีค่าพอ ๆ กับวันที่เทรด กฎ no-trade ควรรวม macro event, spread กว้าง, data feed ผิดปกติ, option chain stale, late entry, gap bucket เสี่ยง, daily loss limit reached.</p>
+<h2>Decision object ต่อ trade</h2><pre><code>{
+  decision_time: "09:36:00 ET",
+  signal: "break_above_orb_high",
+  filters_passed: true,
+  structure: "bull_call_debit_spread",
+  expected_debit_limit: 0.61,
+  max_loss: 0.305,
+  target: 0.7625,
+  time_stop: "15:30:00 ET",
+  size_contracts: 1
+}</code></pre>
+<section class="quiz"><h2>Retrieval</h2><ol><li>ทำไม no-trade rule ต้องมาก่อน entry refinement</li><li>trade decision object ควรมี field อะไรบ้าง</li><li>ทำไม late entry ต้องเป็น violation</li></ol></section>
+  <section class="callout"><h2>Source note</h2><p>บทนี้สังเคราะห์จาก LLM Wiki ไม่ใช่คำแนะนำการลงทุนหรือการรับประกันผลตอบแทน แกนที่ใช้: wiki/synthesis.md, wiki/questions/0dte-options-asset-pricing-research-track.md, wiki/sources/0dte-trading-rules.md, wiki/sources/regime-conditional-alpha-spy-0dte-orb.md, wiki/sources/market-for-zero-dte-options-liquidity-providers-volatility-attenuation.md, wiki/concepts/backtest-validation-protocol.md, wiki/concepts/strategy-research-workflow.md, wiki/concepts/zero-dte-options.md, wiki/concepts/zero-dte-strategy-templates.md, wiki/concepts/implementable-option-pnl.md, wiki/concepts/zero-dte-conditional-trading-rules.md, wiki/concepts/spy-zero-dte-opening-range-breakout.md, wiki/concepts/regime-filtering-for-zero-dte.md, wiki/concepts/strike-selection-for-zero-dte-spreads.md, wiki/concepts/monte-carlo-trading-simulation.md, wiki/concepts/risk-management.md, wiki/concepts/position-sizing.md, wiki/concepts/live-trading-infrastructure.md, wiki/concepts/trading-plan-and-journal.md</p></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

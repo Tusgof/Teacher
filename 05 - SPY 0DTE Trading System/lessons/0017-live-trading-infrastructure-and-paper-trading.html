@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live infrastructure และ paper trading</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Live infrastructure และ paper trading</h1>
+  <p class="deck">เปลี่ยนจาก research เป็น operation โดยไม่เอาเงินจริงไปทดสอบระบบที่ยังไม่พร้อม</p>
+
+<h2>Infrastructure components</h2><table><thead><tr><th>Component</th><th>หน้าที่</th></tr></thead><tbody><tr><td>Data feed</td><td>real-time quote, option chain, event calendar</td></tr><tr><td>Signal engine</td><td>คำนวณ filter และ entry rule</td></tr><tr><td>Risk engine</td><td>ตรวจ size, daily limit, kill switch</td></tr><tr><td>Order manager</td><td>ส่ง, cancel, replace, handle rejection</td></tr><tr><td>Position monitor</td><td>TP/SL/time stop, stale data, partial fill</td></tr><tr><td>Logger</td><td>บันทึก signal, orders, fills, decisions, errors</td></tr><tr><td>Dashboard/alerts</td><td>ให้มนุษย์เห็นความผิดปกติทันที</td></tr></tbody></table>
+<h2>Paper trading gate</h2><p>Live Trading Infrastructure page เตือนว่า live มี connectivity failure, order rejection, partial fills, slippage, broker constraints และ monitoring gaps. ดังนั้น paper trading ต้องทดสอบ workflow ไม่ใช่แค่ดู PNL.</p>
+<h2>Paper trading pass criteria</h2><ul><li>signal ตรงกับ backtest logic</li><li>orders ส่งตาม limit rules</li><li>all no-trade rules ทำงาน</li><li>TP/SL/time stop ทำงาน</li><li>logs ครบพอ audit</li><li>ไม่มี manual override นอกแผน</li><li>paper fills ถูกเปรียบเทียบกับ realistic bid/ask</li></ul>
+<section class="quiz"><h2>Retrieval</h2><ol><li>paper trading ทดสอบอะไรนอกจาก PNL</li><li>risk engine ต้องมาก่อน order manager เพราะอะไร</li><li>partial fill สร้างปัญหาอะไรกับ vertical spread</li></ol></section>
+  <section class="callout"><h2>Source note</h2><p>บทนี้สังเคราะห์จาก LLM Wiki ไม่ใช่คำแนะนำการลงทุนหรือการรับประกันผลตอบแทน แกนที่ใช้: wiki/synthesis.md, wiki/questions/0dte-options-asset-pricing-research-track.md, wiki/sources/0dte-trading-rules.md, wiki/sources/regime-conditional-alpha-spy-0dte-orb.md, wiki/sources/market-for-zero-dte-options-liquidity-providers-volatility-attenuation.md, wiki/concepts/backtest-validation-protocol.md, wiki/concepts/strategy-research-workflow.md, wiki/concepts/zero-dte-options.md, wiki/concepts/zero-dte-strategy-templates.md, wiki/concepts/implementable-option-pnl.md, wiki/concepts/zero-dte-conditional-trading-rules.md, wiki/concepts/spy-zero-dte-opening-range-breakout.md, wiki/concepts/regime-filtering-for-zero-dte.md, wiki/concepts/strike-selection-for-zero-dte-spreads.md, wiki/concepts/monte-carlo-trading-simulation.md, wiki/concepts/risk-management.md, wiki/concepts/position-sizing.md, wiki/concepts/live-trading-infrastructure.md, wiki/concepts/trading-plan-and-journal.md</p></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>

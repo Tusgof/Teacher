@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Strike selection และ order construction</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <h1>Strike selection และ order construction</h1>
+  <p class="deck">การเลือก strike และการส่ง order คือจุดที่ edge เล็ก ๆ หายไปได้ทันที</p>
+
+<h2>Strike gap lesson</h2><p>Strike Selection page จาก ORB source แยก breakout-to-long-strike gap เป็นตัวแปรสำคัญ: gap 0.96-2.00 ดีขึ้นใน simulation แต่ยังต้อง validate บน real option-chain data.</p>
+<h2>Strike selection dimensions</h2><table><thead><tr><th>มิติ</th><th>คำถาม</th></tr></thead><tbody><tr><td>Dollar gap</td><td>breakout price ห่าง long strike เท่าไร</td></tr><tr><td>Delta</td><td>spread ตอบสนองต่อ underlying แค่ไหน</td></tr><tr><td>Debit</td><td>ต้องใช้เงินและ target/stop เท่าไร</td></tr><tr><td>Width</td><td>$1, $2, $5 spread width เปลี่ยน payoff อย่างไร</td></tr><tr><td>Liquidity</td><td>bid/ask และ size พอไหม</td></tr></tbody></table>
+<h2>Order construction</h2><ul><li>ใช้ spread order ถ้า broker รองรับ เพื่อควบคุม net debit</li><li>limit price ต้องตั้งตาม liquidity rule ไม่ chase market</li><li>ถ้าไม่ fill ภายในเวลาที่กำหนด ให้ cancel ไม่ใช่ไล่ราคาไม่จำกัด</li><li>OCO/exit orders ต้องสอดคล้องกับ actual fill debit</li><li>time stop ต้องเป็น hard rule</li></ul>
+<h2>Validation</h2><p>แยกผล backtest ตาม gap bucket, debit bucket, spread width, entry time และ bid/ask width เพื่อรู้ว่า edge มาจากอะไร.</p>
+<section class="quiz"><h2>Retrieval</h2><ol><li>strike gap ส่งผลต่อ debit และ delta อย่างไร</li><li>ทำไม spread order สำคัญ</li><li>ควร log bucket อะไรเพื่อวิเคราะห์ strike selection</li></ol></section>
+  <section class="callout"><h2>Source note</h2><p>บทนี้สังเคราะห์จาก LLM Wiki ไม่ใช่คำแนะนำการลงทุนหรือการรับประกันผลตอบแทน แกนที่ใช้: wiki/synthesis.md, wiki/questions/0dte-options-asset-pricing-research-track.md, wiki/sources/0dte-trading-rules.md, wiki/sources/regime-conditional-alpha-spy-0dte-orb.md, wiki/sources/market-for-zero-dte-options-liquidity-providers-volatility-attenuation.md, wiki/concepts/backtest-validation-protocol.md, wiki/concepts/strategy-research-workflow.md, wiki/concepts/zero-dte-options.md, wiki/concepts/zero-dte-strategy-templates.md, wiki/concepts/implementable-option-pnl.md, wiki/concepts/zero-dte-conditional-trading-rules.md, wiki/concepts/spy-zero-dte-opening-range-breakout.md, wiki/concepts/regime-filtering-for-zero-dte.md, wiki/concepts/strike-selection-for-zero-dte-spreads.md, wiki/concepts/monte-carlo-trading-simulation.md, wiki/concepts/risk-management.md, wiki/concepts/position-sizing.md, wiki/concepts/live-trading-infrastructure.md, wiki/concepts/trading-plan-and-journal.md</p></section>
+</main>
+<script src="../assets/course-nav.js"></script>
+</body>
+</html>
